@@ -2,7 +2,7 @@
 // MAIN SCRIPT - Index Page & Admin Dashboard
 // ============================================
 
-const supabaseClient = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_KEY);
+// supabaseClient is already initialized in supabase-client.js
 
 /* ============================================
    === DỮ LIỆU SẢN PHẨM ===

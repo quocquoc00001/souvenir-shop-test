@@ -1,5 +1,7 @@
+/* ============================================
+   ROOT VARIABLES - MÀU CHỦ ĐẠO
+   ============================================ */
 :root {
-    /* Bảng màu Hồng chủ đạo - Mặc định Xuân */
     --primary-pink: #FF8BA7;
     --dark-pink: #FF5C8D;
     --light-pink: #FFC6C6;
@@ -19,7 +21,6 @@ body {
     background: var(--pastel-bg);
     background: linear-gradient(135deg, var(--pastel-bg), var(--light-pink), var(--primary-pink));
     min-height: 100vh;
-    font-family: 'Quicksand', sans-serif;
     color: var(--text-color);
     overflow-x: hidden;
 }
@@ -100,7 +101,6 @@ h1, h2, h3, .shop-name, .fancy-title {
 }
 .season-card:hover .secret-hint { opacity: 1; }
 
-/* Màu viền cho từng mùa */
 .spring-card { border-color: #FF8BA7; }
 .summer-card { border-color: #FF6B6B; }
 .autumn-card { border-color: #D2691E; }
@@ -318,41 +318,30 @@ h1, h2, h3, .shop-name, .fancy-title {
 .prod-tag { background: var(--pastel-bg); color: var(--text-color); padding: 5px 10px; border-radius: 20px; display: flex; align-items: center; gap: 5px; border: 1px solid var(--primary-pink); }
 .prod-tag i { color: #d63031; cursor: pointer; margin-left: 5px; }
 
-/* Sync Controls */
-.sync-controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-}
+/* Connection Status */
+.connection-status { background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+.status-item { display: flex; align-items: center; gap: 8px; }
+.badge { padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+.badge.success { background: #d4edda; color: #155724; }
+.badge.error { background: #f8d7da; color: #721c24; }
 
-.btn-sync, .btn-load {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
+/* API Config */
+.api-config-box { background: #f8f9fa; padding: 15px; border-radius: 10px; border: 2px solid #e9ecef; }
+.btn-save-api { background: #0984e3; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+.btn-test-api { background: #00b894; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
 
-.btn-sync {
-    background: linear-gradient(45deg, #00b894, #00cec9);
-    color: white;
-}
+/* Season Passwords Grid */
+.season-passwords-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 15px 0; }
+.season-pass-box { background: #f8f9fa; padding: 15px; border-radius: 10px; text-align: center; border: 2px solid var(--primary-pink); }
+.season-pass-box h4 { margin: 0 0 10px 0; color: var(--dark-pink); font-size: 1.1rem; }
+.qr-code { width: 120px; height: 120px; margin: 10px auto; background: white; padding: 5px; border-radius: 8px; }
+.season-pass-box input { width: 100%; text-align: center; font-weight: bold; border: 1px solid #ddd; padding: 8px; border-radius: 5px; margin: 5px 0; }
 
-.btn-load {
-    background: linear-gradient(45deg, #0984e3, #74b9ff);
-    color: white;
-}
-
-.btn-sync:hover, .btn-load:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
+/* Table */
 #order-table { width: 100%; border-collapse: collapse; }
 #order-table th { background: var(--light-pink); padding: 12px; font-family: 'Dancing Script'; font-size: 1.3rem; }
 #order-table td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+.table-responsive { overflow-x: auto; }
 
 /* --- LOGIN BOX --- */
 .login-box {
@@ -402,178 +391,41 @@ h1, h2, h3, .shop-name, .fancy-title {
     box-shadow: 0 8px 20px rgba(255, 92, 141, 0.4);
 }
 
-/* ============================================
-   === RESPONSIVE - MOBILE OPTIMIZATION ===
-   ============================================ */
+/* Print */
+@media print {
+    body * { visibility: hidden; }
+    .print-area, .print-area * { visibility: visible; }
+    .print-area { position: absolute; left: 0; top: 0; width: 100%; }
+    .no-print { display: none !important; }
+}
 
+/* Responsive */
 @media (max-width: 1024px) {
     .admin-panel { grid-template-columns: 1fr; }
+    .season-passwords-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
-    /* Header */
-    .main-header {
-        position: relative;
-        top: 0;
-        left: 0;
-        padding: 15px;
-    }
-    
-    .search-box {
-        width: 100%;
-        max-width: 350px;
-        margin: 0 auto;
-    }
-    
-    .search-box input {
-        width: 100%;
-    }
-    
-    #back-home-btn {
-        top: 15px;
-        right: 15px;
-        padding: 8px 15px;
-        font-size: 0.9rem;
-    }
-    
-    /* Hero */
-    .hero-section {
-        height: 50vh;
-    }
-    
-    .shop-name {
-        font-size: 2.5rem;
-        padding: 20px 30px;
-    }
-    
-    /* Seasons Nav */
-    .seasons-nav {
-        flex-direction: column;
-        align-items: center;
-        padding: 40px 15px;
-        gap: 20px;
-    }
-    
-    .season-card {
-        width: 90%;
-        max-width: 350px;
-        height: 250px;
-    }
-    
-    .season-text {
-        font-size: 2rem;
-    }
-    
-    /* Products */
-    .product-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
-        padding: 0 10px;
-    }
-    
-    .fancy-title {
-        font-size: 2.5rem;
-    }
-    
-    /* Vietnam Seasons */
-    .vn-season-row, .vn-season-row.reverse {
-        flex-direction: column;
-        gap: 30px;
-        margin-bottom: 50px;
-    }
-    
-    .vn-images {
-        width: 100%;
-        max-width: 350px;
-        height: 250px;
-    }
-    
-    .vn-images img {
-        width: 200px;
-        height: 160px;
-    }
-    
-    .vn-content h3 {
-        font-size: 2rem;
-    }
-    
-    /* Modal */
-    .modal-body {
-        flex-direction: column;
-        padding: 15px;
-    }
-    
-    .media-section {
-        height: 250px;
-    }
-    
-    .season-selectors {
-        flex-wrap: wrap;
-    }
-    
-    .season-btn {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-    }
-    
-    /* Thank You Page */
-    .thank-you-container {
-        margin: 50px 15px;
-        padding: 30px 20px;
-    }
-    
-    .secret-message-display {
-        padding: 20px;
-    }
-    
-    /* Admin */
-    .admin-panel {
-        padding: 10px;
-    }
-    
-    .fancy-box {
-        padding: 20px;
-    }
-    
-    .sync-controls {
-        flex-direction: column;
-    }
-    
-    #order-table {
-        font-size: 0.8rem;
-    }
-    
-    #order-table th, #order-table td {
-        padding: 8px 5px;
-    }
-    
-    .table-responsive {
-        overflow-x: auto;
-    }
-    
-    /* Password Modal */
-    .password-box {
-        padding: 30px 20px;
-    }
+    .main-header { position: relative; top: 0; left: 0; padding: 15px; }
+    .search-box { width: 100%; max-width: 350px; margin: 0 auto; }
+    .hero-section { height: 50vh; }
+    .shop-name { font-size: 2.5rem; padding: 20px 30px; }
+    .seasons-nav { flex-direction: column; align-items: center; padding: 40px 15px; }
+    .season-card { width: 90%; max-width: 350px; height: 250px; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+    .fancy-title { font-size: 2.5rem; }
+    .vn-season-row, .vn-season-row.reverse { flex-direction: column; gap: 30px; }
+    .vn-images { width: 100%; max-width: 350px; height: 250px; }
+    .modal-body { flex-direction: column; padding: 15px; }
+    .media-section { height: 250px; }
+    .thank-you-container { margin: 50px 15px; padding: 30px 20px; }
+    .admin-panel { padding: 10px; }
+    .fancy-box { padding: 20px; }
+    #order-table { font-size: 0.8rem; }
+    .password-box, .login-box { padding: 30px 20px; }
 }
 
 @media (max-width: 480px) {
-    .shop-name {
-        font-size: 1.8rem;
-        padding: 15px 20px;
-    }
-    
-    .fancy-title {
-        font-size: 2rem;
-    }
-    
-    .login-box, .password-box {
-        padding: 25px 15px;
-    }
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    .shop-name { font-size: 1.8rem; padding: 15px 20px; }
+    .fancy-title { font-size: 2rem; }
 }

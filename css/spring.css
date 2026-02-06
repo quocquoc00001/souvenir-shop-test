@@ -461,4 +461,5 @@ body {
     .card-large { grid-column: span 1; }
     #drawingCanvas { height: 350px; }
     .canvas-toolbar { flex-direction: column; align-items: stretch; }
+    .poem-content p::before { display: none; }
 }

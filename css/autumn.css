@@ -186,7 +186,9 @@ body {
     box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2);
 }
 
-.card-large { grid-column: span 2; }
+.card-large {
+    grid-column: span 2;
+}
 
 .card-image-wrapper {
     height: 220px;
@@ -378,7 +380,9 @@ body {
     background: white;
 }
 
-.chat-box.active { display: block; }
+.chat-box.active {
+    display: block;
+}
 
 .chat-header {
     background: linear-gradient(135deg, var(--autumn-primary), var(--autumn-brown));

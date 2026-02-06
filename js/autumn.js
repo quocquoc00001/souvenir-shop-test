@@ -2,10 +2,6 @@
 // MÙA THU - AUTUMN PAGE JAVASCRIPT
 // ============================================
 
-const supabaseUrl = 'https://pacdedekrilpryicissg.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhY2RlZGVrcmlscHJ5aWNpc3NnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MzE2MDksImV4cCI6MjA4NTMwNzYwOX0.CNE274tkcgJCHBXq8SlvN59aaecK2qP2CRuKaDY-S1g';
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
 const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
 let isDrawing = false, currentTool = 'brush';
@@ -180,18 +176,15 @@ function drawFallingLeaves() {
 
 function drawOldStreet() {
     saveState();
-    // Sky
     const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height/2);
     skyGradient.addColorStop(0, '#87ceeb');
     skyGradient.addColorStop(1, '#b3e5fc');
     ctx.fillStyle = skyGradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height/2);
     
-    // Street
     ctx.fillStyle = '#9e9e9e';
     ctx.fillRect(0, canvas.height/2, canvas.width, canvas.height/2);
     
-    // Buildings
     const colors = ['#d7ccc8', '#bcaaa4', '#a1887f'];
     for (let i = 0; i < 5; i++) {
         const x = i * (canvas.width/5);
@@ -199,7 +192,6 @@ function drawOldStreet() {
         ctx.fillStyle = colors[i % 3];
         ctx.fillRect(x + 10, canvas.height/2 - height, canvas.width/5 - 20, height);
         
-        // Windows
         ctx.fillStyle = '#5d4037';
         for (let j = 0; j < 3; j++) {
             for (let k = 0; k < 4; k++) {
@@ -216,39 +208,18 @@ function drawAutumnAI() {
     setTimeout(() => drawFallingLeaves(), 300);
 }
 
-async function getGroqApiKey() {
-    const { data } = await supabaseClient.from('settings').select('value').eq('key', 'groq_api_key').single();
-    if (!data?.value) throw new Error('Chưa cấu hình API key');
-    return data.value;
-}
-
 async function analyzeDrawing() {
     document.getElementById('aiChatBox').classList.add('active');
     showLoadingMessage();
     
     try {
-        const apiKey = await getGroqApiKey();
-        const base64Image = canvas.toDataURL('image/png').split(',')[1];
+        const imageData = canvas.toDataURL('image/png');
+        const systemPrompt = 'Bạn là Llama - nhà thơ mùa thu. Nhận xét bức tranh lãng mạn, sâu lắng, ngắn gọn, tiếng Việt.';
         
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                model: 'meta-llama/llama-4-maverick-17b-128e-instruct',
-                messages: [
-                    { role: 'system', content: 'Bạn là Llama - nhà thơ mùa thu. Nhận xét bức tranh lãng mạn, sâu lắng, ngắn gọn, tiếng Việt.' },
-                    { role: 'user', content: [{ type: 'text', text: 'Nhận xét bức tranh mùa thu:' }, { type: 'image_url', image_url: { url: `data:image/png;base64,${base64Image}` } }] }
-                ],
-                temperature: 0.9,
-                max_completion_tokens: 500
-            })
-        });
+        const result = await window.SupabaseAPI.callGroqAPI(imageData, systemPrompt);
         
-        const data = await response.json();
         removeLoadingMessage();
-        if (data.choices?.[0]?.message?.content) {
-            showChatMessage('🤖 Llama 4', data.choices[0].message.content);
-        }
+        showChatMessage('🤖 Llama 4', result.content);
     } catch (error) {
         removeLoadingMessage();
         showChatMessage('🤖 Llama 4', 'Bức tranh mang vẻ buồn man mác đặc trưng của mùa thu Hà Nội. Thật đẹp! 🍁');

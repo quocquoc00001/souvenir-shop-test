@@ -1,9 +1,8 @@
-/* ============================================
-   === KẾT NỐI SUPABASE ===
-   ============================================ */
-const supabaseUrl = 'https://pacdedekrilpryicissg.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhY2RlZGVrcmlscHJ5aWNpc3NnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MzE2MDksImV4cCI6MjA4NTMwNzYwOX0.CNE274tkcgJCHBXq8SlvN59aaecK2qP2CRuKaDY-S1g';
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+// ============================================
+// MAIN SCRIPT - Index Page & Admin Dashboard
+// ============================================
+
+const supabaseClient = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_KEY);
 
 /* ============================================
    === DỮ LIỆU SẢN PHẨM ===
@@ -214,18 +213,12 @@ async function verifyPassword() {
 }
 
 /* ============================================
-   === ADMIN FUNCTIONS - ĐÃ SỬA LỖI ===
+   === ADMIN FUNCTIONS ===
    ============================================ */
 
-// === SỬA LỖI: Khởi tạo dropdown sản phẩm ===
 function initAdminProductSelect() {
     const select = document.getElementById('adm-product-select');
-    if (!select) {
-        console.log('Chưa vào trang admin, bỏ qua khởi tạo dropdown');
-        return;
-    }
-    
-    console.log('✅ Đang khởi tạo dropdown với', products.length, 'sản phẩm');
+    if (!select) return;
     
     select.innerHTML = '<option value="" disabled selected>-- Chọn sản phẩm --</option>';
     
@@ -235,17 +228,11 @@ function initAdminProductSelect() {
         option.textContent = `${p.id}. ${p.name}`;
         select.appendChild(option);
     });
-    
-    console.log('✅ Đã thêm xong sản phẩm vào dropdown');
 }
 
-// === SỬA LỖI: Thêm sản phẩm ===
 function addProductToSelection() {
     const select = document.getElementById('adm-product-select');
-    if (!select) {
-        console.error('Không tìm thấy dropdown');
-        return;
-    }
+    if (!select) return;
     
     const val = select.value;
     if(!val) {
@@ -255,28 +242,22 @@ function addProductToSelection() {
     
     const numVal = parseInt(val);
     
-    // Kiểm tra trùng lặp
     if(!currentSelectedProductIds.includes(numVal)) {
         currentSelectedProductIds.push(numVal);
         renderSelectedProductsList();
-        console.log('✅ Đã thêm sản phẩm ID:', numVal);
     } else {
         alert('Sản phẩm này đã có trong đơn!');
     }
     
-    // Reset về mặc định
     select.value = ""; 
 }
 
-// === SỬA LỖI: Xóa sản phẩm (đổi tên hàm cho khớp với HTML) ===
 function removeProductSelection(pid) {
     const numPid = parseInt(pid);
     currentSelectedProductIds = currentSelectedProductIds.filter(id => id !== numPid);
     renderSelectedProductsList();
-    console.log('✅ Đã xóa sản phẩm ID:', numPid);
 }
 
-// === SỬA LỖI: Hiển thị danh sách sản phẩm đã chọn ===
 function renderSelectedProductsList() {
     const container = document.getElementById('selected-products-list');
     if(!container) return;
@@ -289,23 +270,9 @@ function renderSelectedProductsList() {
     container.innerHTML = currentSelectedProductIds.map(pid => {
         const p = products.find(prod => prod.id === pid);
         return `
-            <div class="prod-tag" style="
-                background: var(--pastel-bg); 
-                color: var(--text-color); 
-                padding: 5px 10px; 
-                border-radius: 20px; 
-                display: inline-flex; 
-                align-items: center; 
-                gap: 5px; 
-                border: 1px solid var(--primary-pink);
-                margin: 2px;
-                font-size: 0.9rem;
-            ">
+            <div class="prod-tag">
                 ${p ? p.name : 'ID:'+pid} 
-                <i class="fas fa-times-circle" 
-                   onclick="removeProductSelection(${pid})" 
-                   style="cursor:pointer;color:#d63031;margin-left:5px;">
-                </i>
+                <i class="fas fa-times-circle" onclick="removeProductSelection(${pid})" style="cursor:pointer;color:#d63031;margin-left:5px;"></i>
             </div>
         `;
     }).join('');
@@ -403,7 +370,7 @@ async function saveOrder() {
             
         if (passError) throw passError;
         
-        alert(`✅ Đã lưu đơn hàng thành công!\n\nMật khẩu các mùa:\nXuân: ${currentSeasonPasswords.spring}\nHạ: ${currentSeasonPasswords.summer}\nThu: ${currentSeasonPasswords.autumn}\nĐông: ${currentSeasonPasswords.winter}`);
+        alert(`✅ Đã lưu đơn hàng thành công!`);
         
         clearForm();
         renderOrderTable();
@@ -499,10 +466,10 @@ function loginAdmin() {
         const header = document.getElementById('header-bar');
         if (header) header.style.display = 'none';
         
-        // Khởi tạo lại dropdown khi vào admin
         setTimeout(() => {
             initAdminProductSelect();
             renderOrderTable();
+            checkAllConnections();
         }, 100);
     } else { 
         alert("Sai mật khẩu!"); 
@@ -602,10 +569,99 @@ async function deleteOrder(id) {
 }
 
 /* ============================================
-   === PRINT FUNCTIONS ===
+   === CONNECTION STATUS & API MANAGEMENT ===
    ============================================ */
-function printOrders() {
-    window.print();
+
+async function checkAllConnections() {
+    // Check Supabase
+    try {
+        const { data, error } = await supabaseClient
+            .from('settings')
+            .select('count')
+            .limit(1);
+        
+        const supabaseStatus = document.getElementById('supabase-status');
+        if (!error) {
+            supabaseStatus.innerHTML = '<i class="fas fa-check"></i> Connected';
+            supabaseStatus.className = 'badge success';
+        } else {
+            supabaseStatus.innerHTML = '<i class="fas fa-times"></i> Error';
+            supabaseStatus.className = 'badge error';
+        }
+    } catch (e) {
+        document.getElementById('supabase-status').innerHTML = '<i class="fas fa-times"></i> Error';
+    }
+    
+    // Check Groq API
+    await updateApiStatusDisplay();
+}
+
+async function updateApiStatusDisplay() {
+    const status = await window.SupabaseAPI.checkApiKeyStatus();
+    const display = document.getElementById('api-status-display');
+    const groqStatus = document.getElementById('groq-status');
+    
+    if (status.configured) {
+        display.innerHTML = `<i class="fas fa-check-circle"></i> ${status.message}`;
+        display.style.color = '#00b894';
+        groqStatus.innerHTML = '<i class="fas fa-check"></i> Ready';
+        groqStatus.className = 'badge success';
+    } else {
+        display.innerHTML = `<i class="fas fa-times-circle"></i> ${status.message}`;
+        display.style.color = '#e74c3c';
+        groqStatus.innerHTML = '<i class="fas fa-times"></i> Not Configured';
+        groqStatus.className = 'badge error';
+    }
+}
+
+async function saveApiKey() {
+    const apiKey = document.getElementById('groq-api-key').value.trim();
+    
+    if (!apiKey) {
+        alert('Vui lòng nhập API key!');
+        return;
+    }
+    
+    if (!apiKey.startsWith('gsk_')) {
+        alert('API key Groq phải bắt đầu bằng "gsk_"');
+        return;
+    }
+    
+    try {
+        await window.SupabaseAPI.saveGroqApiKey(apiKey);
+        alert('✅ Đã lưu API key thành công!');
+        document.getElementById('groq-api-key').value = '';
+        await updateApiStatusDisplay();
+    } catch (err) {
+        alert('❌ Lỗi: ' + err.message);
+    }
+}
+
+async function testApiConnection() {
+    const btn = document.querySelector('.btn-test-api');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+    
+    try {
+        const response = await fetch(`${CONFIG.API_BASE_URL}/api/groq-chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                imageData: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+                systemPrompt: 'Test connection'
+            })
+        });
+        
+        if (response.ok) {
+            alert('✅ Kết nối API thành công!');
+        } else {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+    } catch (err) {
+        alert('❌ Lỗi kết nối: ' + err.message);
+    } finally {
+        btn.innerHTML = '<i class="fas fa-vial"></i> Test';
+    }
 }
 
 /* ============================================
@@ -625,12 +681,11 @@ function showSection(sectionId) {
         else btnHome.classList.remove('hidden');
     }
     
-    // Nếu vào admin dashboard, khởi tạo lại dropdown
     if (sectionId === 'admin-dashboard') {
         setTimeout(() => {
             initAdminProductSelect();
             renderOrderTable();
-            loadApiKeyStatus(); // Thêm dòng này
+            checkAllConnections();
         }, 100);
     }
 }
@@ -772,56 +827,3 @@ function initConstellation() {
         canvas.height = window.innerHeight;
     });
 }
-// ============================================
-// API SETTINGS MANAGEMENT
-// ============================================
-
-async function loadApiKeyStatus() {
-    const { data, error } = await supabaseClient
-        .from('settings')
-        .select('value')
-        .eq('key', 'groq_api_key')
-        .single();
-    
-    const statusDiv = document.getElementById('current-api-status');
-    if (data?.value && data.value.length > 10) {
-        const masked = data.value.substring(0, 8) + '...' + data.value.substring(data.value.length - 4);
-        statusDiv.innerHTML = `<i class="fas fa-check-circle"></i> Đã cấu hình (${masked})`;
-        statusDiv.style.color = '#00b894';
-    } else {
-        statusDiv.innerHTML = `<i class="fas fa-times-circle"></i> Chưa cấu hình`;
-        statusDiv.style.color = '#e74c3c';
-    }
-}
-
-async function saveApiKey() {
-    const apiKey = document.getElementById('groq-api-key').value.trim();
-    
-    if (!apiKey) {
-        alert('Vui lòng nhập API key!');
-        return;
-    }
-    
-    if (!apiKey.startsWith('gsk_')) {
-        alert('API key không hợp lệ! Key Groq thường bắt đầu bằng "gsk_"');
-        return;
-    }
-    
-    try {
-        const { error } = await supabaseClient
-            .from('settings')
-            .upsert({ key: 'groq_api_key', value: apiKey, updated_at: new Date().toISOString() });
-        
-        if (error) throw error;
-        
-        alert('✅ Đã lưu API key thành công!');
-        document.getElementById('groq-api-key').value = '';
-        loadApiKeyStatus();
-        
-    } catch (err) {
-        alert('Lỗi lưu API key: ' + err.message);
-    }
-}
-
-// Gọi loadApiKeyStatus() khi vào admin dashboard
-// Thêm vào hàm showSection hoặc khi khởi tạo admin

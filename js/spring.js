@@ -2,12 +2,6 @@
 // MÙA XUÂN - SPRING PAGE JAVASCRIPT
 // ============================================
 
-// Supabase config
-const supabaseUrl = 'https://pacdedekrilpryicissg.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhY2RlZGVrcmlscHJ5aWNpc3NnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MzE2MDksImV4cCI6MjA4NTMwNzYwOX0.CNE274tkcgJCHBXq8SlvN59aaecK2qP2CRuKaDY-S1g';
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
-// Canvas variables
 const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
 let isDrawing = false;
@@ -16,13 +10,10 @@ let brushColor = '#e91e63';
 let brushSize = 5;
 let lastX = 0;
 let lastY = 0;
-
-// Undo history
 let drawHistory = [];
 let historyStep = -1;
 const MAX_HISTORY = 50;
 
-// Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initParticles();
     initCanvas();
@@ -55,18 +46,15 @@ function initCanvas() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     
-    // Mouse events
     canvas.addEventListener('mousedown', startDrawing);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDrawing);
     canvas.addEventListener('mouseout', stopDrawing);
     
-    // Touch events
     canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
     canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
     canvas.addEventListener('touchend', stopDrawing);
     
-    // Save initial blank state
     saveState();
 }
 
@@ -77,7 +65,6 @@ function resizeCanvas() {
 }
 
 function initTools() {
-    // Tool buttons
     document.querySelectorAll('.tool-btn[data-tool]').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.tool-btn[data-tool]').forEach(b => b.classList.remove('active'));
@@ -87,7 +74,6 @@ function initTools() {
         });
     });
     
-    // Color picker
     const colorPicker = document.getElementById('colorPicker');
     colorPicker.addEventListener('change', (e) => {
         brushColor = e.target.value;
@@ -95,7 +81,6 @@ function initTools() {
         updateToolSelection();
     });
     
-    // Brush size
     const sizeSlider = document.getElementById('brushSize');
     const sizeDisplay = document.getElementById('sizeDisplay');
     sizeSlider.addEventListener('input', (e) => {
@@ -103,7 +88,6 @@ function initTools() {
         sizeDisplay.textContent = brushSize + 'px';
     });
     
-    // Keyboard shortcut for undo
     document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
             e.preventDefault();
@@ -139,8 +123,6 @@ function startDrawing(e) {
     isDrawing = true;
     const coords = getCoordinates(e);
     [lastX, lastY] = [coords.x, coords.y];
-    
-    // For single dot
     draw(e);
 }
 
@@ -236,7 +218,6 @@ function drawFlowers() {
         const size = Math.random() * 30 + 20;
         const color = colors[Math.floor(Math.random() * colors.length)];
         
-        // Draw flower petals
         for (let j = 0; j < 5; j++) {
             ctx.fillStyle = color;
             ctx.beginPath();
@@ -249,7 +230,6 @@ function drawFlowers() {
             ctx.fill();
         }
         
-        // Center
         ctx.fillStyle = '#ffd700';
         ctx.beginPath();
         ctx.arc(x, y, size/5, 0, Math.PI * 2);
@@ -262,21 +242,18 @@ function drawFlowers() {
 function drawRiceField() {
     saveState();
     
-    // Sky
     const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height/2);
     skyGradient.addColorStop(0, '#81d4fa');
     skyGradient.addColorStop(1, '#e1f5fe');
     ctx.fillStyle = skyGradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height/2);
     
-    // Rice field
     const fieldGradient = ctx.createLinearGradient(0, canvas.height/2, 0, canvas.height);
     fieldGradient.addColorStop(0, '#a5d6a7');
     fieldGradient.addColorStop(1, '#4caf50');
     ctx.fillStyle = fieldGradient;
     ctx.fillRect(0, canvas.height/2, canvas.width, canvas.height/2);
     
-    // Rice plants
     for (let i = 0; i < 150; i++) {
         const x = Math.random() * canvas.width;
         const y = canvas.height/2 + Math.random() * canvas.height/2;
@@ -300,19 +277,6 @@ function drawSpringAI() {
 // ============================================
 // GROQ API INTEGRATION
 // ============================================
-async function getGroqApiKey() {
-    const { data, error } = await supabaseClient
-        .from('settings')
-        .select('value')
-        .eq('key', 'groq_api_key')
-        .single();
-    
-    if (error || !data || !data.value) {
-        throw new Error('Chưa cấu hình API key');
-    }
-    return data.value;
-}
-
 async function analyzeDrawing() {
     const chatBox = document.getElementById('aiChatBox');
     chatBox.classList.add('active');
@@ -320,55 +284,18 @@ async function analyzeDrawing() {
     showLoadingMessage();
     
     try {
-        const apiKey = await getGroqApiKey();
         const imageData = canvas.toDataURL('image/png');
-        const base64Image = imageData.split(',')[1];
+        const systemPrompt = 'Bạn là Llama - họa sĩ AI yêu mến mùa xuân Việt Nam. Hãy nhận xét bức tranh một cách chân thành, ấm áp, dùng tiếng Việt. Nhận xét về màu sắc, cảm xúc và ý nghĩa mùa xuân trong bức vẽ. Trả lời ngắn gọn 2-3 câu.';
         
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                model: 'meta-llama/llama-4-maverick-17b-128e-instruct',
-                messages: [
-                    {
-                        role: 'system',
-                        content: 'Bạn là Llama - họa sĩ AI yêu mến mùa xuân Việt Nam. Hãy nhận xét bức tranh một cách chân thành, ấm áp, dùng tiếng Việt. Nhận xét về màu sắc, cảm xúc và ý nghĩa mùa xuân trong bức vẽ. Trả lời ngắn gọn 2-3 câu.'
-                    },
-                    {
-                        role: 'user',
-                        content: [
-                            { type: 'text', text: 'Bạn thấy bức tranh mùa xuân của tôi thế nào?' },
-                            { 
-                                type: 'image_url', 
-                                image_url: { url: `data:image/png;base64,${base64Image}` } 
-                            }
-                        ]
-                    }
-                ],
-                temperature: 0.8,
-                max_completion_tokens: 500,
-                stream: false
-            })
-        });
+        const result = await window.SupabaseAPI.callGroqAPI(imageData, systemPrompt);
         
-        if (!response.ok) {
-            throw new Error(`API Error: ${response.status}`);
-        }
-        
-        const data = await response.json();
         removeLoadingMessage();
-        
-        if (data.choices && data.choices[0] && data.choices[0].message) {
-            showChatMessage('🤖 Llama 4', data.choices[0].message.content);
-        }
+        showChatMessage('🤖 Llama 4', result.content);
         
     } catch (error) {
         removeLoadingMessage();
         console.error('Error:', error);
-        showChatMessage('🤖 Llama 4', 'Bức tranh của bạn thật tuyệt! Tôi cảm nhận được không khí xuân rộn ràng và tràn đầy sức sống! 🌸✨');
+        showChatMessage('🤖 Llama 4', 'Bức tranh mùa xuân của bạn thật tuyệt! Tôi cảm nhận được sức sống và hy vọng! 🌸');
     }
 }
 

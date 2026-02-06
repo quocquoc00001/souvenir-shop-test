@@ -1,0 +1,10 @@
+{
+  "name": "souvenir-shop",
+  "version": "1.0.0",
+  "description": "Tiệm Lưu Niệm Bốn Mùa",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {}
+}

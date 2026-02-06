@@ -2,10 +2,6 @@
 // MÙA ĐÔNG - WINTER PAGE JAVASCRIPT
 // ============================================
 
-const supabaseUrl = 'https://pacdedekrilpryicissg.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhY2RlZGVrcmlscHJ5aWNpc3NnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MzE2MDksImV4cCI6MjA4NTMwNzYwOX0.CNE274tkcgJCHBXq8SlvN59aaecK2qP2CRuKaDY-S1g';
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
 const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
 let isDrawing = false, currentTool = 'brush';
@@ -164,11 +160,9 @@ function undoLastStroke() {
 
 function drawSnow() {
     saveState();
-    // Background
     ctx.fillStyle = '#2d3436';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Snow ground
     ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
     ctx.beginPath();
     ctx.moveTo(0, canvas.height - 100);
@@ -179,7 +173,6 @@ function drawSnow() {
     ctx.lineTo(0, canvas.height);
     ctx.fill();
     
-    // Falling snow
     for (let i = 0; i < 100; i++) {
         const x = Math.random() * canvas.width;
         const y = Math.random() * canvas.height;
@@ -195,7 +188,6 @@ function drawSnow() {
 
 function drawFireplace() {
     saveState();
-    // Fire background
     const fireGradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, 200);
     fireGradient.addColorStop(0, '#ff6b35');
     fireGradient.addColorStop(0.5, '#e74c3c');
@@ -203,7 +195,6 @@ function drawFireplace() {
     ctx.fillStyle = fireGradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Fire flames
     for (let i = 0; i < 20; i++) {
         ctx.fillStyle = `rgba(255, ${100 + Math.random() * 100}, 0, 0.8)`;
         const x = canvas.width/2 - 50 + Math.random() * 100;
@@ -216,7 +207,6 @@ function drawFireplace() {
         ctx.fill();
     }
     
-    // Logs
     ctx.strokeStyle = '#5d4037';
     ctx.lineWidth = 10;
     ctx.beginPath();
@@ -232,39 +222,18 @@ function drawWinterAI() {
     setTimeout(() => drawFireplace(), 300);
 }
 
-async function getGroqApiKey() {
-    const { data } = await supabaseClient.from('settings').select('value').eq('key', 'groq_api_key').single();
-    if (!data?.value) throw new Error('Chưa cấu hình API key');
-    return data.value;
-}
-
 async function analyzeDrawing() {
     document.getElementById('aiChatBox').classList.add('active');
     showLoadingMessage();
     
     try {
-        const apiKey = await getGroqApiKey();
-        const base64Image = canvas.toDataURL('image/png').split(',')[1];
+        const imageData = canvas.toDataURL('image/png');
+        const systemPrompt = 'Bạn là Llama - người bạn ấm áp mùa đông. Nhận xét bức tranh chân thành, ấm áp, ngắn gọn, tiếng Việt.';
         
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                model: 'meta-llama/llama-4-maverick-17b-128e-instruct',
-                messages: [
-                    { role: 'system', content: 'Bạn là Llama - người bạn ấm áp mùa đông. Nhận xét bức tranh chân thành, ấm áp, ngắn gọn, tiếng Việt.' },
-                    { role: 'user', content: [{ type: 'text', text: 'Nhận xét bức tranh mùa đông:' }, { type: 'image_url', image_url: { url: `data:image/png;base64,${base64Image}` } }] }
-                ],
-                temperature: 0.8,
-                max_completion_tokens: 500
-            })
-        });
+        const result = await window.SupabaseAPI.callGroqAPI(imageData, systemPrompt);
         
-        const data = await response.json();
         removeLoadingMessage();
-        if (data.choices?.[0]?.message?.content) {
-            showChatMessage('🤖 Llama 4', data.choices[0].message.content);
-        }
+        showChatMessage('🤖 Llama 4', result.content);
     } catch (error) {
         removeLoadingMessage();
         showChatMessage('🤖 Llama 4', 'Bức tranh mang cảm giác ấm áp giữa mùa đông lạnh giá. Thật tuyệt! ❄️❤️');

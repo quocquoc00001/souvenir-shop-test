@@ -2,10 +2,6 @@
 // MÙA HẠ - SUMMER PAGE JAVASCRIPT
 // ============================================
 
-const supabaseUrl = 'https://pacdedekrilpryicissg.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhY2RlZGVrcmlscHJ5aWNpc3NnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MzE2MDksImV4cCI6MjA4NTMwNzYwOX0.CNE274tkcgJCHBXq8SlvN59aaecK2qP2CRuKaDY-S1g';
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
 const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
 let isDrawing = false, currentTool = 'brush';
@@ -106,10 +102,7 @@ function draw(e) {
 }
 
 function stopDrawing() {
-    if (isDrawing) {
-        isDrawing = false;
-        saveState();
-    }
+    if (isDrawing) { isDrawing = false; saveState(); }
 }
 
 function handleTouchStart(e) {
@@ -156,13 +149,11 @@ function drawSunset() {
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height/2);
     
-    // Sun
     ctx.fillStyle = '#ff5722';
     ctx.beginPath();
     ctx.arc(canvas.width/2, canvas.height/2 - 30, 50, 0, Math.PI * 2);
     ctx.fill();
     
-    // Ocean
     const oceanGradient = ctx.createLinearGradient(0, canvas.height/2, 0, canvas.height);
     oceanGradient.addColorStop(0, '#4fc3f7');
     oceanGradient.addColorStop(1, '#01579b');
@@ -174,15 +165,12 @@ function drawSunset() {
 
 function drawBeach() {
     saveState();
-    // Sky
     ctx.fillStyle = '#87ceeb';
     ctx.fillRect(0, 0, canvas.width, canvas.height/2);
     
-    // Ocean
     ctx.fillStyle = '#00d4ff';
     ctx.fillRect(0, canvas.height/2 - 50, canvas.width, 100);
     
-    // Sand
     ctx.fillStyle = '#f4e4c1';
     ctx.beginPath();
     ctx.moveTo(0, canvas.height/2 + 50);
@@ -191,7 +179,6 @@ function drawBeach() {
     ctx.lineTo(0, canvas.height);
     ctx.fill();
     
-    // Palm tree
     ctx.strokeStyle = '#795548';
     ctx.lineWidth = 8;
     ctx.beginPath();
@@ -199,7 +186,6 @@ function drawBeach() {
     ctx.quadraticCurveTo(canvas.width - 80, canvas.height/2 + 100, canvas.width - 60, canvas.height/2);
     ctx.stroke();
     
-    // Leaves
     ctx.strokeStyle = '#4caf50';
     ctx.lineWidth = 4;
     for (let i = 0; i < 6; i++) {
@@ -221,39 +207,18 @@ function drawSummerAI() {
     setTimeout(() => drawBeach(), 300);
 }
 
-async function getGroqApiKey() {
-    const { data } = await supabaseClient.from('settings').select('value').eq('key', 'groq_api_key').single();
-    if (!data?.value) throw new Error('Chưa cấu hình API key');
-    return data.value;
-}
-
 async function analyzeDrawing() {
     document.getElementById('aiChatBox').classList.add('active');
     showLoadingMessage();
     
     try {
-        const apiKey = await getGroqApiKey();
-        const base64Image = canvas.toDataURL('image/png').split(',')[1];
+        const imageData = canvas.toDataURL('image/png');
+        const systemPrompt = 'Bạn là Llama - chuyên gia về mùa hè Việt Nam. Nhận xét bức tranh ngắn gọn, nhiệt huyết, tiếng Việt.';
         
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                model: 'meta-llama/llama-4-maverick-17b-128e-instruct',
-                messages: [
-                    { role: 'system', content: 'Bạn là Llama - chuyên gia về mùa hè Việt Nam. Nhận xét bức tranh ngắn gọn, nhiệt huyết, tiếng Việt.' },
-                    { role: 'user', content: [{ type: 'text', text: 'Nhận xét bức tranh mùa hè này:' }, { type: 'image_url', image_url: { url: `data:image/png;base64,${base64Image}` } }] }
-                ],
-                temperature: 0.8,
-                max_completion_tokens: 500
-            })
-        });
+        const result = await window.SupabaseAPI.callGroqAPI(imageData, systemPrompt);
         
-        const data = await response.json();
         removeLoadingMessage();
-        if (data.choices?.[0]?.message?.content) {
-            showChatMessage('🤖 Llama 4', data.choices[0].message.content);
-        }
+        showChatMessage('🤖 Llama 4', result.content);
     } catch (error) {
         removeLoadingMessage();
         showChatMessage('🤖 Llama 4', 'Bức tranh mùa hè đầy năng lượng! Tôi cảm nhận được nhiệt huyết của mùa hè! ☀️🏖️');

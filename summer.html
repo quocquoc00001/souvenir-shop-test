@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mùa Hạ Việt Nam - Bí Mật</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/summer.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="ocean-waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    
+    <div class="sun"></div>
+    
+    <div class="header">
+        <h1>☀️ MÙA HẠ VIỆT NAM ☀️</h1>
+        <p>Mùa của nắng gắt, biển xanh và tiếng ve sầu</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+    </div>
+
+    <div class="container">
+        <!-- Thơ Hạ -->
+        <div class="poem-section">
+            <h2><i class="fas fa-water"></i> Thơ Hạ</h2>
+            <div class="poem-content">
+                <p>Phượng vĩ đỏ rực góc trời</p>
+                <p>Tiếng ve ngân vang gọi hè về</p>
+                <p>Biển xanh vẫy gọi du khách</p>
+                <p>Mùa hạ nồng nàn khó phai</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card card-large beach-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1504194921103-98a190533f81?w=800&q=80" alt="Biển hè" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🌊 Thời tiết & Biển</h2>
+                    <p>Nhiệt độ 32-38°C, nắng gắt quanh năm. Biển xanh ngắt, cát trắng mịn. Lý tưởng cho kỳ nghỉ mát.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1559592413-7cec4d0ea49b?w=800&q=80" alt="Phượng vĩ" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🌺 Cảnh quan</h2>
+                    <p>Phượng vĩ đỏ rực, bàng xanh mát, tiếng ve râm ran cả ngày.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1532347922424-cba175ba7cb8?w=800&q=80" alt="Lễ hội" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🎉 Lễ hội</h2>
+                    <div class="festival-tags">
+                        <span class="festival-tag">Tết Đoan Ngọ</span>
+                        <span class="festival-tag">Lễ hội biển</span>
+                    </div>
+                    <p>Tắm biển, cắm trại, du lịch đảo.</p>
+                </div>
+            </div>
+
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80" alt="Cảm xúc" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>❤️ Cảm xúc</h2>
+                    <div class="emotion-box">
+                        <span>☀️ Nhiệt huyết, sôi nổi</span>
+                        <span>🌊 Tự do, phóng khoáng</span>
+                        <span>🏖️ Thư giãn tuyệt đối</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <h2>🎨 Vẽ Mùa Hạ Của Bạn</h2>
+                <p>Hãy vẽ và để AI nhận xét bức tranh của bạn</p>
+            </div>
+            
+            <div class="canvas-toolbar">
+                <div class="brush-tools">
+                    <button class="tool-btn active" data-tool="brush" title="Cọ vẽ">
+                        <i class="fas fa-paint-brush"></i>
+                    </button>
+                    <button class="tool-btn" data-tool="eraser" title="Tẩy">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                    <button class="tool-btn" onclick="undoLastStroke()" title="Hoàn tác">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </div>
+                
+                <div class="brush-options">
+                    <label>Màu:</label>
+                    <input type="color" id="colorPicker" value="#ff6b35">
+                    <label>Kích thước:</label>
+                    <input type="range" id="brushSize" min="1" max="50" value="5">
+                    <span id="sizeDisplay">5px</span>
+                </div>
+            </div>
+
+            <canvas id="drawingCanvas"></canvas>
+            
+            <div class="controls">
+                <button class="btn btn-summer" onclick="drawSummerAI()">
+                    <i class="fas fa-robot"></i> AI Vẽ Mùa Hạ
+                </button>
+                <button class="btn btn-summer" onclick="drawSunset()">
+                    <i class="fas fa-sun"></i> Vẽ Hoàng Hôn
+                </button>
+                <button class="btn btn-summer" onclick="drawBeach()">
+                    <i class="fas fa-umbrella-beach"></i> Vẽ Biển
+                </button>
+                <button class="btn btn-secondary" onclick="analyzeDrawing()">
+                    <i class="fas fa-magic"></i> Phân Tích
+                </button>
+                <button class="btn btn-danger" onclick="clearCanvas()">
+                    <i class="fas fa-trash"></i> Xóa
+                </button>
+            </div>
+
+            <div id="aiChatBox" class="chat-box">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i> Chat với Llama 4
+                    <button onclick="toggleChat()" class="chat-toggle"><i class="fas fa-minus"></i></button>
+                </div>
+                <div id="chatMessages" class="chat-messages"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/summer.js"></script>
+</body>
+</html>

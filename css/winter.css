@@ -1,0 +1,380 @@
+/* ==================== MÙA ĐÔNG THEME - FROST STYLE ==================== */
+:root {
+    --winter-primary: #0984e3;
+    --winter-secondary: #74b9ff;
+    --winter-ice: #dfe6e9;
+    --winter-dark: #2d3436;
+    --winter-fire: #e17055;
+    --text-dark: #2d3436;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+
+/* Snow Animation */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    color: white;
+    font-size: 1rem;
+    animation: snow linear infinite;
+    opacity: 0.8;
+    text-shadow: 0 0 5px rgba(255,255,255,0.8);
+}
+
+@keyframes snow {
+    0% { transform: translateY(-100px) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, var(--winter-primary), var(--winter-dark));
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(9, 132, 227, 0.3);
+}
+
+.header h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    margin-top: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-3px);
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Poem */
+.poem-section {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 50px;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px);
+}
+
+.poem-section h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    color: var(--winter-primary);
+    margin-bottom: 30px;
+}
+
+.poem-content {
+    font-size: 1.4rem;
+    line-height: 2;
+    color: var(--text-dark);
+    font-weight: 300;
+}
+
+/* Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.content-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.content-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(9, 132, 227, 0.2);
+}
+
+.card-large { grid-column: span 2; }
+
+.card-image-wrapper {
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(9, 132, 227, 0.2));
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.content-card:hover .card-image {
+    transform: scale(1.1);
+}
+
+.card-content {
+    padding: 30px;
+}
+
+.card-content h2 {
+    color: var(--winter-primary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+/* Festival Tags */
+.festival-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.festival-tag {
+    background: linear-gradient(135deg, var(--winter-primary), var(--winter-secondary));
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Emotion Box */
+.emotion-box {
+    background: linear-gradient(135deg, #f5f6fa, #dcdde1);
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 5px solid var(--winter-fire);
+}
+
+.emotion-box span {
+    display: block;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+/* Canvas Section */
+.canvas-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.canvas-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.canvas-header h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 2.2rem;
+    color: var(--winter-primary);
+}
+
+/* Toolbar */
+.canvas-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-radius: 15px 15px 0 0;
+    border: 2px solid #e9ecef;
+    border-bottom: none;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.tool-btn {
+    width: 45px;
+    height: 45px;
+    border: 2px solid #dee2e6;
+    background: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.tool-btn:hover, .tool-btn.active {
+    background: var(--winter-primary);
+    color: white;
+    border-color: var(--winter-primary);
+    transform: scale(1.05);
+}
+
+.brush-options {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#drawingCanvas {
+    width: 100%;
+    height: 500px;
+    border: 3px solid var(--winter-secondary);
+    border-top: none;
+    background: linear-gradient(to bottom, #2d3436 0%, #636e72 100%);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-winter {
+    background: linear-gradient(135deg, var(--winter-primary), var(--winter-dark));
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: white;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Chat Box */
+.chat-box {
+    margin-top: 30px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: none;
+    border: 2px solid var(--winter-secondary);
+    background: white;
+}
+
+.chat-box.active { display: block; }
+
+.chat-header {
+    background: linear-gradient(135deg, var(--winter-primary), var(--winter-dark));
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.chat-messages {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.message {
+    margin: 12px 0;
+    padding: 15px 20px;
+    border-radius: 18px;
+    max-width: 80%;
+    line-height: 1.6;
+}
+
+.message.ai {
+    background: linear-gradient(135deg, var(--winter-ice), #b2bec3);
+    color: var(--winter-dark);
+    margin-right: auto;
+}
+
+.message.user {
+    background: #e3f2fd;
+    margin-left: auto;
+    text-align: right;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header h1 { font-size: 2.2rem; }
+    .content-grid { grid-template-columns: 1fr; }
+    .card-large { grid-column: span 1; }
+    .poem-section { padding: 30px 20px; }
+}

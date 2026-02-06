@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mùa Xuân Việt Nam - Bí Mật</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/spring.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="spring-particles" id="springParticles"></div>
+    
+    <div class="header">
+        <h1>🌸 MÙA XUÂN VIỆT NAM 🌸</h1>
+        <p>Mùa của sự khởi đầu, hy vọng và tươi mới</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+    </div>
+
+    <div class="container">
+        <!-- Thơ Xuân -->
+        <div class="poem-section">
+            <h2><i class="fas fa-feather-alt"></i> Thơ Xuân</h2>
+            <div class="poem-content">
+                <p>Hoa đào nở rộ khoe sắc thắm</p>
+                <p>Mưa phùn gió bấc se lòng</p>
+                <p>Xuân về mang đến hy vọng</p>
+                <p>Khởi đầu một năm an vui</p>
+            </div>
+        </div>
+
+        <!-- Grid nội dung -->
+        <div class="content-grid">
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1550596334-7bb40a71b6bc?w=800&q=80" alt="Hoa đào" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🌸 Thời tiết & Khí hậu</h2>
+                    <p>Mùa xuân miền Bắc ấm áp với nhiệt độ 15-22°C. Mưa phùn nhẹ, không khí ẩm ướt. Hoa đào, hoa mai nở rộ báo hiệu Tết đến.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1582450871972-ab5ca641643d?w=800&q=80" alt="Lễ hội" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🎊 Lễ hội</h2>
+                    <div class="festival-tags">
+                        <span class="festival-tag">Tết Nguyên Đán</span>
+                        <span class="festival-tag">Lễ hội hoa đào</span>
+                        <span class="festival-tag">Hội Lim</span>
+                    </div>
+                    <p>Thăm chùa đầu năm, chúc Tết, mừng tuổi.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1496412705862-e0088f16f791?w=800&q=80" alt="Ẩm thực" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🍜 Ẩm thực</h2>
+                    <p>Bánh chưng, bánh tét, mứt Tết, nem rán, giò chả.</p>
+                </div>
+            </div>
+
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80" alt="Gia đình" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>💝 Cảm xúc</h2>
+                    <div class="emotion-box">
+                        <span class="emotion-item">✨ Vui vẻ, phấn khởi</span>
+                        <span class="emotion-item">🌟 Hy vọng, lạc quan</span>
+                        <span class="emotion-item">👨‍👩‍👧‍👦 Sum vầy gia đình</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Section -->
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <h2>🎨 Vẽ Mùa Xuân Của Bạn</h2>
+                <p>Hãy vẽ và để AI nhận xét bức tranh của bạn</p>
+            </div>
+            
+            <div class="canvas-toolbar">
+                <div class="brush-tools">
+                    <button class="tool-btn active" data-tool="brush" title="Cọ vẽ">
+                        <i class="fas fa-paint-brush"></i>
+                    </button>
+                    <button class="tool-btn" data-tool="eraser" title="Tẩy">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                    <button class="tool-btn" onclick="undoLastStroke()" title="Hoàn tác (Ctrl+Z)">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </div>
+                
+                <div class="brush-options">
+                    <label>Màu:</label>
+                    <input type="color" id="colorPicker" value="#e91e63">
+                    <label>Kích thước:</label>
+                    <input type="range" id="brushSize" min="1" max="50" value="5">
+                    <span id="sizeDisplay">5px</span>
+                </div>
+            </div>
+
+            <canvas id="drawingCanvas"></canvas>
+            
+            <div class="controls">
+                <button class="btn btn-spring" onclick="drawSpringAI()">
+                    <i class="fas fa-robot"></i> AI Vẽ Mùa Xuân
+                </button>
+                <button class="btn btn-spring" onclick="drawFlowers()">
+                    <i class="fas fa-spa"></i> Vẽ Hoa Đào
+                </button>
+                <button class="btn btn-spring" onclick="drawRiceField()">
+                    <i class="fas fa-seedling"></i> Vẽ Đồng Lúa
+                </button>
+                <button class="btn btn-secondary" onclick="analyzeDrawing()">
+                    <i class="fas fa-magic"></i> Phân Tích Bức Vẽ
+                </button>
+                <button class="btn btn-danger" onclick="clearCanvas()">
+                    <i class="fas fa-trash"></i> Xóa Tất Cả
+                </button>
+            </div>
+
+            <!-- Chat Box -->
+            <div id="aiChatBox" class="chat-box">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i> Chat với Llama 4
+                    <button onclick="toggleChat()" class="chat-toggle"><i class="fas fa-minus"></i></button>
+                </div>
+                <div id="chatMessages" class="chat-messages"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/spring.js"></script>
+</body>
+</html>

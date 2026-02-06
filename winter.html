@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mùa Đông Việt Nam - Bí Mật</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/winter.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="snow-container" id="snowContainer"></div>
+    
+    <div class="header">
+        <h1>❄️ MÙA ĐÔNG VIỆT NAM ❄️</h1>
+        <p>Mùa của gió lạnh, bếp lửa và kỷ niệm ấm áp</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+    </div>
+
+    <div class="container">
+        <div class="poem-section">
+            <h2><i class="fas fa-fire"></i> Thơ Đông</h2>
+            <div class="poem-content">
+                <p>Gió mùa đông bắc se lạnh</p>
+                <p>Bếp lửa hồng sưởi ấm tay</p>
+                <p>Đông vĩnh cửu là ký ức</p>
+                <p>Đóng băng thời gian yêu thương</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1483664852095-d6cc687070ef?w=800&q=80" alt="Mùa đông" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🌡️ Thời tiết & Khí hậu</h2>
+                    <p>Miền Bắc 10-20°C, có khi dưới 10°C. Gió mùa đông bắc se lạnh. Sương muối phủ trắng đồng.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" alt="Bếp lửa" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🔥 Ấm áp</h2>
+                    <p>Bếp lửa hồng, nướng khoai, nướng ngô. Quây quần bên gia đình.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80" alt="Tết" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🎊 Lễ hội</h2>
+                    <div class="festival-tags">
+                        <span class="festival-tag">Tết Dương Lịch</span>
+                        <span class="festival-tag">Giáng Sinh</span>
+                        <span class="festival-tag">Tết Nguyên Đán</span>
+                    </div>
+                    <p>Chuẩn bị đón năm mới, sắm sửa Tết.</p>
+                </div>
+            </div>
+
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1516714819001-8ee7a13b71d7?w=800&q=80" alt="Gia đình" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>❤️ Cảm xúc</h2>
+                    <div class="emotion-box">
+                        <span>❄️ Se lạnh nhưng ấm áp</span>
+                        <span>🔥 Gắn kết gia đình</span>
+                        <span>🎊 Háo hức chờ Tết</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <h2>🎨 Vẽ Mùa Đông Của Bạn</h2>
+            </div>
+            
+            <div class="canvas-toolbar">
+                <div class="brush-tools">
+                    <button class="tool-btn active" data-tool="brush"><i class="fas fa-paint-brush"></i></button>
+                    <button class="tool-btn" data-tool="eraser"><i class="fas fa-eraser"></i></button>
+                    <button class="tool-btn" onclick="undoLastStroke()"><i class="fas fa-undo"></i></button>
+                </div>
+                
+                <div class="brush-options">
+                    <label>Màu:</label>
+                    <input type="color" id="colorPicker" value="#0984e3">
+                    <label>Kích thước:</label>
+                    <input type="range" id="brushSize" min="1" max="50" value="5">
+                    <span id="sizeDisplay">5px</span>
+                </div>
+            </div>
+
+            <canvas id="drawingCanvas"></canvas>
+            
+            <div class="controls">
+                <button class="btn btn-winter" onclick="drawWinterAI()"><i class="fas fa-robot"></i> AI Vẽ Đông</button>
+                <button class="btn btn-winter" onclick="drawSnow()"><i class="fas fa-snowflake"></i> Vẽ Tuyết</button>
+                <button class="btn btn-winter" onclick="drawFireplace()"><i class="fas fa-fire"></i> Vẽ Bếp Lửa</button>
+                <button class="btn btn-secondary" onclick="analyzeDrawing()"><i class="fas fa-magic"></i> Phân Tích</button>
+                <button class="btn btn-danger" onclick="clearCanvas()"><i class="fas fa-trash"></i> Xóa</button>
+            </div>
+
+            <div id="aiChatBox" class="chat-box">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i> Chat với Llama 4
+                    <button onclick="toggleChat()" class="chat-toggle"><i class="fas fa-minus"></i></button>
+                </div>
+                <div id="chatMessages" class="chat-messages"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/winter.js"></script>
+</body>
+</html>

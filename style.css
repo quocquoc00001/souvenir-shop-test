@@ -1,0 +1,579 @@
+:root {
+    /* Bảng màu Hồng chủ đạo - Mặc định Xuân */
+    --primary-pink: #FF8BA7;
+    --dark-pink: #FF5C8D;
+    --light-pink: #FFC6C6;
+    --pastel-bg: #FAE3D9;
+    --text-color: #594a4e;
+    --white: #ffffff;
+    --glass: rgba(255, 255, 255, 0.7);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Quicksand', 'Nunito', 'Arial', sans-serif;
+    background: var(--pastel-bg);
+    background: linear-gradient(135deg, var(--pastel-bg), var(--light-pink), var(--primary-pink));
+    min-height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* FONT CẦU KỲ CHO TIÊU ĐỀ */
+h1, h2, h3, .shop-name, .fancy-title {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+}
+
+/* --- HIỆU ỨNG NỀN --- */
+#sakura-container, #constellation { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; 
+}
+#sakura-container { z-index: 1; }
+#constellation { z-index: 0; opacity: 0.5; }
+.hidden { display: none !important; }
+
+/* --- HEADER --- */
+.main-header { position: fixed; top: 20px; left: 20px; z-index: 100; }
+.search-box {
+    background: rgba(255,255,255,0.9); padding: 8px; border-radius: 30px; 
+    box-shadow: 0 4px 15px rgba(255, 92, 141, 0.3); display: flex; gap: 5px;
+    border: 2px solid var(--primary-pink);
+}
+.search-box input { 
+    border: none; padding: 8px 15px; border-radius: 20px; outline: none; 
+    background: transparent; font-family: 'Quicksand'; font-weight: bold; width: 150px;
+}
+.search-box button { 
+    background: var(--dark-pink); color: white; border: none; padding: 8px 20px; 
+    border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s;
+}
+.search-box button:hover { transform: scale(1.05); background: #d93d6e; }
+
+#back-home-btn {
+    position: fixed; top: 20px; right: 20px; z-index: 100;
+    background: var(--dark-pink); border: none; padding: 10px 25px; border-radius: 25px; 
+    cursor: pointer; color: #fff; font-family: 'Quicksand'; font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+    position: relative; height: 60vh; width: 100%; overflow: hidden;
+    border-bottom-left-radius: 50% 15%; border-bottom-right-radius: 50% 15%;
+    box-shadow: 0 10px 30px rgba(168, 56, 92, 0.2);
+}
+.hero-img { width: 100%; height: 100%; object-fit: cover; }
+.shop-name {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 5rem; color: #fff; text-shadow: 2px 2px 0px var(--dark-pink);
+    background: rgba(255, 255, 255, 0.25); padding: 30px 60px; border-radius: 20px; 
+    backdrop-filter: blur(8px); border: 2px solid rgba(255,255,255,0.5);
+    white-space: nowrap; animation: float 3s ease-in-out infinite;
+}
+@keyframes float { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -60%); } }
+
+/* --- 4 SEASONS NAV --- */
+.seasons-nav { display: flex; justify-content: center; gap: 30px; padding: 80px 20px; flex-wrap: wrap; }
+.season-card {
+    width: 200px; height: 500px; position: relative; cursor: pointer; overflow: hidden; border-radius: 20px; 
+    transition: transform 0.4s; border: 3px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.season-card:hover { transform: translateY(-15px) scale(1.05); z-index: 10; }
+.season-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.season-card:hover img { transform: scale(1.1); }
+.season-text {
+    position: absolute; bottom: 30px; left: 0; width: 100%; text-align: center;
+    color: white; font-family: 'Dancing Script'; font-size: 2.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+.secret-hint {
+    position: absolute; top: 15px; right: 15px;
+    background: rgba(0,0,0,0.6); color: white;
+    padding: 5px 12px; border-radius: 20px;
+    font-size: 0.8rem; font-weight: bold;
+    opacity: 0; transition: 0.3s;
+}
+.season-card:hover .secret-hint { opacity: 1; }
+
+/* Màu viền cho từng mùa */
+.spring-card { border-color: #FF8BA7; }
+.summer-card { border-color: #FF6B6B; }
+.autumn-card { border-color: #D2691E; }
+.winter-card { border-color: #4682B4; }
+
+/* --- PRODUCTS GRID --- */
+.products-section { padding: 60px 20px; background: rgba(255, 255, 255, 0.3); text-align: center; }
+.fancy-title { font-size: 3.5rem; color: var(--dark-pink); margin-bottom: 40px; text-shadow: 1px 1px 2px white; }
+.product-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 40px; max-width: 1200px; margin: 0 auto;
+}
+.product-item {
+    background: var(--glass); padding: 20px; border-radius: 20px; cursor: pointer; 
+    transition: 0.3s; border: var(--glass-border);
+}
+.product-item:hover { transform: translateY(-10px); background: white; box-shadow: 0 10px 30px rgba(255, 92, 141, 0.2); }
+.product-item img { width: 100%; height: 220px; object-fit: cover; border-radius: 15px; }
+.product-item h3 { margin-top: 15px; color: var(--text-color); font-size: 1.5rem; }
+
+/* --- SLIDER TRONG MODAL --- */
+.media-section {
+    position: relative; width: 100%; height: 400px; background: #000;
+    border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.slider-container { width: 100%; height: 100%; position: relative; }
+.slider-track { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
+.slide-item { min-width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: #f0f0f0; }
+.slide-item img, .slide-item video { width: 100%; height: 100%; object-fit: cover; }
+.slider-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.3); border: 1px solid white; color: white;
+    font-size: 20px; padding: 15px 10px; cursor: pointer; z-index: 10; border-radius: 5px; transition: 0.3s;
+}
+.slider-btn:hover { background: var(--dark-pink); }
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+/* --- BUTTONS CHỌN MÙA --- */
+.season-selectors { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+.season-btn {
+    padding: 10px 20px; border: 2px solid var(--primary-pink); background: white;
+    color: var(--text-color); border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s;
+}
+.season-btn:hover, .season-btn.active { background: var(--dark-pink); color: white; box-shadow: 0 5px 15px rgba(255, 92, 141, 0.4); }
+
+/* --- MODAL CHUNG --- */
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+.modal-content { background: white; width: 90%; max-width: 900px; border-radius: 25px; overflow: hidden; position: relative; display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+.close-modal { position: absolute; top: 15px; right: 25px; font-size: 35px; cursor: pointer; color: var(--dark-pink); z-index: 10; }
+.modal-body { display: flex; padding: 30px; gap: 30px; }
+.info-section { flex: 1; display: flex; flex-direction: column; gap: 10px; text-align: left; }
+.contact-btns { display: flex; gap: 10px; }
+.contact-btns a { flex: 1; padding: 12px; text-align: center; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; }
+.btn-zalo { background: #0068FF; }
+.btn-fb { background: #1877F2; }
+
+/* --- PASSWORD MODAL --- */
+.password-box {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 40px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.password-box h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--dark-pink);
+}
+
+.password-box input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.password-box input:focus {
+    border-color: var(--primary-pink);
+}
+
+.btn-verify-pass {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ff5c8d, #ff8ba7);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+.btn-verify-pass:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(255, 92, 141, 0.4);
+}
+
+.btn-close-login {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    background: white;
+    color: #666;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-close-login:hover {
+    background: #f5f5f5;
+}
+
+/* --- VIETNAM SEASONS INFO --- */
+.vietnam-seasons-info { padding: 80px 20px; background: rgba(255,255,255,0.4); }
+.vn-season-row { display: flex; align-items: center; justify-content: center; gap: 60px; margin-bottom: 80px; }
+.vn-season-row.reverse { flex-direction: row-reverse; }
+.vn-content { max-width: 400px; text-align: left; }
+.vn-content h3 { font-size: 3rem; color: var(--dark-pink); margin-bottom: 10px; }
+.vn-content p { font-size: 1.2rem; line-height: 1.6; }
+.vn-images { position: relative; width: 450px; height: 350px; }
+.vn-images img { position: absolute; width: 280px; height: 220px; object-fit: cover; border-radius: 15px; border: 4px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.img-style-1 { top: 0; left: 0; transform: rotate(-8deg); z-index: 1; }
+.img-style-2 { bottom: 0; right: 0; transform: rotate(8deg); z-index: 2; }
+
+/* --- FOOTER & ADMIN TRIGGER --- */
+.site-footer { background: rgba(255, 255, 255, 0.8); padding: 30px; text-align: center; margin-top: 50px; border-top: 2px solid var(--white); }
+.admin-access-box {
+    display: inline-block; margin-top: 15px; padding: 10px 20px;
+    background: #333; color: #fff; border-radius: 50px; font-size: 0.9rem;
+    cursor: pointer; transition: 0.3s; opacity: 0.8; font-weight: bold;
+}
+.admin-access-box:hover { background: var(--dark-pink); transform: scale(1.1); opacity: 1; }
+
+/* --- THANK YOU PAGE --- */
+.thank-you-container { 
+    background: rgba(255, 255, 255, 0.95); 
+    padding: 50px; 
+    border-radius: 30px; 
+    box-shadow: 0 15px 40px rgba(255,92,141,0.2); 
+    max-width: 700px; 
+    margin: 100px auto; 
+    text-align: center; 
+}
+
+.ty-message {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555;
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 230, 230, 0.5);
+    border-radius: 15px;
+}
+
+.secret-message-display {
+    background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+    padding: 25px;
+    border-radius: 20px;
+    margin: 25px 0;
+    border-left: 5px solid var(--dark-pink);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.secret-message-display h3 {
+    color: var(--dark-pink);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.secret-message-display p {
+    font-family: 'Quicksand', 'Segoe UI', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: #444;
+}
+
+.ty-product-list { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 20px 0; }
+.ty-product-item { width: 100px; }
+.ty-product-item img { width: 100%; border-radius: 10px; }
+
+/* --- ADMIN UI --- */
+.admin-panel { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; max-width: 1400px; margin: 0 auto; padding: 20px; }
+.fancy-box { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-radius: 20px; padding: 30px; border: 1px solid white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+.input-group { margin-bottom: 15px; text-align: left; }
+.input-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #555; }
+.input-group input, .input-group textarea, .input-group select {
+    width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px;
+    background: #fff; font-family: 'Quicksand'; font-size: 1rem;
+}
+.row-input { display: flex; gap: 10px; }
+.btn-generate, .btn-add-prod, .btn-save, .btn-clear { border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; color: white; font-weight: bold; }
+.btn-generate { background: #6c5ce7; }
+.btn-add-prod { background: #00b894; white-space: nowrap; }
+.btn-save { background: linear-gradient(45deg, #ff5c8d, #ff8ba7); width: 100%; font-size: 1.1rem; padding: 15px; margin-bottom: 10px; }
+.btn-clear { background: #b2bec3; width: 100%; }
+
+.selected-products-container { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+.tags-input { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.prod-tag { background: var(--pastel-bg); color: var(--text-color); padding: 5px 10px; border-radius: 20px; display: flex; align-items: center; gap: 5px; border: 1px solid var(--primary-pink); }
+.prod-tag i { color: #d63031; cursor: pointer; margin-left: 5px; }
+
+/* Sync Controls */
+.sync-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-sync, .btn-load {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-sync {
+    background: linear-gradient(45deg, #00b894, #00cec9);
+    color: white;
+}
+
+.btn-load {
+    background: linear-gradient(45deg, #0984e3, #74b9ff);
+    color: white;
+}
+
+.btn-sync:hover, .btn-load:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#order-table { width: 100%; border-collapse: collapse; }
+#order-table th { background: var(--light-pink); padding: 12px; font-family: 'Dancing Script'; font-size: 1.3rem; }
+#order-table td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+
+/* --- LOGIN BOX --- */
+.login-box {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 40px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.login-box h2 {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    color: var(--dark-pink);
+}
+
+.login-box input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ff5c8d, #ff8ba7);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+.login-box button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(255, 92, 141, 0.4);
+}
+
+/* ============================================
+   === RESPONSIVE - MOBILE OPTIMIZATION ===
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .admin-panel { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    /* Header */
+    .main-header {
+        position: relative;
+        top: 0;
+        left: 0;
+        padding: 15px;
+    }
+    
+    .search-box {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    
+    .search-box input {
+        width: 100%;
+    }
+    
+    #back-home-btn {
+        top: 15px;
+        right: 15px;
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Hero */
+    .hero-section {
+        height: 50vh;
+    }
+    
+    .shop-name {
+        font-size: 2.5rem;
+        padding: 20px 30px;
+    }
+    
+    /* Seasons Nav */
+    .seasons-nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 15px;
+        gap: 20px;
+    }
+    
+    .season-card {
+        width: 90%;
+        max-width: 350px;
+        height: 250px;
+    }
+    
+    .season-text {
+        font-size: 2rem;
+    }
+    
+    /* Products */
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 0 10px;
+    }
+    
+    .fancy-title {
+        font-size: 2.5rem;
+    }
+    
+    /* Vietnam Seasons */
+    .vn-season-row, .vn-season-row.reverse {
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+    
+    .vn-images {
+        width: 100%;
+        max-width: 350px;
+        height: 250px;
+    }
+    
+    .vn-images img {
+        width: 200px;
+        height: 160px;
+    }
+    
+    .vn-content h3 {
+        font-size: 2rem;
+    }
+    
+    /* Modal */
+    .modal-body {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .media-section {
+        height: 250px;
+    }
+    
+    .season-selectors {
+        flex-wrap: wrap;
+    }
+    
+    .season-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Thank You Page */
+    .thank-you-container {
+        margin: 50px 15px;
+        padding: 30px 20px;
+    }
+    
+    .secret-message-display {
+        padding: 20px;
+    }
+    
+    /* Admin */
+    .admin-panel {
+        padding: 10px;
+    }
+    
+    .fancy-box {
+        padding: 20px;
+    }
+    
+    .sync-controls {
+        flex-direction: column;
+    }
+    
+    #order-table {
+        font-size: 0.8rem;
+    }
+    
+    #order-table th, #order-table td {
+        padding: 8px 5px;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+    }
+    
+    /* Password Modal */
+    .password-box {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .shop-name {
+        font-size: 1.8rem;
+        padding: 15px 20px;
+    }
+    
+    .fancy-title {
+        font-size: 2rem;
+    }
+    
+    .login-box, .password-box {
+        padding: 25px 15px;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

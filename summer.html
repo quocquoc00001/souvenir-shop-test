@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mùa Hạ Việt Nam - Bí Mật</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Lobster&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/summer.css">
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
     <div class="ocean-waves">
         <div class="wave"></div>
         <div class="wave"></div>
         <div class="wave"></div>
     </div>
-    
+
     <div class="sun"></div>
-    
+
     <div class="header">
         <h1>☀️ MÙA HẠ VIỆT NAM ☀️</h1>
         <p>Mùa của nắng gắt, biển xanh và tiếng ve sầu</p>
@@ -38,17 +41,20 @@
         <div class="content-grid">
             <div class="content-card card-large beach-card">
                 <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1504194921103-98a190533f81?w=800&q=80" alt="Biển hè" class="card-image">
+                    <img src="https://images.unsplash.com/photo-1504194921103-98a190533f81?w=800&q=80" alt="Biển hè"
+                        class="card-image">
                 </div>
                 <div class="card-content">
                     <h2>🌊 Thời tiết & Biển</h2>
-                    <p>Nhiệt độ 32-38°C, nắng gắt quanh năm. Biển xanh ngắt, cát trắng mịn. Lý tưởng cho kỳ nghỉ mát.</p>
+                    <p>Nhiệt độ 32-38°C, nắng gắt quanh năm. Biển xanh ngắt, cát trắng mịn. Lý tưởng cho kỳ nghỉ mát.
+                    </p>
                 </div>
             </div>
 
             <div class="content-card">
                 <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1559592413-7cec4d0ea49b?w=800&q=80" alt="Phượng vĩ" class="card-image">
+                    <img src="https://images.unsplash.com/photo-1559592413-7cec4d0ea49b?w=800&q=80" alt="Phượng vĩ"
+                        class="card-image">
                 </div>
                 <div class="card-content">
                     <h2>🌺 Cảnh quan</h2>
@@ -58,7 +64,8 @@
 
             <div class="content-card">
                 <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1532347922424-cba175ba7cb8?w=800&q=80" alt="Lễ hội" class="card-image">
+                    <img src="https://images.unsplash.com/photo-1532347922424-cba175ba7cb8?w=800&q=80" alt="Lễ hội"
+                        class="card-image">
                 </div>
                 <div class="card-content">
                     <h2>🎉 Lễ hội</h2>
@@ -72,7 +79,8 @@
 
             <div class="content-card card-large">
                 <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80" alt="Cảm xúc" class="card-image">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80" alt="Cảm xúc"
+                        class="card-image">
                 </div>
                 <div class="card-content">
                     <h2>❤️ Cảm xúc</h2>
@@ -90,7 +98,7 @@
                 <h2>🎨 Vẽ Mùa Hạ Của Bạn</h2>
                 <p>Hãy vẽ và để AI nhận xét bức tranh của bạn</p>
             </div>
-            
+
             <div class="canvas-toolbar">
                 <div class="brush-tools">
                     <button class="tool-btn active" data-tool="brush" title="Cọ vẽ">
@@ -103,7 +111,7 @@
                         <i class="fas fa-undo"></i>
                     </button>
                 </div>
-                
+
                 <div class="brush-options">
                     <label>Màu:</label>
                     <input type="color" id="colorPicker" value="#ff6b35">
@@ -114,7 +122,7 @@
             </div>
 
             <canvas id="drawingCanvas"></canvas>
-            
+
             <div class="controls">
                 <button class="btn btn-summer" onclick="drawSummerAI()">
                     <i class="fas fa-robot"></i> AI Vẽ Mùa Hạ
@@ -147,4 +155,5 @@
     <script src="js/supabase-client.js"></script>
     <script src="js/summer.js"></script>
 </body>
+
 </html>

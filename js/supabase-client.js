@@ -1,7 +1,8 @@
 // ============================================
 // SUPABASE CLIENT - Shared instance
 // ============================================
-const supabaseClient = supabase.createClient(
+const { createClient } = window.supabase;
+const supabaseClient = createClient(
   CONFIG.SUPABASE_URL,
   CONFIG.SUPABASE_KEY
 );
@@ -20,12 +21,12 @@ async function callGroqAPI(imageData, systemPrompt) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ imageData, systemPrompt })
     });
-    
+
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.message || 'API call failed');
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error('Groq API Error:', error);
@@ -41,17 +42,17 @@ async function getGroqApiKey() {
   if (window.location.hostname.includes('vercel.app')) {
     return null;
   }
-  
+
   const { data, error } = await supabaseClient
     .from('settings')
     .select('value')
     .eq('key', 'groq_api_key')
     .single();
-  
+
   if (error || !data?.value) {
     throw new Error('API key chưa được cấu hình');
   }
-  
+
   return data.value;
 }
 
@@ -61,12 +62,12 @@ async function getGroqApiKey() {
 async function saveGroqApiKey(apiKey) {
   const { error } = await supabaseClient
     .from('settings')
-    .upsert({ 
-      key: 'groq_api_key', 
+    .upsert({
+      key: 'groq_api_key',
       value: apiKey,
       updated_at: new Date().toISOString()
     });
-  
+
   if (error) throw error;
   return true;
 }
@@ -78,13 +79,13 @@ async function checkApiKeyStatus() {
   if (window.location.hostname.includes('vercel.app')) {
     return { configured: true, message: 'Server Configured' };
   }
-  
+
   const { data } = await supabaseClient
     .from('settings')
     .select('value')
     .eq('key', 'groq_api_key')
     .single();
-  
+
   return {
     configured: !!(data?.value && data.value.startsWith('gsk_')),
     message: data?.value ? 'Configured' : 'Not configured'

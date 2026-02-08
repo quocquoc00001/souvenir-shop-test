@@ -203,6 +203,32 @@ const translations = {
         'winter.warmth.desc': 'Bếp lửa hồng, nướng khoai, nướng ngô. Quây quần bên gia đình.',
         'winter.festival.title': 'Lễ hội',
         'winter.festival.desc': 'Chuẩn bị đón năm mới, sắm sửa Tết.',
+
+        // Emotion sections
+        'spring.emotion.title': 'Cảm xúc',
+        'spring.emotion.item1': 'Vui vẻ, phấn khởi',
+        'spring.emotion.item2': 'Hy vọng, lạc quan',
+        'spring.emotion.item3': 'Sum vầy gia đình',
+        'summer.emotion.title': 'Cảm xúc',
+        'summer.emotion.item1': 'Nhiệt huyết, sôi nổi',
+        'summer.emotion.item2': 'Tự do, phóng khoáng',
+        'summer.emotion.item3': 'Thư giãn tuyệt đối',
+        'autumn.emotion.title': 'Cảm xúc',
+        'autumn.emotion.item1': 'Lãng mạn, sâu lắng',
+        'autumn.emotion.item2': 'Hoài niệm, triết lý',
+        'autumn.emotion.item3': 'Bình yên, an nhiên',
+        'winter.emotion.title': 'Cảm xúc',
+        'winter.emotion.item1': 'Se lạnh nhưng ấm áp',
+        'winter.emotion.item2': 'Gắn kết gia đình',
+        'winter.emotion.item3': 'Háo hức chờ Tết',
+
+        // Canvas sections
+        'spring.canvas.title': 'Vẽ Mùa Xuân Của Bạn',
+        'spring.canvas.subtitle': 'Hãy vẽ và để AI nhận xét bức tranh của bạn',
+        'summer.canvas.title': 'Vẽ Mùa Hạ Của Bạn',
+        'summer.canvas.subtitle': 'Hãy vẽ và để AI nhận xét bức tranh của bạn',
+        'autumn.canvas.title': 'Vẽ Mùa Thu Của Bạn',
+        'winter.canvas.title': 'Vẽ Mùa Đông Của Bạn',
     },
 
     // English
@@ -405,6 +431,32 @@ const translations = {
         'winter.warmth.desc': 'Red fire, roasted sweet potato, roasted corn. Gathering with family.',
         'winter.festival.title': 'Festivals',
         'winter.festival.desc': 'Preparing for New Year, Tet shopping.',
+
+        // Emotion sections
+        'spring.emotion.title': 'Emotions',
+        'spring.emotion.item1': 'Joyful, excited',
+        'spring.emotion.item2': 'Hopeful, optimistic',
+        'spring.emotion.item3': 'Family reunion',
+        'summer.emotion.title': 'Emotions',
+        'summer.emotion.item1': 'Passionate, energetic',
+        'summer.emotion.item2': 'Free, adventurous',
+        'summer.emotion.item3': 'Absolutely relaxing',
+        'autumn.emotion.title': 'Emotions',
+        'autumn.emotion.item1': 'Romantic, profound',
+        'autumn.emotion.item2': 'Nostalgic, philosophical',
+        'autumn.emotion.item3': 'Peaceful, serene',
+        'winter.emotion.title': 'Emotions',
+        'winter.emotion.item1': 'Cold yet warm',
+        'winter.emotion.item2': 'Family bonding',
+        'winter.emotion.item3': 'Excited for Tet',
+
+        // Canvas sections
+        'spring.canvas.title': 'Draw Your Spring',
+        'spring.canvas.subtitle': 'Draw and let AI comment on your artwork',
+        'summer.canvas.title': 'Draw Your Summer',
+        'summer.canvas.subtitle': 'Draw and let AI comment on your artwork',
+        'autumn.canvas.title': 'Draw Your Autumn',
+        'winter.canvas.title': 'Draw Your Winter',
     },
 
     // Japanese
@@ -607,6 +659,32 @@ const translations = {
         'winter.warmth.desc': '赤い火、焼き芋、焼きとうもろこし。家族と集まる。',
         'winter.festival.title': '祭り',
         'winter.festival.desc': '新年の準備、テトの買い物。',
+
+        // Emotion sections
+        'spring.emotion.title': '感情',
+        'spring.emotion.item1': '楽しい、興奮',
+        'spring.emotion.item2': '希望に満ちた、楽観的',
+        'spring.emotion.item3': '家族の再会',
+        'summer.emotion.title': '感情',
+        'summer.emotion.item1': '情熱的、エネルギッシュ',
+        'summer.emotion.item2': '自由、冒険的',
+        'summer.emotion.item3': '完全にリラックス',
+        'autumn.emotion.title': '感情',
+        'autumn.emotion.item1': 'ロマンチック、深遠',
+        'autumn.emotion.item2': '懐かしい、哲学的',
+        'autumn.emotion.item3': '平和、穏やか',
+        'winter.emotion.title': '感情',
+        'winter.emotion.item1': '寒いけど暖かい',
+        'winter.emotion.item2': '家族の絆',
+        'winter.emotion.item3': 'テトを楽しみに',
+
+        // Canvas sections
+        'spring.canvas.title': 'あなたの春を描く',
+        'spring.canvas.subtitle': '描いてAIにあなたのアートワークにコメントしてもらいましょう',
+        'summer.canvas.title': 'あなたの夏を描く',
+        'summer.canvas.subtitle': '描いてAIにあなたのアートワークにコメントしてもらいましょう',
+        'autumn.canvas.title': 'あなたの秋を描く',
+        'winter.canvas.title': 'あなたの冬を描く',
     }
 };
 

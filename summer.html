@@ -22,19 +22,32 @@
     <div class="sun"></div>
 
     <div class="header">
-        <h1>☀️ MÙA HẠ VIỆT NAM ☀️</h1>
-        <p>Mùa của nắng gắt, biển xanh và tiếng ve sầu</p>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+        <div class="language-switcher"
+            style="position: absolute; top: 20px; right: 20px; display: flex; gap: 8px; background: rgba(255,255,255,0.9); padding: 8px; border-radius: 30px; box-shadow: 0 4px 15px rgba(255, 92, 141, 0.3); border: 2px solid #FF8BA7; z-index: 100;">
+            <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇻🇳
+                VI</button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇬🇧
+                EN</button>
+            <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇯🇵
+                JA</button>
+        </div>
+        <h1>☀️ <span data-i18n="summer.title">MÙA HẠ VIỆT NAM</span> ☀️</h1>
+        <p data-i18n="summer.subtitle">Mùa của nắng gắt, biển xanh và tiếng ve sầu</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="summer.backHome">Quay
+                lại trang chủ</span></a>
     </div>
 
     <div class="container">
         <div class="poem-section">
-            <h2><i class="fas fa-water"></i> Thơ Hạ</h2>
+            <h2><i class="fas fa-water"></i> <span data-i18n="summer.poem.title">Thơ Hạ</span></h2>
             <div class="poem-content">
-                <p>Phượng vĩ đỏ rực góc trời</p>
-                <p>Tiếng ve ngân vang gọi hè về</p>
-                <p>Biển xanh vẫy gọi du khách</p>
-                <p>Mùa hạ nồng nàn khó phai</p>
+                <p data-i18n="summer.poem.line1">Phượng vĩ đỏ rực góc trời</p>
+                <p data-i18n="summer.poem.line2">Tiếng ve ngân vang gọi hè về</p>
+                <p data-i18n="summer.poem.line3">Biển xanh vẫy gọi du khách</p>
+                <p data-i18n="summer.poem.line4">Mùa hạ nồng nàn khó phai</p>
             </div>
         </div>
 
@@ -45,8 +58,9 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🌊 Thời tiết & Biển</h2>
-                    <p>Nhiệt độ 32-38°C, nắng gắt quanh năm. Biển xanh ngắt, cát trắng mịn. Lý tưởng cho kỳ nghỉ mát.
+                    <h2>🌊 <span data-i18n="summer.weather.title">Thời tiết & Biển</span></h2>
+                    <p data-i18n="summer.weather.desc">Nhiệt độ 32-38°C, nắng gắt quanh năm. Biển xanh ngắt, cát trắng
+                        mịn. Lý tưởng cho kỳ nghỉ mát.
                     </p>
                 </div>
             </div>
@@ -57,8 +71,8 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🌺 Cảnh quan</h2>
-                    <p>Phượng vĩ đỏ rực, bàng xanh mát, tiếng ve râm ran cả ngày.</p>
+                    <h2>🌺 <span data-i18n="summer.landscape.title">Cảnh quan</span></h2>
+                    <p data-i18n="summer.landscape.desc">Phượng vĩ đỏ rực, bàng xanh mát, tiếng ve râm ran cả ngày.</p>
                 </div>
             </div>
 
@@ -68,12 +82,12 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🎉 Lễ hội</h2>
+                    <h2>🎉 <span data-i18n="summer.festival.title">Lễ hội</span></h2>
                     <div class="festival-tags">
                         <span class="festival-tag">Tết Đoan Ngọ</span>
                         <span class="festival-tag">Lễ hội biển</span>
                     </div>
-                    <p>Tắm biển, cắm trại, du lịch đảo.</p>
+                    <p data-i18n="summer.festival.desc">Tắm biển, cắm trại, du lịch đảo.</p>
                 </div>
             </div>
 
@@ -152,6 +166,7 @@
     </div>
 
     <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/summer.js"></script>
 </body>

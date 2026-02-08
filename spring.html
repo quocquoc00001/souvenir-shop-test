@@ -17,19 +17,32 @@
     <div class="spring-particles" id="springParticles"></div>
 
     <div class="header">
-        <h1>🌸 MÙA XUÂN VIỆT NAM 🌸</h1>
-        <p>Mùa của sự khởi đầu, hy vọng và tươi mới</p>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+        <div class="language-switcher"
+            style="position: absolute; top: 20px; right: 20px; display: flex; gap: 8px; background: rgba(255,255,255,0.9); padding: 8px; border-radius: 30px; box-shadow: 0 4px 15px rgba(255, 92, 141, 0.3); border: 2px solid #FF8BA7; z-index: 100;">
+            <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇻🇳
+                VI</button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇬🇧
+                EN</button>
+            <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇯🇵
+                JA</button>
+        </div>
+        <h1>🌸 <span data-i18n="spring.title">MÙA XUÂN VIỆT NAM</span> 🌸</h1>
+        <p data-i18n="spring.subtitle">Mùa của sự khởi đầu, hy vọng và tươi mới</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="spring.backHome">Quay
+                lại trang chủ</span></a>
     </div>
 
     <div class="container">
         <div class="poem-section">
-            <h2><i class="fas fa-feather-alt"></i> Thơ Xuân</h2>
+            <h2><i class="fas fa-feather-alt"></i> <span data-i18n="spring.poem.title">Thơ Xuân</span></h2>
             <div class="poem-content">
-                <p>Hoa đào nở rộ khoe sắc thắm</p>
-                <p>Mưa phùn gió bấc se lòng</p>
-                <p>Xuân về mang đến hy vọng</p>
-                <p>Khởi đầu một năm an vui</p>
+                <p data-i18n="spring.poem.line1">Hoa đào nở rộ khoe sắc thắm</p>
+                <p data-i18n="spring.poem.line2">Mưa phùn gió bấc se lòng</p>
+                <p data-i18n="spring.poem.line3">Xuân về mang đến hy vọng</p>
+                <p data-i18n="spring.poem.line4">Khởi đầu một năm an vui</p>
             </div>
         </div>
 
@@ -40,8 +53,9 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🌸 Thời tiết & Khí hậu</h2>
-                    <p>Mùa xuân miền Bắc ấm áp với nhiệt độ 15-22°C. Mưa phùn nhẹ, không khí ẩm ướt. Hoa đào, hoa mai nở
+                    <h2>🌸 <span data-i18n="spring.weather.title">Thời tiết & Khí hậu</span></h2>
+                    <p data-i18n="spring.weather.desc">Mùa xuân miền Bắc ấm áp với nhiệt độ 15-22°C. Mưa phùn nhẹ, không
+                        khí ẩm ướt. Hoa đào, hoa mai nở
                         rộ báo hiệu Tết đến.</p>
                 </div>
             </div>
@@ -52,13 +66,14 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🎊 Lễ hội</h2>
+                    <h2>🎊 <span data-i18n="spring.culture.title">Văn hóa Tết</span></h2>
                     <div class="festival-tags">
                         <span class="festival-tag">Tết Nguyên Đán</span>
                         <span class="festival-tag">Lễ hội hoa đào</span>
                         <span class="festival-tag">Hội Lim</span>
                     </div>
-                    <p>Thăm chùa đầu năm, chúc Tết, mừng tuổi.</p>
+                    <p data-i18n="spring.culture.desc">Tết Nguyên Đán là dịp lễ quan trọng nhất. Người Việt dọn dẹp nhà
+                        cửa, thờ cúng tổ tiên, mặc áo dài mới, và chúc Tết nhau.</p>
                 </div>
             </div>
 
@@ -68,8 +83,9 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🍜 Ẩm thực</h2>
-                    <p>Bánh chưng, bánh tét, mứt Tết, nem rán, giò chả.</p>
+                    <h2>🍜 <span data-i18n="spring.food.title">Ẩm thực Xuân</span></h2>
+                    <p data-i18n="spring.food.desc">Bánh chưng, bánh tét, thịt kho tàu, dưa hành, mứt Tết đầy màu sắc.
+                        Mâm cỗ Tết thể hiện sự sum vầy của gia đình.</p>
                 </div>
             </div>
 
@@ -148,6 +164,7 @@
     </div>
 
     <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/spring.js"></script>
 </body>

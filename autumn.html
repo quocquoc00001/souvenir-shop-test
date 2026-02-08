@@ -17,19 +17,32 @@
     <div class="falling-leaves" id="fallingLeaves"></div>
 
     <div class="header">
-        <h1>🍂 MÙA THU VIỆT NAM 🍂</h1>
-        <p>Mùa của nỗi nhớ, lá vàng và tình yêu</p>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+        <div class="language-switcher"
+            style="position: absolute; top: 20px; right: 20px; display: flex; gap: 8px; background: rgba(255,255,255,0.9); padding: 8px; border-radius: 30px; box-shadow: 0 4px 15px rgba(255, 92, 141, 0.3); border: 2px solid #FF8BA7; z-index: 100;">
+            <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇻🇳
+                VI</button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇬🇧
+                EN</button>
+            <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇯🇵
+                JA</button>
+        </div>
+        <h1>🍂 <span data-i18n="autumn.title">MÙA THU VIỆT NAM</span> 🍂</h1>
+        <p data-i18n="autumn.subtitle">Mùa của nỗi nhớ, lá vàng và tình yêu</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="autumn.backHome">Quay
+                lại trang chủ</span></a>
     </div>
 
     <div class="container">
         <div class="poem-section">
-            <h2><i class="fas fa-feather-alt"></i> Thơ Thu</h2>
+            <h2><i class="fas fa-feather-alt"></i> <span data-i18n="autumn.poem.title">Thơ Thu</span></h2>
             <div class="poem-content">
-                <p>Hương cốm mới thoang thoảng bay</p>
-                <p>Lá vàng rơi xào xạc ngoài hiên</p>
-                <p>Thu sầu là nỗi nhớ ai</p>
-                <p>Đẹp tựa bản tình ca buồn</p>
+                <p data-i18n="autumn.poem.line1">Hương cốm mới thoang thoảng bay</p>
+                <p data-i18n="autumn.poem.line2">Lá vàng rơi xào xạc ngoài hiên</p>
+                <p data-i18n="autumn.poem.line3">Thu sầu là nỗi nhớ ai</p>
+                <p data-i18n="autumn.poem.line4">Đẹp tựa bản tình ca buồn</p>
             </div>
         </div>
 
@@ -40,8 +53,9 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🍁 Thời tiết & Khí hậu</h2>
-                    <p>Mùa thu Hà Nội 20-28°C, gió mát, trời trong. Lá vàng rơi đầy phố cổ.</p>
+                    <h2>🍁 <span data-i18n="autumn.weather.title">Thời tiết & Khí hậu</span></h2>
+                    <p data-i18n="autumn.weather.desc">Mùa thu Hà Nội 20-28°C, gió mát, trời trong. Lá vàng rơi đầy phố
+                        cổ.</p>
                 </div>
             </div>
 
@@ -51,8 +65,8 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🌾 Đặc sản</h2>
-                    <p>Cốm làng Vòng dẻo thơm, chả cốm, bánh cốm.</p>
+                    <h2>🌾 <span data-i18n="autumn.specialty.title">Đặc sản</span></h2>
+                    <p data-i18n="autumn.specialty.desc">Cốm làng Vòng dẻo thơm, chả cốm, bánh cốm.</p>
                 </div>
             </div>
 
@@ -62,12 +76,12 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🎊 Lễ hội</h2>
+                    <h2>🎊 <span data-i18n="autumn.festival.title">Lễ hội</span></h2>
                     <div class="festival-tags">
                         <span class="festival-tag">Tết Trung Thu</span>
                         <span class="festival-tag">Ngắm lá vàng</span>
                     </div>
-                    <p>Phá cỗ trăng rằm, rước đèn ông sao.</p>
+                    <p data-i18n="autumn.festival.desc">Phá cỗ trăng rằm, rước đèn ông sao.</p>
                 </div>
             </div>
 
@@ -131,6 +145,7 @@
     </div>
 
     <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/autumn.js"></script>
 </body>

@@ -17,19 +17,32 @@
     <div class="snow-container" id="snowContainer"></div>
 
     <div class="header">
-        <h1>❄️ MÙA ĐÔNG VIỆT NAM ❄️</h1>
-        <p>Mùa của gió lạnh, bếp lửa và kỷ niệm ấm áp</p>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+        <div class="language-switcher"
+            style="position: absolute; top: 20px; right: 20px; display: flex; gap: 8px; background: rgba(255,255,255,0.9); padding: 8px; border-radius: 30px; box-shadow: 0 4px 15px rgba(255, 92, 141, 0.3); border: 2px solid #FF8BA7; z-index: 100;">
+            <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇻🇳
+                VI</button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇬🇧
+                EN</button>
+            <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')"
+                style="background: transparent; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Quicksand'; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease;">🇯🇵
+                JA</button>
+        </div>
+        <h1>❄️ <span data-i18n="winter.title">MÙA ĐÔNG VIỆT NAM</span> ❄️</h1>
+        <p data-i18n="winter.subtitle">Mùa của gió lạnh, bếp lửa và kỷ niệm ấm áp</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="winter.backHome">Quay
+                lại trang chủ</span></a>
     </div>
 
     <div class="container">
         <div class="poem-section">
-            <h2><i class="fas fa-fire"></i> Thơ Đông</h2>
+            <h2><i class="fas fa-fire"></i> <span data-i18n="winter.poem.title">Thơ Đông</span></h2>
             <div class="poem-content">
-                <p>Gió mùa đông bắc se lạnh</p>
-                <p>Bếp lửa hồng sưởi ấm tay</p>
-                <p>Đông vĩnh cửu là ký ức</p>
-                <p>Đóng băng thời gian yêu thương</p>
+                <p data-i18n="winter.poem.line1">Gió mùa đông bắc se lạnh</p>
+                <p data-i18n="winter.poem.line2">Bếp lửa hồng sưởi ấm tay</p>
+                <p data-i18n="winter.poem.line3">Đông vĩnh cửu là ký ức</p>
+                <p data-i18n="winter.poem.line4">Đóng băng thời gian yêu thương</p>
             </div>
         </div>
 
@@ -40,8 +53,9 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🌡️ Thời tiết & Khí hậu</h2>
-                    <p>Miền Bắc 10-20°C, có khi dưới 10°C. Gió mùa đông bắc se lạnh. Sương muối phủ trắng đồng.</p>
+                    <h2>🌡️ <span data-i18n="winter.weather.title">Thời tiết & Khí hậu</span></h2>
+                    <p data-i18n="winter.weather.desc">Miền Bắc 10-20°C, có khi dưới 10°C. Gió mùa đông bắc se lạnh.
+                        Sương muối phủ trắng đồng.</p>
                 </div>
             </div>
 
@@ -51,8 +65,8 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🔥 Ấm áp</h2>
-                    <p>Bếp lửa hồng, nướng khoai, nướng ngô. Quây quần bên gia đình.</p>
+                    <h2>🔥 <span data-i18n="winter.warmth.title">Ấm áp</span></h2>
+                    <p data-i18n="winter.warmth.desc">Bếp lửa hồng, nướng khoai, nướng ngô. Quây quần bên gia đình.</p>
                 </div>
             </div>
 
@@ -62,13 +76,13 @@
                         class="card-image">
                 </div>
                 <div class="card-content">
-                    <h2>🎊 Lễ hội</h2>
+                    <h2>🎊 <span data-i18n="winter.festival.title">Lễ hội</span></h2>
                     <div class="festival-tags">
                         <span class="festival-tag">Tết Dương Lịch</span>
                         <span class="festival-tag">Giáng Sinh</span>
                         <span class="festival-tag">Tết Nguyên Đán</span>
                     </div>
-                    <p>Chuẩn bị đón năm mới, sắm sửa Tết.</p>
+                    <p data-i18n="winter.festival.desc">Chuẩn bị đón năm mới, sắm sửa Tết.</p>
                 </div>
             </div>
 
@@ -131,6 +145,7 @@
     </div>
 
     <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/winter.js"></script>
 </body>

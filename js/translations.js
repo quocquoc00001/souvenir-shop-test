@@ -24,6 +24,36 @@ const translations = {
         'products.title': 'Bộ Sưu Tập Ký Ức',
         'products.viewDetail': 'Xem chi tiết',
 
+        // Product Details
+        'product.1.name': 'Nón Lá Vẽ Tay',
+        'product.1.material': 'Lá cọ, Tre, Màu acrylic',
+        'product.1.method': 'Vẽ tay thủ công từng chiếc',
+        'product.1.meaning': 'Biểu tượng văn hóa Việt Nam, che chở mưa nắng.',
+
+        'product.2.name': 'Áo Dài Mini',
+        'product.2.material': 'Lụa tơ tằm, Gấm',
+        'product.2.method': 'May đo tỉ mỉ',
+        'product.2.meaning': 'Tôn vinh nét đẹp dịu dàng của phụ nữ Việt.',
+
+        'product.3.name': 'Gốm Bát Tràng',
+        'product.3.material': 'Đất sét trắng',
+        'product.3.method': 'Nung 1200 độ C',
+        'product.3.meaning': 'Tinh hoa từ lòng đất.',
+
+        'product.4.name': 'Tranh Đông Hồ',
+        'product.4.material': 'Giấy Dó',
+        'product.4.method': 'In khắc gỗ',
+        'product.4.meaning': 'Lưu giữ hồn dân tộc.',
+
+        'product.5.name': 'Chuồn Chuồn Tre',
+        'product.5.material': 'Tre tự nhiên',
+        'product.5.method': 'Thủ công',
+        'product.5.meaning': 'Ký ức tuổi thơ.',
+
+        'product.6.name': 'Quạt Thư Pháp',
+        'product.6.material': 'Giấy, tre',
+        'product.6.method': 'Viết thư pháp',
+        'product.6.meaning': 'Gió mát lành.',
         // Vietnam Seasons Info
         'seasons.title': 'Hương Sắc Việt Nam',
         'seasons.spring.title': 'Mùa Xuân',
@@ -132,6 +162,36 @@ const translations = {
         'products.title': 'Memory Collection',
         'products.viewDetail': 'View details',
 
+        // Product Details
+        'product.1.name': 'Hand-Painted Conical Hat',
+        'product.1.material': 'Palm leaves, Bamboo, Acrylic paint',
+        'product.1.method': 'Hand-painted individually',
+        'product.1.meaning': 'Symbol of Vietnamese culture, protection from sun and rain.',
+
+        'product.2.name': 'Mini Ao Dai',
+        'product.2.material': 'Silk, Brocade',
+        'product.2.method': 'Meticulously tailored',
+        'product.2.meaning': 'Honors the gentle beauty of Vietnamese women.',
+
+        'product.3.name': 'Bat Trang Ceramics',
+        'product.3.material': 'White clay',
+        'product.3.method': 'Fired at 1200°C',
+        'product.3.meaning': 'Essence from the earth.',
+
+        'product.4.name': 'Dong Ho Painting',
+        'product.4.material': 'Do paper',
+        'product.4.method': 'Woodblock printing',
+        'product.4.meaning': 'Preserving the soul of the nation.',
+
+        'product.5.name': 'Bamboo Dragonfly',
+        'product.5.material': 'Natural bamboo',
+        'product.5.method': 'Handcrafted',
+        'product.5.meaning': 'Childhood memories.',
+
+        'product.6.name': 'Calligraphy Fan',
+        'product.6.material': 'Paper, bamboo',
+        'product.6.method': 'Calligraphy writing',
+        'product.6.meaning': 'Cool breeze.',
         // Vietnam Seasons Info
         'seasons.title': 'Vietnamese Seasons',
         'seasons.spring.title': 'Spring',
@@ -240,6 +300,36 @@ const translations = {
         'products.title': '思い出コレクション',
         'products.viewDetail': '詳細を見る',
 
+        // Product Details
+        'product.1.name': '手描きノンラー（笠帽子）',
+        'product.1.material': 'ヤシの葉、竹、アクリル絵の具',
+        'product.1.method': '一つ一つ手描き',
+        'product.1.meaning': 'ベトナム文化の象徴、日差しと雨から守る。',
+
+        'product.2.name': 'ミニアオザイ',
+        'product.2.material': 'シルク、錦',
+        'product.2.method': '丁寧に仕立てられた',
+        'product.2.meaning': 'ベトナム女性の優しい美しさを称える。',
+
+        'product.3.name': 'バッチャン焼',
+        'product.3.material': '白土',
+        'product.3.method': '1200度で焼成',
+        'product.3.meaning': '大地からの精髄。',
+
+        'product.4.name': 'ドンホー絵画',
+        'product.4.material': 'ゾー紙',
+        'product.4.method': '木版画',
+        'product.4.meaning': '民族の魂を保存する。',
+
+        'product.5.name': '竹トンボ',
+        'product.5.material': '天然竹',
+        'product.5.method': '手作り',
+        'product.5.meaning': '子供時代の思い出。',
+
+        'product.6.name': '書道扇子',
+        'product.6.material': '紙、竹',
+        'product.6.method': '書道',
+        'product.6.meaning': '涼しい風。',
         // Vietnam Seasons Info
         'seasons.title': 'ベトナムの四季',
         'seasons.spring.title': '春',
@@ -369,6 +459,11 @@ function updatePageContent() {
 
     // Update HTML lang attribute
     document.documentElement.lang = currentLanguage;
+
+    // Refresh product list if exists
+    if (typeof initProducts === 'function') {
+        initProducts();
+    }
 }
 
 // Initialize language on page load

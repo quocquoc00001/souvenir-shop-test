@@ -66,6 +66,8 @@ async function saveGroqApiKey(apiKey) {
       key: 'groq_api_key',
       value: apiKey,
       updated_at: new Date().toISOString()
+    }, {
+      onConflict: 'key'
     });
 
   if (error) throw error;

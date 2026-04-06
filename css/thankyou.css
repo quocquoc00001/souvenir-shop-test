@@ -1,0 +1,552 @@
+/* =============================================
+   THANK YOU PAGE - Beautiful Redesign
+   Based on "Gửi đến bản thân" design system
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Poppins:wght@200;300;400&display=swap');
+
+#thank-you-page {
+    --rose: #f4a7b9;
+    --blush: #fce4ec;
+    --peach: #ffccbc;
+    --cream: #fff8f0;
+    --mauve: #e8a0b4;
+    --deep: #c2677a;
+    position: relative;
+    background: #fde8ef;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    cursor: default;
+}
+
+#thank-you-page.page-section {
+    padding: 0;
+    margin: 0;
+}
+
+/* ── LAYERED BG ─────────────────────────────── */
+#ty-bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.ty-vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 45%, rgba(180, 80, 100, 0.22) 100%);
+}
+
+.ty-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+}
+
+#ty-particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* ── WRAPPER ────────────────────────────────── */
+.ty-wrapper {
+    position: relative;
+    z-index: 10;
+}
+
+/* ── HERO ───────────────────────────────────── */
+.ty-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+}
+
+.ty-hero-inner {
+    text-align: center;
+    opacity: 0;
+    filter: blur(18px);
+    transform: translateY(20px) scale(0.96);
+    animation: tyHeroReveal 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
+
+@keyframes tyHeroReveal {
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ty-hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    letter-spacing: 0.3em;
+    color: var(--deep);
+    opacity: 0.7;
+    margin-bottom: 1.2rem;
+    animation: tyFadeUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+}
+
+.ty-hero-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 700;
+    line-height: 1.05;
+    background: linear-gradient(135deg, #c2677a 0%, #e8a0b4 40%, #f4a7b9 70%, #d4607c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 4px 24px rgba(194, 103, 122, 0.25));
+    animation: tyFadeUp 2s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;
+}
+
+.ty-hero-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    margin: 2rem auto;
+    animation: tyLineGrow 1.8s cubic-bezier(0.16, 1, 0.3, 1) 1.8s both;
+    transform-origin: center;
+    transform: scaleX(0);
+}
+
+@keyframes tyLineGrow {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.ty-hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: var(--deep);
+    opacity: 0.65;
+    letter-spacing: 0.08em;
+    margin-top: 0.8rem;
+    animation: tyFadeUp 2s cubic-bezier(0.16, 1, 0.3, 1) 1.4s both;
+}
+
+.ty-scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: tyFadeIn 1s ease 3s forwards;
+}
+
+.ty-scroll-hint span {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--deep);
+    opacity: 0.5;
+    text-transform: uppercase;
+}
+
+.ty-scroll-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--rose);
+    animation: tyScrollBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes tyScrollBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(8px);
+        opacity: 1;
+    }
+}
+
+/* ── LETTER CARD ────────────────────────────── */
+.ty-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 4vw, 2rem);
+}
+
+.ty-glass-card {
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(28px) saturate(1.6);
+    -webkit-backdrop-filter: blur(28px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 28px;
+    padding: clamp(2rem, 6vw, 4rem) clamp(2rem, 6vw, 4.5rem);
+    max-width: 780px;
+    width: 100%;
+    position: relative;
+    box-shadow:
+        0 8px 40px rgba(194, 103, 122, 0.12),
+        0 2px 8px rgba(255, 255, 255, 0.6) inset,
+        0 -1px 0 rgba(194, 103, 122, 0.08) inset;
+    animation: tyCardReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+@keyframes tyCardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ty-glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.ty-card-tag {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--deep);
+    opacity: 0.55;
+    margin-bottom: 1.8rem;
+    font-weight: 300;
+}
+
+.ty-card-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 2;
+    color: #8b4d5e;
+    font-weight: 300;
+    white-space: pre-wrap;
+}
+
+/* ── SECRET MESSAGE ─────────────────────────── */
+.ty-secret-wrap {
+    position: relative;
+    margin-top: 2.5rem;
+    background: none;
+    border: none;
+    padding: 0;
+    animation: none;
+    border-left: none;
+}
+
+.ty-secret-wrap h3 {
+    display: none;
+}
+
+.ty-secret-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--deep);
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(194, 103, 122, 0.3);
+    border-radius: 50px;
+    padding: 0.6rem 1.4rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    letter-spacing: 0.04em;
+}
+
+.ty-secret-btn:hover {
+    background: rgba(255, 255, 255, 0.65);
+    border-color: var(--rose);
+    box-shadow: 0 0 20px rgba(244, 167, 185, 0.4);
+    transform: translateY(-2px);
+}
+
+.ty-secret-btn .btn-icon {
+    font-size: 1.1rem;
+    transition: transform 0.4s;
+}
+
+.ty-secret-btn:hover .btn-icon {
+    transform: rotate(15deg) scale(1.2);
+}
+
+.ty-secret-reveal {
+    margin-top: 1.5rem;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+}
+
+.ty-secret-reveal.open {
+    max-height: 400px;
+    opacity: 1;
+}
+
+.ty-secret-inner {
+    background: linear-gradient(135deg, rgba(255, 200, 215, 0.35), rgba(255, 240, 245, 0.5));
+    border: 1px solid rgba(244, 167, 185, 0.45);
+    border-radius: 18px;
+    padding: 1.6rem 2rem;
+    position: relative;
+    transform: translateY(10px);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+.ty-secret-reveal.open .ty-secret-inner {
+    transform: translateY(0);
+}
+
+.ty-secret-inner::before {
+    content: '✦';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--rose);
+    font-size: 1rem;
+    background: rgba(255, 245, 250, 0.9);
+    padding: 0 8px;
+}
+
+.ty-secret-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    color: var(--deep);
+    text-align: center;
+    line-height: 1.6;
+}
+
+.ty-secret-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(244, 167, 185, 0.4), transparent, rgba(232, 160, 180, 0.4));
+    z-index: -1;
+    filter: blur(6px);
+    animation: tySecretPulse 3s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.ty-secret-reveal.open .ty-secret-glow {
+    opacity: 1;
+}
+
+@keyframes tySecretPulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.01);
+    }
+}
+
+/* ── PRODUCTS ───────────────────────────────── */
+.ty-postcard-section {
+    padding: clamp(2rem, 6vw, 5rem) 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.ty-section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--deep);
+    opacity: 0.5;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.ty-product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    max-width: 900px;
+    width: 100%;
+}
+
+.ty-product-item {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 1.2rem;
+    width: 160px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(194, 103, 122, 0.12);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ty-product-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(194, 103, 122, 0.2);
+}
+
+.ty-product-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 0.6rem;
+}
+
+.ty-product-item p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--deep);
+    line-height: 1.3;
+}
+
+.ty-product-version {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    color: var(--deep);
+    background: rgba(244, 167, 185, 0.2);
+    border: 1px solid rgba(194, 103, 122, 0.25);
+    border-radius: 20px;
+    padding: 2px 10px;
+    letter-spacing: 0.04em;
+}
+
+/* ── SPOTIFY ────────────────────────────────── */
+.ty-player-section {
+    display: flex;
+    justify-content: center;
+    padding: clamp(1rem, 4vw, 3rem) 1rem;
+}
+
+.ty-player-section .spotify-embed {
+    width: clamp(300px, 90vw, 500px);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* ── FOOTER ─────────────────────────────────── */
+.ty-footer-section {
+    text-align: center;
+    padding: 3rem 1rem 5rem;
+}
+
+.ty-footer-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: var(--deep);
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+}
+
+.ty-footer-heart {
+    display: inline-block;
+    animation: tyHeartbeat 2s ease-in-out infinite;
+    color: var(--rose);
+}
+
+@keyframes tyHeartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.3);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.15);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+}
+
+/* ── ANIMATIONS ─────────────────────────────── */
+@keyframes tyFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes tyFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 600px) {
+    .ty-glass-card {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    .ty-product-item {
+        width: 130px;
+    }
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mùa Hạ Việt Nam - Bí Mật</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/summer.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="ocean-waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <div class="sun"></div>
+
+    <div class="header">
+        <div class="language-switcher season-lang-switcher">
+            <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')"><img
+                    src="https://flagcdn.com/16x12/vn.png" width="16" height="12" alt="VN"> VI</button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')"><img
+                    src="https://flagcdn.com/16x12/gb.png" width="16" height="12" alt="GB"> EN</button>
+            <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')"><img
+                    src="https://flagcdn.com/16x12/jp.png" width="16" height="12" alt="JP"> JA</button>
+        </div>
+        <h1>☀️ <span data-i18n="summer.title">MÙA HẠ VIỆT NAM</span> ☀️</h1>
+        <p data-i18n="summer.subtitle">Mùa của nắng gắt, biển xanh và tiếng ve sầu</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="summer.backHome">Quay
+                lại trang chủ</span></a>
+    </div>
+
+    <div class="container">
+        <div class="poem-section">
+            <h2><i class="fas fa-water"></i> <span data-i18n="summer.poem.title">Thơ Hạ</span></h2>
+            <div class="poem-content">
+                <p data-i18n="summer.poem.line1">Mùa hạ của tôi, mùa hạ đã đi chưa</p>
+                <p data-i18n="summer.poem.line2">Ôi tuổi trẻ bao khát khao còn, hết?</p>
+                <p data-i18n="summer.poem.line3">Mà mặt đất màu xanh là vẫn biển</p>
+                <p data-i18n="summer.poem.line4">Quả ngọt ngào thắm thiết vẫn màu hoa.</p>
+                <p style="font-style: italic; font-size: 0.9em; margin-top: 8px;" data-i18n="summer.poem.author">Mùa hạ
+                    - Xuân Quỳnh</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card card-large beach-card">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Ha/unnamed.webp" alt="Biển hè" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🌊 <span data-i18n="summer.weather.title">Thời tiết & Khí hậu</span></h2>
+                    <p data-i18n="summer.weather.desc">Mùa hè thường nóng bức, oi ả. Miền Bắc nắng chói chang nhưng đôi
+                        khi đi kèm những cơn mưa nhanh vào buổi chiều. Miền Trung khô nóng và hanh khô. Miền Nam nắng
+                        nhiều hơn và mưa đều đặn buổi chiều.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Ha/unnamed_1.webp" alt="Phượng vĩ" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🌺 <span data-i18n="summer.landscape.title">Cảnh quan</span></h2>
+                    <p data-i18n="summer.landscape.desc">Biển xanh cát vàng và bầu trời trong xanh. Hoa phượng nở đỏ rực
+                        trên phố. Ruộng lúa xanh mướt và núi rừng hùng vĩ dưới ánh nắng rực rỡ.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Ha/unnamed_2.webp" alt="Lễ hội" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🎉 <span data-i18n="summer.festival.title">Trang phục & Lễ hội</span></h2>
+                    <p data-i18n="summer.festival.outfit"><strong>Trang phục:</strong> Ưu tiên trang phục thoải mái,
+                        thấm hút tốt và thoáng mát. Áo thun, quần short, váy… chất liệu cotton, lanh sẽ phù hợp với thời
+                        tiết nóng bức. Mang theo mũ hoặc dù để che nắng.</p>
+                    <div class="festival-tags">
+                        <span class="festival-tag">Tết Đoan Ngọ</span>
+                        <span class="festival-tag">Lễ hội pháo hoa Đà Nẵng</span>
+                        <span class="festival-tag">Festival Biển Nha Trang</span>
+                    </div>
+                    <p data-i18n="summer.festival.desc">Đi tắm biển (Đà Nẵng, Nha Trang…), vui chơi tại công viên nước
+                        để dịu đi cái nóng. Cắm trại, picnic với bạn bè, gia đình giữa thiên nhiên xanh mát. Tham quan
+                        khu du lịch sinh thái và hòa mình vào những lễ hội sôi động.</p>
+                </div>
+            </div>
+
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Ha/unnamed_3.webp" alt="Cảm xúc" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>❤️ <span data-i18n="summer.emotion.title">Cảm xúc</span></h2>
+                    <p data-i18n="summer.emotion.desc">Mùa hè tuy nóng nực nhưng là khoảng thời gian vui nhất. Sắc đỏ
+                        của màu hoa phượng nở rực rỡ gợi biết bao kỷ niệm. Nghe tiếng sóng vỗ rì rào mang lại cảm giác
+                        thoải mái, thư giãn đầu óc để rồi tận hưởng giây phút nghỉ ngơi sau những lúc căng thẳng.</p>
+                    <div class="emotion-box">
+                        <span>☀️ <span data-i18n="summer.emotion.item1">Nhiệt huyết, sôi nổi</span></span>
+                        <span>🌊 <span data-i18n="summer.emotion.item2">Tự do, phóng khoáng</span></span>
+                        <span>🏖️ <span data-i18n="summer.emotion.item3">Thư giãn tuyệt đối</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <h2>🎨 <span data-i18n="summer.canvas.title">Vẽ Mùa Hạ Của Bạn</span></h2>
+                <p data-i18n="summer.canvas.subtitle">Hãy vẽ và để AI nhận xét bức tranh của bạn</p>
+            </div>
+
+            <div class="canvas-toolbar">
+                <div class="brush-tools">
+                    <button class="tool-btn active" data-tool="brush" title="Cọ vẽ">
+                        <i class="fas fa-paint-brush"></i>
+                    </button>
+                    <button class="tool-btn" data-tool="eraser" title="Tẩy">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                    <button class="tool-btn" onclick="undoLastStroke()" title="Hoàn tác">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </div>
+
+                <div class="brush-options">
+                    <label data-i18n="canvas.color">Màu:</label>
+                    <input type="color" id="colorPicker" value="#ff6b35">
+                    <label data-i18n="canvas.size">Kích thước:</label>
+                    <input type="range" id="brushSize" min="1" max="50" value="5">
+                    <span id="sizeDisplay">5px</span>
+                </div>
+            </div>
+
+            <canvas id="drawingCanvas"></canvas>
+
+            <div class="controls">
+                <button class="btn btn-summer" onclick="drawSummerAI()">
+                    <i class="fas fa-robot"></i> <span data-i18n="canvas.summer.aiDraw">AI Vẽ Mùa Hạ</span>
+                </button>
+                <button class="btn btn-summer" onclick="drawSunset()">
+                    <i class="fas fa-sun"></i> <span data-i18n="canvas.summer.drawSunset">Vẽ Hoàng Hôn</span>
+                </button>
+                <button class="btn btn-summer" onclick="drawBeach()">
+                    <i class="fas fa-umbrella-beach"></i> <span data-i18n="canvas.summer.drawBeach">Vẽ Biển</span>
+                </button>
+                <button class="btn btn-secondary" onclick="analyzeDrawing()">
+                    <i class="fas fa-magic"></i> <span data-i18n="canvas.analyze">Phân Tích</span>
+                </button>
+                <button class="btn btn-danger" onclick="clearCanvas()">
+                    <i class="fas fa-trash"></i> <span data-i18n="canvas.clear">Xóa</span>
+                </button>
+            </div>
+
+            <div id="aiChatBox" class="chat-box">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i> <span data-i18n="canvas.chatHeader">AI cute nhất hệ mặt trời</span>
+                    <button onclick="toggleChat()" class="chat-toggle"><i class="fas fa-minus"></i></button>
+                </div>
+                <div id="chatMessages" class="chat-messages"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/summer.js"></script>
+</body>
+
+</html>

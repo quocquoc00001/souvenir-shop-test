@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souvenir Shop-Góc Quà Nhỏ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="Media/Góc.ico">
+    <link rel="stylesheet" href="css/thankyou.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div id="sakura-container"></div>
+    <canvas id="constellation"></canvas>
+
+    <header class="main-header" id="header-bar">
+        <div class="language-switcher">
+            <button class="lang-btn active" data-lang="vi" onclick="changeLanguage('vi')" title="Tiếng Việt">
+                <img src="https://flagcdn.com/16x12/vn.png" width="16" height="12" alt="VN"> VI
+            </button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')" title="English">
+                <img src="https://flagcdn.com/16x12/gb.png" width="16" height="12" alt="GB"> EN
+            </button>
+            <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')" title="日本語">
+                <img src="https://flagcdn.com/16x12/jp.png" width="16" height="12" alt="JP"> JA
+            </button>
+        </div>
+        <div class="search-box">
+            <input type="text" id="order-search-input" placeholder="Nhập mã đơn (4 số)"
+                data-i18n="header.search.placeholder" maxlength="4">
+            <button onclick="checkOrder()"><span data-i18n="header.search.button">Tra
+                    cứu</span> <i class="fas fa-search"></i></button>
+        </div>
+    </header>
+
+    <button id="back-home-btn" class="hidden" onclick="goHome()"><span
+            data-i18n="header.backHome">Trang chủ</span> <i class="fas fa-heart"></i></button>
+
+    <main id="home-page">
+        <section class="hero-section curved-bg">
+            <img src="Media/tranngchu/background.webp" alt="Shop Banner" class="hero-img">
+            <h1 class="shop-name floating-text" data-i18n="hero.title">Góc Quà Nhỏ Niềm Vui Đong Đầy</h1>
+        </section>
+
+        <section class="seasons-nav">
+            <div class="season-card spring-card" onclick="showPasswordModal('spring')">
+                <img src="Media/tranngchu/unnamed.webp" alt="Xuân">
+                <span class="season-text" data-i18n="season.spring">Xuân Thì</span>
+                <div class="secret-hint"><span data-i18n="season.secret">Bí mật</span> <i class="fas fa-lock"></i></div>
+            </div>
+            <div class="season-card summer-card" onclick="showPasswordModal('summer')">
+                <img src="Media/tranngchu/unnamed_1.webp" alt="Hạ">
+                <span class="season-text" data-i18n="season.summer">Hạ Nồng</span>
+                <div class="secret-hint"><span data-i18n="season.secret">Bí mật</span> <i class="fas fa-lock"></i></div>
+            </div>
+            <div class="season-card autumn-card" onclick="showPasswordModal('autumn')">
+                <img src="Media/tranngchu/unnamed_2.webp" alt="Thu">
+                <span class="season-text" data-i18n="season.autumn">Thu Phai</span>
+                <div class="secret-hint"><span data-i18n="season.secret">Bí mật</span> <i class="fas fa-lock"></i></div>
+            </div>
+            <div class="season-card winter-card" onclick="showPasswordModal('winter')">
+                <img src="Media/tranngchu/unnamed_3.webp" alt="Đông">
+                <span class="season-text" data-i18n="season.winter">Đông Lạnh</span>
+                <div class="secret-hint"><span data-i18n="season.secret">Bí mật</span> <i class="fas fa-lock"></i></div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <h2 class="fancy-title" data-i18n="products.title">Bộ Sưu Tập Ký Ức</h2>
+            <div class="product-grid" id="product-list"></div>
+        </section>
+
+
+        <section class="vietnam-seasons-info" id="vietnam-seasons">
+            <h2 class="fancy-title" data-i18n="seasons.title">Hương Sắc Việt Nam</h2>
+
+            <!-- Season tabs -->
+            <div class="vsn-season-tabs" id="vsn-season-tabs">
+                <button class="vsn-stab active" data-season="spring" data-i18n="seasons.tab.spring">Mùa Xuân 🌸</button>
+                <button class="vsn-stab" data-season="summer" data-i18n="seasons.tab.summer">Mùa Hạ ☀️</button>
+                <button class="vsn-stab" data-season="autumn" data-i18n="seasons.tab.autumn">Mùa Thu 🍂</button>
+                <button class="vsn-stab" data-season="winter" data-i18n="seasons.tab.winter">Mùa Đông ❄️</button>
+            </div>
+
+            <div class="vsn-panels-wrap">
+
+                <!-- ====== SPRING ====== -->
+                <div class="vsn-panel active" data-season="spring">
+                    <div class="vsn-region-tabs">
+                        <button class="vsn-rtab active" data-region="north" data-i18n="seasons.region.north">Miền
+                            Bắc</button>
+                        <button class="vsn-rtab" data-region="central" data-i18n="seasons.region.central">Miền
+                            Trung</button>
+                        <button class="vsn-rtab" data-region="south" data-i18n="seasons.region.south">Miền Nam</button>
+                    </div>
+                    <!-- Spring North -->
+                    <div class="vsn-region-card active" data-region="north">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/spring-north-1.jpg"
+                                    onerror="this.src='Media/XuanTrangchu/Bac (1).webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/spring-north-2.jpg"
+                                    onerror="this.src='Media/XuanTrangchu/Bac (2).webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.spring.north.title">Xuân Miền Bắc</h3>
+                                <p data-i18n="seasons.spring.north.desc">Đào phai rực rỡ, mưa phùn bay nhẹ trên phố cổ
+                                    Hà Nội...</p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/spring-north-g1.jpg"
+                                onerror="this.src='Media/XuanTrangchu/Bac (3).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/spring-north-g2.jpg"
+                                onerror="this.src='Media/XuanTrangchu/Bac (4).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/spring-north-g3.jpg"
+                                onerror="this.src='Media/XuanTrangchu/Bac (5).webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.spring.north.food">Phở Hà Nội nóng hổi, bánh cuốn Thanh Trì, xôi
+                                    lá cẩm ngày Tết</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.spring.north.landmark">Hồ Hoàn Kiếm, Văn Miếu Quốc Tử Giám, phố cổ
+                                    36 phố phường</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.spring.north.activity">Lễ hội hoa đào Nhật Tân, đi chợ hoa Tết,
+                                    khám phá làng Đường Lâm</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Spring Central -->
+                    <div class="vsn-region-card" data-region="central">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/spring-central-1.jpg"
+                                    onerror="this.src='Media/XuanTrangchu/Trung (1).webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/spring-central-2.jpg"
+                                    onerror="this.src='Media/XuanTrangchu/Trung (2).webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.spring.central.title">Xuân Miền Trung</h3>
+                                <p data-i18n="seasons.spring.central.desc">Cố đô Huế thơ mộng trong sắc mai vàng rực
+                                    rỡ...</p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/spring-central-g1.jpg"
+                                onerror="this.src='Media/XuanTrangchu/Trung (3).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/spring-central-g2.jpg"
+                                onerror="this.src='Media/XuanTrangchu/Trung (4).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/spring-central-g3.jpg"
+                                onerror="this.src='Media/XuanTrangchu/Trung (5).webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.spring.central.food">Bún bò Huế đậm đà, bánh bèo xứ Huế, bánh
+                                    khoái Đông Ba</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.spring.central.landmark">Đại Nội Huế, sông Hương thơ mộng, cầu
+                                    Tràng Tiền lung linh</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.spring.central.activity">Thả đèn hoa đăng sông Hương, mặc áo dài
+                                    chụp ảnh, Festival Huế</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Spring South -->
+                    <div class="vsn-region-card" data-region="south">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/spring-south-1.jpg"
+                                    onerror="this.src='Media/XuanTrangchu/Nam (1).webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/spring-south-2.jpg"
+                                    onerror="this.src='Media/XuanTrangchu/Nam (2).webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.spring.south.title">Xuân Miền Nam</h3>
+                                <p data-i18n="seasons.spring.south.desc">Nắng ấm quanh năm, Tết miền Nam tràn ngập màu
+                                    sắc...</p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/spring-south-g1.jpg"
+                                onerror="this.src='Media/XuanTrangchu/Nam (3).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/spring-south-g2.jpg"
+                                onerror="this.src='Media/XuanTrangchu/Nam (4).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/spring-south-g3.jpg"
+                                onerror="this.src='Media/XuanTrangchu/Nam (5).webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.spring.south.food">Bánh tét miền Nam, mứt gừng cay nồng, chè trôi
+                                    nước ngày Tết</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.spring.south.landmark">Chợ hoa Nguyễn Huệ, Chùa Bà Thiên Hậu,
+                                    đường hoa Tết Sài Gòn</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.spring.south.activity">Du xuân miền Tây sông nước, lễ hội chùa
+                                    Tết, tham quan vườn mai</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== SUMMER ====== -->
+                <div class="vsn-panel" data-season="summer">
+                    <div class="vsn-region-tabs">
+                        <button class="vsn-rtab active" data-region="north" data-i18n="seasons.region.north">Miền
+                            Bắc</button>
+                        <button class="vsn-rtab" data-region="central" data-i18n="seasons.region.central">Miền
+                            Trung</button>
+                        <button class="vsn-rtab" data-region="south" data-i18n="seasons.region.south">Miền Nam</button>
+                    </div>
+                    <div class="vsn-region-card active" data-region="north">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/summer-north-1.jpg"
+                                    onerror="this.src='Media/HaTrangchu/Miền Bắc.webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/summer-north-2.jpg"
+                                    onerror="this.src='Media/HaTrangchu/Miền Bắccc.webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.summer.north.title">Hạ Miền Bắc</h3>
+                                <p data-i18n="seasons.summer.north.desc">Phượng vĩ đỏ rực sân trường Hà Nội...</p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/summer-north-g1.jpg"
+                                onerror="this.src='Media/HaTrangchu/Miền bắcccc.webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/summer-north-g2.jpg"
+                                onerror="this.src='Media/HaTrangchu/download.webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/summer-north-g3.jpg"
+                                onerror="this.src='Media/HaTrangchu/download_1.webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.summer.north.food">Bún thang Hà Nội, chả cá Lã Vọng, cốm xanh làng
+                                    Vòng đầu mùa</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.summer.north.landmark">Hồ Tây sen nở, Hồ Gươm buổi sáng, Ba Vì mát
+                                    lành mùa hè</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.summer.north.activity">Đạp xe ven Hồ Tây, hái sen sáng sớm, leo
+                                    núi Tam Đảo tránh nóng</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vsn-region-card" data-region="central">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/summer-central-1.jpg"
+                                    onerror="this.src='Media/HaTrangchu/Mien trung.webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/summer-central-2.jpg"
+                                    onerror="this.src='Media/HaTrangchu/MIỀN TRUNG.webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.summer.central.title">Hạ Miền Trung</h3>
+                                <p data-i18n="seasons.summer.central.desc">Biển Đà Nẵng xanh trong, cát trắng nắng
+                                    vàng...</p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/summer-central-g1.jpg"
+                                onerror="this.src='Media/HaTrangchu/miền trung(1).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/summer-central-g2.jpg"
+                                onerror="this.src='Media/HaTrangchu/miền trunggg.webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/summer-central-g3.jpg"
+                                onerror="this.src='Media/HaTrangchu/MTRUNG.webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.summer.central.food">Mỳ Quảng thơm nồng, cao lầu Hội An, bánh mì
+                                    Đà Nẵng giòn rụm</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.summer.central.landmark">Bãi biển Mỹ Khê, Sơn Trà bán đảo xanh,
+                                    Lăng Cô vịnh đẹp nhất</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.summer.central.activity">Lặn ngắm san hô Cù Lao Chàm, leo Bà Nà
+                                    Hills, tắm biển Mỹ Khê</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vsn-region-card" data-region="south">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/summer-south-1.jpg"
+                                    onerror="this.src='Media/HaTrangchu/miền nam.webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/summer-south-2.jpg"
+                                    onerror="this.src='Media/HaTrangchu/miền Namm.webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.summer.south.title">Hạ Miền Nam</h3>
+                                <p data-i18n="seasons.summer.south.desc">Mưa chiều đổ xuống Sài Gòn rồi tạnh ngay...</p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/summer-south-g1.jpg"
+                                onerror="this.src='Media/HaTrangchu/Miền Nammmm.webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/summer-south-g2.jpg"
+                                onerror="this.src='Media/HaTrangchu/miền Nammmmg.webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/summer-south-g3.jpg"
+                                onerror="this.src='Media/HaTrangchu/MIỀN NAMMn.webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.summer.south.food">Bún mắm Cần Thơ, hủ tiếu Nam Vang, lẩu mắm miền
+                                    Tây đặc sắc</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.summer.south.landmark">Đảo Phú Quốc, Cần Thơ chợ nổi, vườn quốc
+                                    gia Tràm Chim</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.summer.south.activity">Du thuyền sông Cửu Long, tắm biển Phú Quốc,
+                                    khám phá rừng ngập mặn</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== AUTUMN ====== -->
+                <div class="vsn-panel" data-season="autumn">
+                    <div class="vsn-region-tabs">
+                        <button class="vsn-rtab active" data-region="north" data-i18n="seasons.region.north">Miền
+                            Bắc</button>
+                        <button class="vsn-rtab" data-region="central" data-i18n="seasons.region.central">Miền
+                            Trung</button>
+                        <button class="vsn-rtab" data-region="south" data-i18n="seasons.region.south">Miền Nam</button>
+                    </div>
+                    <div class="vsn-region-card active" data-region="north">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/autumn-north-1.jpg"
+                                    onerror="this.src='Media/ThuTrangchu/Bac (1).webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/autumn-north-2.jpg"
+                                    onerror="this.src='Media/ThuTrangchu/Bac (2).webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.autumn.north.title">Thu Miền Bắc</h3>
+                                <p data-i18n="seasons.autumn.north.desc">Hà Nội vào thu se lạnh, hương hoa sữa len
+                                    lỏi...</p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/autumn-north-g1.jpg"
+                                onerror="this.src='Media/ThuTrangchu/Bac (3).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/autumn-north-g2.jpg"
+                                onerror="this.src='Media/ThuTrangchu/Bac (4).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/autumn-north-g3.jpg"
+                                onerror="this.src='Media/ThuTrangchu/Bac (5).webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.autumn.north.food">Cốm làng Vòng thơm dẻo, bún riêu cua, bánh cốm
+                                    hương thu</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.autumn.north.landmark">Phố hoa sữa Nguyễn Du, hồ Hoàn Kiếm lá
+                                    vàng, lúa chín Mù Cang Chải</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.autumn.north.activity">Chụp ảnh lá vàng Hà Nội, săn mây Sapa,
+                                    trekking Mù Cang Chải mùa vàng</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vsn-region-card" data-region="central">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/autumn-central-1.jpg"
+                                    onerror="this.src='Media/ThuTrangchu/Trung (1).webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/autumn-central-2.jpg"
+                                    onerror="this.src='Media/ThuTrangchu/Trung (2).webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.autumn.central.title">Thu Miền Trung</h3>
+                                <p data-i18n="seasons.autumn.central.desc">Hội An bình yên trong nắng thu vàng mật...
+                                </p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/autumn-central-g1.jpg"
+                                onerror="this.src='Media/ThuTrangchu/Trung (3).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/autumn-central-g2.jpg"
+                                onerror="this.src='Media/ThuTrangchu/Trung (4).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/autumn-central-g3.jpg"
+                                onerror="this.src='Media/ThuTrangchu/Trung (5).webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.autumn.central.food">Cao lầu Hội An, bánh bèo Huế mùa thu, cơm hến
+                                    sông Hương</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.autumn.central.landmark">Phố cổ Hội An đèn lồng, làng gốm Thanh
+                                    Hà, ruộng lúa Quảng Nam</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.autumn.central.activity">Thả đèn lồng sông Hoài, chụp ảnh phố cổ
+                                    mùa thu, đạp xe làng quê</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vsn-region-card" data-region="south">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/autumn-south-1.jpg"
+                                    onerror="this.src='Media/ThuTrangchu/Nam (1).webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/autumn-south-2.jpg"
+                                    onerror="this.src='Media/ThuTrangchu/Nam (2).webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.autumn.south.title">Thu Miền Nam</h3>
+                                <p data-i18n="seasons.autumn.south.desc">Miền Nam không có mùa thu lá đỏ nhưng trời
+                                    trong xanh hơn...</p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/autumn-south-g1.jpg"
+                                onerror="this.src='Media/ThuTrangchu/Nam (3).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/autumn-south-g2.jpg"
+                                onerror="this.src='Media/ThuTrangchu/Nam (4).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/autumn-south-g3.jpg"
+                                onerror="this.src='Media/ThuTrangchu/Nam (5).webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.autumn.south.food">Bưởi Năm Roi, xoài cát Hòa Lộc, sầu riêng Cái
+                                    Mơn ngọt lịm</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.autumn.south.landmark">Vườn trái cây Cái Bè, chùa Vĩnh Tràng, cù
+                                    lao sông nước Bến Tre</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.autumn.south.activity">Tham quan vườn trái cây, chèo xuồng kênh
+                                    rạch, mua sắm trái cây miền Tây</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== WINTER ====== -->
+                <div class="vsn-panel" data-season="winter">
+                    <div class="vsn-region-tabs">
+                        <button class="vsn-rtab active" data-region="north" data-i18n="seasons.region.north">Miền
+                            Bắc</button>
+                        <button class="vsn-rtab" data-region="central" data-i18n="seasons.region.central">Miền
+                            Trung</button>
+                        <button class="vsn-rtab" data-region="south" data-i18n="seasons.region.south">Miền Nam</button>
+                    </div>
+                    <div class="vsn-region-card active" data-region="north">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/winter-north-1.jpg"
+                                    onerror="this.src='Media/DongTrangchu/Bac (1).webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/winter-north-2.jpg"
+                                    onerror="this.src='Media/DongTrangchu/Bac (2).webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.winter.north.title">Đông Miền Bắc</h3>
+                                <p data-i18n="seasons.winter.north.desc">Gió mùa đông bắc thổi lạnh buốt qua Hà Nội...
+                                </p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/winter-north-g1.jpg"
+                                onerror="this.src='Media/DongTrangchu/Bac (3).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/winter-north-g2.jpg"
+                                onerror="this.src='Media/DongTrangchu/Bac (4).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/winter-north-g3.jpg"
+                                onerror="this.src='Media/DongTrangchu/Bac (5).webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.winter.north.food">Phở nóng bốc khói, lẩu nấm rừng Sapa, bánh trôi
+                                    tàu đêm đông</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.winter.north.landmark">Sapa tuyết phủ, Hà Giang hoa tam giác mạch,
+                                    Mộc Châu hoa cải trắng</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.winter.north.activity">Săn mây Sapa, trekking Hà Giang, check-in
+                                    hoa tam giác mạch Đồng Văn</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vsn-region-card" data-region="central">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/winter-central-1.jpg"
+                                    onerror="this.src='Media/DongTrangchu/Trung (1).webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/winter-central-2.jpg"
+                                    onerror="this.src='Media/DongTrangchu/Trung (2).webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.winter.central.title">Đông Miền Trung</h3>
+                                <p data-i18n="seasons.winter.central.desc">Mưa dầm dai dẳng trên xứ Huế...</p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/winter-central-g1.jpg"
+                                onerror="this.src='Media/DongTrangchu/Trung (3).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/winter-central-g2.jpg"
+                                onerror="this.src='Media/DongTrangchu/Trung (4).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/winter-central-g3.jpg"
+                                onerror="this.src='Media/DongTrangchu/Trung (5).webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.winter.central.food">Bún bò Huế cay nồng, bánh canh cá lóc, cháo
+                                    lòng Huế sưởi ấm</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.winter.central.landmark">Đại Nội Huế trong sương, sông Hương buổi
+                                    sáng, làng cổ Phước Tích</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.winter.central.activity">Du lịch làng cổ Huế mùa vắng, thưởng trà,
+                                    tham quan Đại Nội yên bình</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vsn-region-card" data-region="south">
+                        <div class="vsn-card-top">
+                            <div class="vsn-image-slot">
+                                <img src="Media/seasons/winter-south-1.jpg"
+                                    onerror="this.src='Media/DongTrangchu/Nam (1).webp'" class="vsn-img vsn-img-a"
+                                    alt="">
+                                <img src="Media/seasons/winter-south-2.jpg"
+                                    onerror="this.src='Media/DongTrangchu/Nam (2).webp'" class="vsn-img vsn-img-b"
+                                    alt="">
+                            </div>
+                            <div class="vsn-text-slot">
+                                <h3 data-i18n="seasons.winter.south.title">Đông Miền Nam</h3>
+                                <p data-i18n="seasons.winter.south.desc">Mùa khô miền Nam nắng ấm dịu dàng...</p>
+                            </div>
+                        </div>
+                        <div class="vsn-gallery-strip">
+                            <img src="Media/seasons/winter-south-g1.jpg"
+                                onerror="this.src='Media/DongTrangchu/Nam (3).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/winter-south-g2.jpg"
+                                onerror="this.src='Media/DongTrangchu/Nam (4).webp'" class="vsn-gal-img" alt="">
+                            <img src="Media/seasons/winter-south-g3.jpg"
+                                onerror="this.src='Media/DongTrangchu/Nam (5).webp'" class="vsn-gal-img" alt="">
+                        </div>
+                        <div class="vsn-highlights">
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🍜</span>
+                                <h4 data-i18n="seasons.highlight.food">Ẩm thực</h4>
+                                <p data-i18n="seasons.winter.south.food">Bánh phồng Sóc Trăng, hủ tiếu mùa khô, canh
+                                    chua cá điêu hồng</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">🏛️</span>
+                                <h4 data-i18n="seasons.highlight.landmark">Danh thắng</h4>
+                                <p data-i18n="seasons.winter.south.landmark">Vườn quốc gia U Minh Hạ, Mũi Cà Mau, Phú
+                                    Quốc mùa khô tuyệt đẹp</p>
+                            </div>
+                            <div class="vsn-hi-card"><span class="vsn-hi-icon">✨</span>
+                                <h4 data-i18n="seasons.highlight.activity">Trải nghiệm</h4>
+                                <p data-i18n="seasons.winter.south.activity">Khám phá rừng đước Cà Mau, câu cá biển Phú
+                                    Quốc, du lịch biển mùa khô</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /vsn-panels-wrap -->
+        </section>
+
+        <footer class="site-footer">
+            <p data-i18n="footer.copyright">© 2026 Góc Quà Nhỏ</p>
+            <div class="admin-access-box" onclick="showAdminLogin()">
+                <span data-i18n=""></span> <i class="fas fa-crown"></i>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">×</span>
+            <div class="modal-body">
+                <div class="media-section-wrapper" style="flex: 1.5;">
+                    <div class="media-section">
+                        <div class="slider-container">
+                            <div class="slider-track" id="slider-track"></div>
+                            <button class="slider-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+                            <button class="slider-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+                        </div>
+                    </div>
+                    <div class="season-selectors" id="season-selectors">
+                        <button class="season-btn" onclick="changeProductVersion('xuan')"
+                            data-i18n="modal.season.spring">Xuân</button>
+                        <button class="season-btn" onclick="changeProductVersion('ha')"
+                            data-i18n="modal.season.summer">Hạ</button>
+                        <button class="season-btn" onclick="changeProductVersion('thu')"
+                            data-i18n="modal.season.autumn">Thu</button>
+                        <button class="season-btn" onclick="changeProductVersion('dong')"
+                            data-i18n="modal.season.winter">Đông</button>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2 id="modal-title" class="fancy-title" style="font-size: 2.5rem;">Tên Sản Phẩm</h2>
+                    <hr style="border: 0; border-top: 1px dashed var(--dark-pink); margin: 10px 0;">
+                    <p><strong><span data-i18n="modal.material">Số
+                                lượng:</span> <i class="fas fa-layer-group"></i></strong> <span id="modal-material"></span>
+                    </p>
+                    <p><strong><span data-i18n="modal.method">Mô tả sản
+                                phẩm:</span> <i class="fas fa-tools"></i></strong>
+                        <span id="modal-method"></span>
+                    </p>
+                    <p><strong><span data-i18n="modal.meaning">Ý nghĩa:</span> <i class="fas fa-star"></i></strong>
+                        <span id="modal-meaning"></span>
+                    </p>
+
+                    <div style="margin-top: auto;">
+                        <p style="font-size: 0.9rem; font-style: italic; margin-bottom: 10px;"
+                            data-i18n="modal.contact">Liên hệ đặt hàng ngay:
+                        </p>
+                        <div class="contact-btns">
+                            <a href="https://www.facebook.com/profile.php?id=61588398452433&rdid=EQEJ3jZyb545Weq9&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F179Cs9cAZb#"
+                                target="_blank" class="btn-fb">Messenger <i class="fab fa-facebook-messenger"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Modal for Secret Pages -->
+    <div id="password-modal" class="modal hidden">
+        <div class="password-box fancy-box">
+            <h2 class="fancy-title"><span data-i18n="password.title">Nhập Mật Khẩu Bí
+                    Mật</span> <i class="fas fa-lock"></i></h2>
+            <p id="password-hint" style="margin-bottom: 15px; color: #666;"></p>
+            <input type="password" id="secret-password-input" placeholder="Nhập mật khẩu..."
+                data-i18n="password.placeholder">
+            <button onclick="verifyPassword()" class="btn-verify-pass"><span
+                    data-i18n="password.unlock">Mở Khóa</span> <i class="fas fa-unlock"></i></button>
+            <button class="btn-close-login" onclick="closePasswordModal()" data-i18n="password.close">Đóng</button>
+            <input type="hidden" id="target-season">
+        </div>
+    </div>
+
+    <!-- Thank You Page -->
+    <section id="thank-you-page" class="hidden page-section">
+        <!-- Layered Background -->
+        <canvas id="ty-bg-canvas"></canvas>
+        <div class="ty-vignette"></div>
+        <div class="ty-noise"></div>
+        <canvas id="ty-particles-canvas"></canvas>
+
+        <div class="ty-wrapper">
+            <!-- HERO -->
+            <div class="ty-hero">
+                <div class="ty-hero-inner">
+                    <div class="ty-hero-eyebrow">✦ &nbsp; <span data-i18n="thankyou.eyebrow">một món quà nhỏ · a little
+                            gift</span> &nbsp; ✦</div>
+                    <h1 id="ty-title" class="ty-hero-title">Gửi đến bạn</h1>
+                    <div class="ty-hero-line"></div>
+                    <p class="ty-hero-subtitle" data-i18n="thankyou.subtitle">với yêu thương &amp; trân trọng</p>
+                </div>
+                <div class="ty-scroll-hint">
+                    <span data-i18n="thankyou.scrollHint">cuộn xuống</span>
+                    <div class="ty-scroll-dot"></div>
+                </div>
+            </div>
+
+            <!-- LETTER CARD -->
+            <div class="ty-section">
+                <div class="ty-glass-card" id="ty-main-card">
+                    <div class="ty-card-tag" data-i18n="thankyou.cardTag">✦ &nbsp; lời nhắn &nbsp; ✦</div>
+                    <div class="ty-card-body" id="ty-content"></div>
+
+                    <!-- SECRET MESSAGE -->
+                    <div class="secret-message-display ty-secret-wrap" id="secret-message-box" style="display: none;">
+                        <button class="ty-secret-btn" id="ty-secret-btn">
+                            <span class="btn-icon">🌸</span>
+                            <span data-i18n="thankyou.secretMessage">Lời Nhắn Bí Mật</span>
+                        </button>
+                        <div class="ty-secret-reveal" id="ty-secret-reveal">
+                            <div class="ty-secret-inner">
+                                <div class="ty-secret-glow"></div>
+                                <p class="ty-secret-text" id="secret-message-content"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCTS SECTION -->
+            <div class="ty-postcard-section">
+                <div class="ty-section-label">✦ &nbsp; <span data-i18n="thankyou.products">sản phẩm đã chọn</span>
+                    &nbsp; ✦</div>
+                <div id="ty-products" class="ty-product-list"></div>
+            </div>
+
+            <!-- SPOTIFY PLAYER -->
+            <div class="ty-player-section">
+                <div class="spotify-embed" id="ty-spotify"></div>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="ty-footer-section">
+                <p class="ty-footer-text" data-i18n="thankyou.footer">Làm bằng <span class="ty-footer-heart">♥</span>
+                    dành cho bạn — người xứng đáng nhận những điều tốt đẹp nhất</p>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Admin Login -->
+    <div id="admin-login" class="modal hidden">
+        <div class="login-box fancy-box">
+            <h2 class="fancy-title">Cổng Quản Trị</h2>
+            <input type="password" id="admin-pass" placeholder="Nhập mật khẩu...">
+            <button onclick="loginAdmin()">Mở Cánh Cửa</button>
+            <button class="btn-close-login" onclick="closeLogin()">Đóng</button>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <section id="admin-dashboard" class="hidden page-section">
+        <h1 class="fancy-title">Quản Lý Đơn Hàng</h1>
+
+        <div class="admin-panel">
+            <div class="admin-form fancy-box">
+                <h3>Tạo / Sửa Đơn <i class="fas fa-edit"></i></h3>
+
+                <div class="input-group">
+                    <label>Mã Đơn Hàng (4 số)</label>
+                    <div class="row-input">
+                        <input type="text" id="adm-order-id" readonly placeholder="Bấm nút tạo mã ->">
+                        <button onclick="generateRandomOrderId()" class="btn-generate">Tạo
+                            Mã <i class="fas fa-random"></i></button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Tiêu đề lời chúc</label>
+                    <input type="text" id="adm-title" placeholder="VD: Gửi ngườii thương...">
+                </div>
+
+                <div class="input-group">
+                    <label>Nội dung lời chúc</label>
+                    <textarea id="adm-content" rows="3" placeholder="Viết những lời có cánh..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Lời nhắn bí mật (chỉ người nhận đơn hàng xem được)</label>
+                    <textarea id="adm-secret-message" rows="3" placeholder="Lờii nhắn bí mật..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Link nhạc Spotify (Embed)</label>
+                    <input type="text" id="adm-spotify" placeholder="Link embed spotify...">
+                </div>
+
+                <div class="input-group">
+                    <label>Thêm sản phẩm vào đơn</label>
+                    <div class="row-input">
+                        <select id="adm-product-select" onchange="updateVersionSelect()" style="flex:1"></select>
+                        <select id="adm-version-select" style="display:none; flex:1;"></select>
+                        <button onclick="addProductToSelection()" class="btn-add-prod">
+                            Thêm <i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="selected-products-container">
+                    <label>Sản phẩm đã chọn (Bấm X để xóa):</label>
+                    <div id="selected-products-list" class="tags-input">
+                        <span class="empty-msg">Chưa có sản phẩm nào</span>
+                    </div>
+                </div>
+
+                <!-- Connection Status -->
+                <div class="input-group">
+                    <label>Trạng Thái Kết Nối <i class="fas fa-shield-alt"></i></label>
+                    <div class="connection-status">
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <div class="status-item">
+                                Database: <i class="fas fa-database"></i>
+                                <span id="supabase-status" class="badge">Checking...</span>
+                            </div>
+                            <div class="status-item">
+                                API: <i class="fas fa-robot"></i>
+                                <span id="groq-status" class="badge">Checking...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Configuration -->
+                <div class="input-group">
+                    <label>Cấu Hình API Key <i class="fas fa-key"></i></label>
+                    <div class="api-config-box">
+                        <div id="api-status-display" style="margin-bottom: 10px; color: #e74c3c;">
+                            Chưa cấu hình <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="row-input">
+                            <input type="password" id="groq-api-key" placeholder="gsk_..." style="flex: 1;">
+                            <button onclick="saveApiKey()" class="btn-save-api">
+                                Lưu <i class="fas fa-save"></i>
+                            </button>
+                            <button onclick="testApiConnection()" class="btn-test-api">
+                                Test <i class="fas fa-vial"></i>
+                            </button>
+                        </div>
+                        <small style="color: #666; display: block; margin-top: 8px;">
+                            <i class="fas fa-info-circle"></i>
+                        </small>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Mật Khẩu Bí Mật Theo Mùa <i class="fas fa-key"></i></label>
+                    <button onclick="generateSeasonPasswords()" class="btn-generate"
+                        style="width: 100%; margin-bottom: 10px;">
+                        Tạo 4 Mật Khẩu Cho Các Mùa <i class="fas fa-magic"></i>
+                    </button>
+
+                    <div class="season-passwords-grid" id="season-passwords-container">
+                        <div class="season-pass-box">
+                            <h4>Xuân <i class="fas fa-seedling" style="color: #10b981;"></i></h4>
+                            <input type="text" id="pass-spring" readonly placeholder="Chưa tạo">
+                            <div id="qr-spring" class="qr-code"></div>
+                        </div>
+                        <div class="season-pass-box">
+                            <h4>Hạ <i class="fas fa-sun" style="color: #f59e0b;"></i></h4>
+                            <input type="text" id="pass-summer" readonly placeholder="Chưa tạo">
+                            <div id="qr-summer" class="qr-code"></div>
+                        </div>
+                        <div class="season-pass-box">
+                            <h4>Thu <i class="fas fa-leaf" style="color: #d35400;"></i></h4>
+                            <input type="text" id="pass-autumn" readonly placeholder="Chưa tạo">
+                            <div id="qr-autumn" class="qr-code"></div>
+                        </div>
+                        <div class="season-pass-box">
+                            <h4>Đông <i class="fas fa-snowflake" style="color: #0984e3;"></i></h4>
+                            <input type="text" id="pass-winter" readonly placeholder="Chưa tạo">
+                            <div id="qr-winter" class="qr-code"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn-save" onclick="saveOrder()">Lưu Đơn Hàng <i class="fas fa-save"></i></button>
+                    <button class="btn-clear" onclick="clearForm()">Làm Mới <i class="fas fa-eraser"></i></button>
+                </div>
+            </div>
+
+            <div class="admin-list fancy-box print-area">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3>Danh Sách Đơn <i class="fas fa-list"></i></h3>
+                    <button onclick="window.print()" class="btn-print no-print">In Danh
+                        Sách <i class="fas fa-print"></i></button>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="order-table">
+                        <thead>
+                            <tr>
+                                <th>Mã Đơn</th>
+                                <th>Tiêu đề</th>
+                                <th>Mật khẩu các mùa & QR</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

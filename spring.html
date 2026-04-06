@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mùa Xuân Việt Nam - Bí Mật</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/spring.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="spring-particles" id="springParticles"></div>
+
+    <div class="header">
+        <div class="language-switcher season-lang-switcher">
+            <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')"><img
+                    src="https://flagcdn.com/16x12/vn.png" width="16" height="12" alt="VN"> VI</button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')"><img
+                    src="https://flagcdn.com/16x12/gb.png" width="16" height="12" alt="GB"> EN</button>
+            <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')"><img
+                    src="https://flagcdn.com/16x12/jp.png" width="16" height="12" alt="JP"> JA</button>
+        </div>
+        <h1>🌸 <span data-i18n="spring.title">MÙA XUÂN VIỆT NAM</span> 🌸</h1>
+        <p data-i18n="spring.subtitle">Mùa của sự khởi đầu, hy vọng và tươi mới</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="spring.backHome">Quay
+                lại trang chủ</span></a>
+    </div>
+
+    <div class="container">
+        <div class="poem-section">
+            <h2><i class="fas fa-feather-alt"></i> <span data-i18n="spring.poem.title">Thơ Xuân</span></h2>
+            <div class="poem-content">
+                <p data-i18n="spring.poem.line1">Hoa đào trước ngõ</p>
+                <p data-i18n="spring.poem.line2">Cười vui sáng hồng</p>
+                <p data-i18n="spring.poem.line3">Hoa mai trong vườn</p>
+                <p data-i18n="spring.poem.line4">Rung rinh cánh trắng</p>
+                <p style="font-style: italic; font-size: 0.9em; margin-top: 8px;" data-i18n="spring.poem.author">(
+                    Nguyễn Hồng Kiên, Tết đang vào nhà)
+                </p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Xuan/unnamed.webp" alt="Hoa đào" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🌸 <span data-i18n="spring.weather.title">Thời tiết & Khí hậu</span></h2>
+                    <p data-i18n="spring.weather.desc">Mùa xuân thường mát mẻ, dễ chịu, có nắng dịu và gió thổi dịu
+                        dàng. Không khí trong lành hơn, đôi khi có mưa xuân lất phất tạo cảm giác dịu dàng, dễ chịu cho
+                        mọi người.</p>
+                    <p data-i18n="spring.weather.desc2"><strong>Cảnh quan:</strong> Cây cối đâm chồi nảy lộc, hoa nở rực
+                        rỡ khắp nơi. Màu xanh tươi mới xuất hiện nhiều hơn, làm cảnh vật trở nên sinh động và đầy sức
+                        sống.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Xuan/unnamed_1.webp" alt="Lễ hội" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🎊 <span data-i18n="spring.culture.title">Trang phục & Lễ hội</span></h2>
+                    <p data-i18n="spring.culture.outfit"><strong>Trang phục:</strong> Mùa xuân, miền Bắc chuộng áo dài,
+                        áo khoác mỏng, khăn choàng nhẹ vì trời còn se lạnh. Miền Trung thường mặc áo dài truyền thống,
+                        màu sắc nhã nhặn, phù hợp không khí lễ hội đầu năm. Miền Nam thời tiết ấm áp nên trang phục
+                        thoáng mát, áo dài mỏng, váy nhẹ, màu sắc tươi sáng.</p>
+                    <div class="festival-tags">
+                        <span class="festival-tag">Tết Nguyên Đán</span>
+                        <span class="festival-tag">Du xuân</span>
+                        <span class="festival-tag">Chúc Tết</span>
+                    </div>
+                    <p data-i18n="spring.culture.desc">Mùa xuân gắn liền với nhiều lễ hội truyền thống, đặc biệt là Tết.
+                        Mọi người đi du xuân, chúc Tết, tham gia các hoạt động văn hóa và gặp gỡ người thân, bạn bè.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Xuan/unnamed_2.webp" alt="Ẩm thực" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🍜 <span data-i18n="spring.food.title">Ẩm thực Xuân</span></h2>
+                    <p data-i18n="spring.food.desc">Mùa xuân thường gắn với những món ăn thanh đạm, mang ý nghĩa khởi
+                        đầu mới và may mắn. Ở Việt Nam, có bánh chưng, bánh tét tượng trưng cho sự sum vầy, thịt kho
+                        trứng thể hiện sự đủ đầy, cùng các loại mứt ngọt mang ý nghĩa chúc năm mới thuận lợi. Ngoài ra,
+                        những món ăn có màu sắc tươi sáng như dưa hành, củ kiệu hay trái cây ngày Tết cũng tạo cảm giác
+                        tươi mới, hài hòa.</p>
+                </div>
+            </div>
+
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Xuan/unnamed_3.webp" alt="Gia đình" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>💝 <span data-i18n="spring.emotion.title">Cảm xúc</span></h2>
+                    <p data-i18n="spring.emotion.desc">Mùa xuân thường mang lại cảm giác vui tươi, nhẹ nhàng và đầy hy
+                        vọng. Không khí ấm áp cùng sự thay đổi của thiên nhiên khiến con người dễ cảm thấy thoải mái,
+                        muốn bắt đầu những kế hoạch mới và dành nhiều thời gian hơn cho gia đình, bạn bè. Đây cũng là
+                        khoảng thời gian để nhìn lại năm cũ và mong chờ những điều tốt đẹp phía trước.</p>
+                    <div class="emotion-box">
+                        <span class="emotion-item">✨ <span data-i18n="spring.emotion.item1">Vui tươi, hy
+                                vọng</span></span>
+                        <span class="emotion-item">🌟 <span data-i18n="spring.emotion.item2">Khởi đầu mới</span></span>
+                        <span class="emotion-item">👨‍👩‍👧‍👦 <span data-i18n="spring.emotion.item3">Sum vầy gia
+                                đình</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <h2>🎨 <span data-i18n="spring.canvas.title">Vẽ Mùa Xuân Của Bạn</span></h2>
+                <p data-i18n="spring.canvas.subtitle">Hãy vẽ và để AI nhận xét bức tranh của bạn</p>
+            </div>
+
+            <div class="canvas-toolbar">
+                <div class="brush-tools">
+                    <button class="tool-btn active" data-tool="brush" title="Cọ vẽ">
+                        <i class="fas fa-paint-brush"></i>
+                    </button>
+                    <button class="tool-btn" data-tool="eraser" title="Tẩy">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                    <button class="tool-btn" onclick="undoLastStroke()" title="Hoàn tác (Ctrl+Z)">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </div>
+
+                <div class="brush-options">
+                    <label data-i18n="canvas.color">Màu:</label>
+                    <input type="color" id="colorPicker" value="#e91e63">
+                    <label data-i18n="canvas.size">Kích thước:</label>
+                    <input type="range" id="brushSize" min="1" max="50" value="5">
+                    <span id="sizeDisplay">5px</span>
+                </div>
+            </div>
+
+            <canvas id="drawingCanvas"></canvas>
+
+            <div class="controls">
+                <button class="btn btn-spring" onclick="drawSpringAI()">
+                    <i class="fas fa-robot"></i> <span data-i18n="canvas.spring.aiDraw">AI Vẽ Mùa Xuân</span>
+                </button>
+                <button class="btn btn-spring" onclick="drawFlowers()">
+                    <i class="fas fa-spa"></i> <span data-i18n="canvas.spring.drawFlowers">Vẽ Hoa Đào</span>
+                </button>
+                <button class="btn btn-spring" onclick="drawRiceField()">
+                    <i class="fas fa-seedling"></i> <span data-i18n="canvas.spring.drawRice">Vẽ Đồng Lúa</span>
+                </button>
+                <button class="btn btn-secondary" onclick="analyzeDrawing()">
+                    <i class="fas fa-magic"></i> <span data-i18n="canvas.analyze">Phân Tích Bức Vẽ</span>
+                </button>
+                <button class="btn btn-danger" onclick="clearCanvas()">
+                    <i class="fas fa-trash"></i> <span data-i18n="canvas.clear">Xóa Tất Cả</span>
+                </button>
+            </div>
+
+            <div id="aiChatBox" class="chat-box">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i> <span data-i18n="canvas.chatHeader">AI cute nhất hệ mặt trời</span>
+                    <button onclick="toggleChat()" class="chat-toggle"><i class="fas fa-minus"></i></button>
+                </div>
+                <div id="chatMessages" class="chat-messages"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/spring.js"></script>
+</body>
+
+</html>

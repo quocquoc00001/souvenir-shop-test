@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mùa Đông Việt Nam - Bí Mật</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/winter.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="snow-container" id="snowContainer"></div>
+
+    <div class="header">
+        <div class="language-switcher season-lang-switcher">
+            <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')"><img
+                    src="https://flagcdn.com/16x12/vn.png" width="16" height="12" alt="VN"> VI</button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')"><img
+                    src="https://flagcdn.com/16x12/gb.png" width="16" height="12" alt="GB"> EN</button>
+            <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')"><img
+                    src="https://flagcdn.com/16x12/jp.png" width="16" height="12" alt="JP"> JA</button>
+        </div>
+        <h1>❄️ <span data-i18n="winter.title">MÙA ĐÔNG VIỆT NAM</span> ❄️</h1>
+        <p data-i18n="winter.subtitle">Mùa của gió lạnh, bếp lửa và kỷ niệm ấm áp</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="winter.backHome">Quay
+                lại trang chủ</span></a>
+    </div>
+
+    <div class="container">
+        <div class="poem-section">
+            <h2><i class="fas fa-fire"></i> <span data-i18n="winter.poem.title">Thơ Đông</span></h2>
+            <div class="poem-content">
+                <p data-i18n="winter.poem.line1">Nỗi niềm xám xịt hao hanh</p>
+                <p data-i18n="winter.poem.line2">Áng mây xoả tóc dỗ dành cô đơn</p>
+                <p data-i18n="winter.poem.line3">Quay đi giấu giọt lệ hờn</p>
+                <p data-i18n="winter.poem.line4">Rơi vào thăm thẳm nỗi buồn mùa đông</p>
+                <p style="font-style: italic; font-size: 0.9em; margin-top: 8px;" data-i18n="winter.poem.author">MÙA
+                    ĐÔNG - LÂM THỊ HỒNG TÚ</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Dong/unnamed.webp" alt="Mùa đông" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🌡️ <span data-i18n="winter.weather.title">Thời tiết & Khí hậu</span></h2>
+                    <p data-i18n="winter.weather.desc">Mùa đông Việt Nam mang cái lạnh nhẹ đến vừa, đặc trưng rõ nhất ở
+                        miền Bắc. Nhiệt độ thường dao động khoảng 10-20°C. Không khí khô hanh, sáng sớm có sương, đôi
+                        khi kèm mưa phùn và gió mùa đông bắc.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Dong/unnamed_1.webp" alt="Bếp lửa" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🍜 <span data-i18n="winter.food.title">Ẩm thực</span></h2>
+                    <p data-i18n="winter.food.desc">Phở nóng, bún bò, lẩu nghi ngút khói. Ngô nướng, khoai nướng ven
+                        đường sưởi ấm những chiều đông lạnh. Món ăn mùa đông đậm đà và đầy hơi ấm.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Dong/unnamed_2.webp" alt="Tết" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🎊 <span data-i18n="winter.festival.title">Trang phục & Lễ hội</span></h2>
+                    <p data-i18n="winter.festival.outfit"><strong>Trang phục:</strong> Áo khoác dày, áo len, khăn quàng
+                        cổ trở nên quen thuộc. Trang phục mùa đông thiên về gam màu trầm, đơn giản nhưng ấm áp và tinh
+                        tế.</p>
+                    <div class="festival-tags">
+                        <span class="festival-tag">Tết Dương Lịch</span>
+                        <span class="festival-tag">Giáng Sinh</span>
+                        <span class="festival-tag">Tết Nguyên Đán</span>
+                    </div>
+                    <p data-i18n="winter.festival.desc">Giáng sinh và Tết Dương lịch mang không khí rộn ràng cuối năm.
+                        Người người tụ họp, dạo phố, uống cà phê nóng, quây quần bên gia đình để khép lại một năm cũ.
+                    </p>
+                </div>
+            </div>
+
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Dong/unnamed_3.webp" alt="Gia đình" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>❤️ <span data-i18n="winter.emotion.title">Cảm xúc</span></h2>
+                    <p data-i18n="winter.emotion.desc">Mọi thứ lắng xuống rất tự nhiên, như thể thời gian cũng trôi chậm
+                        lại. Giữa cái lạnh của mùa đông, chúng ta nhâm nhi một tách cacao ấm nóng hay là ăn khoai nướng
+                        cùng những người thân yêu, vừa nhâm nhi vừa cảm nhận dòng chảy thời gian, nhìn về một năm đã
+                        qua. Trải qua xuân, hạ, thu và đến đông, chúng ta có những sự khác đi qua mỗi khoảnh khắc của
+                        thời gian. Và nhận ra, vậy là một năm nữa lại khép lại, một trang sách mới sắp được hé mở, điều
+                        gì sẽ đón chờ ta trong năm mới?</p>
+                    <div class="emotion-box">
+                        <span>❄️ <span data-i18n="winter.emotion.item1">Se lạnh nhưng ấm áp</span></span>
+                        <span>🔥 <span data-i18n="winter.emotion.item2">Gắn kết gia đình</span></span>
+                        <span>🎊 <span data-i18n="winter.emotion.item3">Háo hức chờ Tết</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <h2>🎨 <span data-i18n="winter.canvas.title">Vẽ Mùa Đông Của Bạn</span></h2>
+            </div>
+
+            <div class="canvas-toolbar">
+                <div class="brush-tools">
+                    <button class="tool-btn active" data-tool="brush"><i class="fas fa-paint-brush"></i></button>
+                    <button class="tool-btn" data-tool="eraser"><i class="fas fa-eraser"></i></button>
+                    <button class="tool-btn" onclick="undoLastStroke()"><i class="fas fa-undo"></i></button>
+                </div>
+
+                <div class="brush-options">
+                    <label data-i18n="canvas.color">Màu:</label>
+                    <input type="color" id="colorPicker" value="#0984e3">
+                    <label data-i18n="canvas.size">Kích thước:</label>
+                    <input type="range" id="brushSize" min="1" max="50" value="5">
+                    <span id="sizeDisplay">5px</span>
+                </div>
+            </div>
+
+            <canvas id="drawingCanvas"></canvas>
+
+            <div class="controls">
+                <button class="btn btn-winter" onclick="drawWinterAI()"><i class="fas fa-robot"></i> <span
+                        data-i18n="canvas.winter.aiDraw">AI Vẽ Đông</span></button>
+                <button class="btn btn-winter" onclick="drawSnow()"><i class="fas fa-snowflake"></i> <span
+                        data-i18n="canvas.winter.drawSnow">Vẽ Tuyết</span></button>
+                <button class="btn btn-winter" onclick="drawFireplace()"><i class="fas fa-fire"></i> <span
+                        data-i18n="canvas.winter.drawFire">Vẽ Bếp Lửa</span></button>
+                <button class="btn btn-secondary" onclick="analyzeDrawing()"><i class="fas fa-magic"></i> <span
+                        data-i18n="canvas.analyze">Phân Tích</span></button>
+                <button class="btn btn-danger" onclick="clearCanvas()"><i class="fas fa-trash"></i> <span
+                        data-i18n="canvas.clear">Xóa</span></button>
+            </div>
+
+            <div id="aiChatBox" class="chat-box">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i> <span data-i18n="canvas.chatHeader">AI cute nhất hệ mặt trời</span>
+                    <button onclick="toggleChat()" class="chat-toggle"><i class="fas fa-minus"></i></button>
+                </div>
+                <div id="chatMessages" class="chat-messages"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/winter.js"></script>
+</body>
+
+</html>

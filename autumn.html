@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mùa Thu Việt Nam - Bí Mật</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/autumn.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="falling-leaves" id="fallingLeaves"></div>
+
+    <div class="header">
+        <div class="language-switcher season-lang-switcher">
+            <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')"><img
+                    src="https://flagcdn.com/16x12/vn.png" width="16" height="12" alt="VN"> VI</button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')"><img
+                    src="https://flagcdn.com/16x12/gb.png" width="16" height="12" alt="GB"> EN</button>
+            <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')"><img
+                    src="https://flagcdn.com/16x12/jp.png" width="16" height="12" alt="JP"> JA</button>
+        </div>
+        <h1>🍂 <span data-i18n="autumn.title">MÙA THU VIỆT NAM</span> 🍂</h1>
+        <p data-i18n="autumn.subtitle">Mùa của nỗi nhớ, lá vàng và tình yêu</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="autumn.backHome">Quay
+                lại trang chủ</span></a>
+    </div>
+
+    <div class="container">
+        <div class="poem-section">
+            <h2><i class="fas fa-feather-alt"></i> <span data-i18n="autumn.poem.title">Thơ Thu</span></h2>
+            <div class="poem-content">
+                <p data-i18n="autumn.poem.line1">"Rặng liễu đìu hiu đứng chịu tang,</p>
+                <p data-i18n="autumn.poem.line2">Tóc buồn buông xuống lệ ngàn hàng:</p>
+                <p data-i18n="autumn.poem.line3">Đây mùa thu tới - mùa thu tới</p>
+                <p data-i18n="autumn.poem.line4">Với áo mơ phai dệt lá vàng."</p>
+                <p style="font-style: italic; font-size: 0.9em; margin-top: 8px;" data-i18n="autumn.poem.author">Đây Mùa
+                    Thu Tới - Xuân Diệu</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Thu/unnamed.webp" alt="Lá vàng" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🍁 <span data-i18n="autumn.weather.title">Thời tiết & Khí hậu</span></h2>
+                    <p data-i18n="autumn.weather.desc">Thu đến thường mang theo những làn gió se lạnh mang đến cảm giác
+                        sảng khoái cùng với ánh nắng hanh vàng trải dài trên các con phố.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Thu/unnamed_1.webp" alt="Cốm" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🌾 <span data-i18n="autumn.specialty.title">Cảnh quan</span></h2>
+                    <p data-i18n="autumn.specialty.desc">Hình ảnh những hàng cây cơm nguội vàng, cây lộc vừng hay cây lá
+                        đỏ trải thảm trên vỉa hè (đặc biệt là ở Phan Đình Phùng - Hà Nội) bên cạnh hồ nước phẳng lặng
+                        như gương. Đặc trưng mùa thu là hương hoa sữa len lỏi khắp ngỏ và những đóa hoa thạch thảo nở rộ
+                        vào cuối thu.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Thu/unnamed_2.webp" alt="Phố cổ" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>🎊 <span data-i18n="autumn.festival.title">Trang phục & Lễ hội</span></h2>
+                    <p data-i18n="autumn.festival.outfit"><strong>Trang phục:</strong> Với phong cách nhẹ nhàng, thanh
+                        lịch cùng với các tông màu be, pastel đầy thơ mộng phối với áo khoác nhẹ và khăn voan mỏng.</p>
+                    <p data-i18n="autumn.festival.food"><strong>Ẩm thực:</strong> Thiên về những món ăn mang tính nhâm
+                        nhi và hương vị thanh tao như ốm làng Vòng dẻo thơm, hồng chín ngọt lịm, sấu chín ngọt thanh và
+                        giòn rụm.</p>
+                    <div class="festival-tags">
+                        <span class="festival-tag">Tết Trung Thu</span>
+                        <span class="festival-tag">Dạo hồ Gươm</span>
+                    </div>
+                    <p data-i18n="autumn.festival.desc">Tết Trung Thu là lễ hội lớn nhất trong mùa, với lồng đèn, múa
+                        lân, bánh trung thu. Đi dạo hồ Gươm, ngắm hoàng hôn hồ Tây hay chụp ảnh cùng xe hoa dạo.</p>
+                </div>
+            </div>
+
+            <div class="content-card card-large">
+                <div class="card-image-wrapper">
+                    <img src="Media/Trangbimat/Thu/unnamed_3.webp" alt="Cảm xúc" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h2>💭 <span data-i18n="autumn.emotion.title">Cảm xúc</span></h2>
+                    <p data-i18n="autumn.emotion.desc">Không gian yên tĩnh gợi lên những cảm giác hoài niệm, khiến cho
+                        con người cảm nhận được sự sâu lắng cũng như mong muốn được ở cạnh những người thân yêu, cùng
+                        nhau trải qua những khoảnh khắc đẹp của mùa thu lãng mạn.</p>
+                    <div class="emotion-box">
+                        <span>🍂 <span data-i18n="autumn.emotion.item1">Lãng mạn, sâu lắng</span></span>
+                        <span>📚 <span data-i18n="autumn.emotion.item2">Hoài niệm, triết lý</span></span>
+                        <span>🌅 <span data-i18n="autumn.emotion.item3">Bình yên, an nhiên</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <h2>🎨 <span data-i18n="autumn.canvas.title">Vẽ Mùa Thu Của Bạn</span></h2>
+            </div>
+
+            <div class="canvas-toolbar">
+                <div class="brush-tools">
+                    <button class="tool-btn active" data-tool="brush"><i class="fas fa-paint-brush"></i></button>
+                    <button class="tool-btn" data-tool="eraser"><i class="fas fa-eraser"></i></button>
+                    <button class="tool-btn" onclick="undoLastStroke()"><i class="fas fa-undo"></i></button>
+                </div>
+
+                <div class="brush-options">
+                    <label data-i18n="canvas.color">Màu:</label>
+                    <input type="color" id="colorPicker" value="#d35400">
+                    <label data-i18n="canvas.size">Kích thước:</label>
+                    <input type="range" id="brushSize" min="1" max="50" value="5">
+                    <span id="sizeDisplay">5px</span>
+                </div>
+            </div>
+
+            <canvas id="drawingCanvas"></canvas>
+
+            <div class="controls">
+                <button class="btn btn-autumn" onclick="drawAutumnAI()"><i class="fas fa-robot"></i> <span
+                        data-i18n="canvas.autumn.aiDraw">AI Vẽ Thu</span></button>
+                <button class="btn btn-autumn" onclick="drawFallingLeaves()"><i class="fas fa-leaf"></i> <span
+                        data-i18n="canvas.autumn.drawLeaves">Vẽ Lá Rơi</span></button>
+                <button class="btn btn-autumn" onclick="drawOldStreet()"><i class="fas fa-road"></i> <span
+                        data-i18n="canvas.autumn.drawStreet">Vẽ Phố Cổ</span></button>
+                <button class="btn btn-secondary" onclick="analyzeDrawing()"><i class="fas fa-magic"></i> <span
+                        data-i18n="canvas.analyze">Phân Tích</span></button>
+                <button class="btn btn-danger" onclick="clearCanvas()"><i class="fas fa-trash"></i> <span
+                        data-i18n="canvas.clear">Xóa</span></button>
+            </div>
+
+            <div id="aiChatBox" class="chat-box">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i> <span data-i18n="canvas.chatHeader">AI cute nhất hệ mặt trời</span>
+                    <button onclick="toggleChat()" class="chat-toggle"><i class="fas fa-minus"></i></button>
+                </div>
+                <div id="chatMessages" class="chat-messages"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/autumn.js"></script>
+</body>
+
+</html>

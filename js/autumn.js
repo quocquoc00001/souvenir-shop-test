@@ -1,0 +1,257 @@
+// ============================================
+// MÙA THU - AUTUMN PAGE JAVASCRIPT
+// ============================================
+
+const canvas = document.getElementById('drawingCanvas');
+const ctx = canvas.getContext('2d');
+let isDrawing = false, currentTool = 'brush';
+let brushColor = '#d35400', brushSize = 5, lastX = 0, lastY = 0;
+let drawHistory = [], historyStep = -1;
+const MAX_HISTORY = 50;
+
+document.addEventListener('DOMContentLoaded', () => {
+    initLeaves();
+    initCanvas();
+    initTools();
+});
+
+function initLeaves() {
+    const container = document.getElementById('fallingLeaves');
+    for (let i = 0; i < 20; i++) {
+        const leaf = document.createElement('div');
+        leaf.className = 'leaf';
+        leaf.style.left = Math.random() * 100 + '%';
+        leaf.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        leaf.style.animationDelay = Math.random() * 5 + 's';
+        leaf.style.width = (Math.random() * 20 + 20) + 'px';
+        leaf.style.height = leaf.style.width;
+        container.appendChild(leaf);
+    }
+}
+
+function initCanvas() {
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.addEventListener('touchend', stopDrawing);
+
+    saveState();
+}
+
+function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+}
+
+function initTools() {
+    document.querySelectorAll('.tool-btn[data-tool]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tool-btn[data-tool]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentTool = btn.dataset.tool;
+        });
+    });
+
+    document.getElementById('colorPicker').addEventListener('change', (e) => {
+        brushColor = e.target.value;
+        currentTool = 'brush';
+    });
+
+    const sizeSlider = document.getElementById('brushSize');
+    sizeSlider.addEventListener('input', (e) => {
+        brushSize = parseInt(e.target.value);
+        document.getElementById('sizeDisplay').textContent = brushSize + 'px';
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+            e.preventDefault();
+            undoLastStroke();
+        }
+    });
+}
+
+function getCoordinates(e) {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+    return { x: clientX - rect.left, y: clientY - rect.top };
+}
+
+function startDrawing(e) {
+    isDrawing = true;
+    const coords = getCoordinates(e);
+    [lastX, lastY] = [coords.x, coords.y];
+    draw(e);
+}
+
+function draw(e) {
+    if (!isDrawing) return;
+    e.preventDefault();
+    const coords = getCoordinates(e);
+
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(coords.x, coords.y);
+
+    if (currentTool === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = brushSize * 2;
+    } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = brushColor;
+        ctx.lineWidth = brushSize;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+    }
+    ctx.stroke();
+    [lastX, lastY] = [coords.x, coords.y];
+}
+
+function stopDrawing() {
+    if (isDrawing) { isDrawing = false; saveState(); }
+}
+
+function handleTouchStart(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    canvas.dispatchEvent(new MouseEvent('mousedown', {
+        clientX: touch.clientX, clientY: touch.clientY
+    }));
+}
+
+function handleTouchMove(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    canvas.dispatchEvent(new MouseEvent('mousemove', {
+        clientX: touch.clientX, clientY: touch.clientY
+    }));
+}
+
+function saveState() {
+    historyStep++;
+    if (historyStep < drawHistory.length) drawHistory.length = historyStep;
+    drawHistory.push(canvas.toDataURL());
+    if (drawHistory.length > MAX_HISTORY) { drawHistory.shift(); historyStep--; }
+}
+
+function undoLastStroke() {
+    if (historyStep > 0) {
+        historyStep--;
+        const img = new Image();
+        img.src = drawHistory[historyStep];
+        img.onload = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+        };
+    }
+}
+
+function drawFallingLeaves() {
+    saveState();
+    const colors = ['#d35400', '#e67e22', '#f39c12', '#8b4513', '#c0392b'];
+
+    for (let i = 0; i < 40; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = Math.random() * 15 + 10;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.ellipse(x, y, size, size / 2, Math.random() * Math.PI, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    saveState();
+    showAiMessage(t('canvas.autumn.drew.leaves'));
+}
+
+function drawOldStreet() {
+    saveState();
+    const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height / 2);
+    skyGradient.addColorStop(0, '#87ceeb');
+    skyGradient.addColorStop(1, '#b3e5fc');
+    ctx.fillStyle = skyGradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height / 2);
+
+    ctx.fillStyle = '#9e9e9e';
+    ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
+
+    const colors = ['#d7ccc8', '#bcaaa4', '#a1887f'];
+    for (let i = 0; i < 5; i++) {
+        const x = i * (canvas.width / 5);
+        const height = Math.random() * 150 + 200;
+        ctx.fillStyle = colors[i % 3];
+        ctx.fillRect(x + 10, canvas.height / 2 - height, canvas.width / 5 - 20, height);
+
+        ctx.fillStyle = '#5d4037';
+        for (let j = 0; j < 3; j++) {
+            for (let k = 0; k < 4; k++) {
+                ctx.fillRect(x + 25 + j * 40, canvas.height / 2 - height + 30 + k * 50, 25, 35);
+            }
+        }
+    }
+    saveState();
+    showAiMessage(t('canvas.autumn.drew.street'));
+}
+
+function drawAutumnAI() {
+    drawOldStreet();
+    setTimeout(() => drawFallingLeaves(), 300);
+}
+
+async function analyzeDrawing() {
+    document.getElementById('aiChatBox').classList.add('active');
+    showLoadingMessage();
+
+    try {
+        const imageData = canvas.toDataURL('image/png');
+        const systemPrompt = t('canvas.systemPrompt.autumn');
+
+        const result = await window.SupabaseAPI.callGroqAPI(imageData, systemPrompt);
+
+        removeLoadingMessage();
+        showAiMessage(result.content);
+    } catch (error) {
+        removeLoadingMessage();
+        showAiMessage(t('canvas.error.autumn'));
+    }
+}
+
+function showLoadingMessage() {
+    const div = document.createElement('div');
+    div.className = 'message loading';
+    div.id = 'loadingMessage';
+    div.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${t('canvas.loading')}`;
+    document.getElementById('chatMessages').appendChild(div);
+}
+
+function removeLoadingMessage() {
+    document.getElementById('loadingMessage')?.remove();
+}
+
+function showAiMessage(message) {
+    const div = document.createElement('div');
+    div.className = 'message ai';
+    div.innerHTML = `<strong>${t('canvas.aiName')}:</strong> ${message}`;
+    document.getElementById('chatMessages').appendChild(div);
+    document.getElementById('chatMessages').scrollTop = 999999;
+}
+
+function toggleChat() {
+    document.getElementById('aiChatBox').classList.toggle('active');
+}
+
+function clearCanvas() {
+    saveState();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById('aiChatBox').classList.remove('active');
+}

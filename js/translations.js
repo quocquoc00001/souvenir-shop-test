@@ -226,6 +226,7 @@ const translations = {
         'thankyou.cardTag': '✦ &nbsp; lời nhắn &nbsp; ✦',
         'thankyou.products': 'Sản phẩm bạn đã chọn',
         'thankyou.secretMessage': 'Lời Nhắn Bí Mật',
+        'thankyou.secretHide': 'Cất đi nhé...',
         'thankyou.noProducts': 'Không có sản phẩm',
         'thankyou.footer': 'Làm bằng <span class="ty-footer-heart">♥</span> dành cho bạn — người xứng đáng nhận những điều tốt đẹp nhất',
 
@@ -609,6 +610,7 @@ const translations = {
         'thankyou.cardTag': '✦ &nbsp; a little note &nbsp; ✦',
         'thankyou.products': 'Your selected products',
         'thankyou.secretMessage': 'Secret Message',
+        'thankyou.secretHide': 'Put it away...',
         'thankyou.noProducts': 'No products',
         'thankyou.footer': 'Made with <span class="ty-footer-heart">♥</span> for you — because you deserve the best',
 
@@ -779,7 +781,7 @@ const translations = {
         'header.backHome': 'ホーム',
 
         // Hero Section
-        'hero.title': '小さなギフトコーナー 喜びいっぱい',
+        'hero.title': '小さな贈り物、いっぱいの喜び',
 
         // Seasons
         'season.spring': '春',
@@ -990,6 +992,7 @@ const translations = {
         'thankyou.cardTag': '✦ &nbsp; メッセージカード &nbsp; ✦',
         'thankyou.products': '選択された商品',
         'thankyou.secretMessage': '秘密のメッセージ',
+        'thankyou.secretHide': 'しまっておいてね...',
         'thankyou.noProducts': '商品がありません',
         'thankyou.footer': 'あなたのために <span class="ty-footer-heart">♥</span> をこめて — あなたは一番素敵なものを受け取るにふさわしいから',
 

@@ -1489,14 +1489,25 @@ function initTySecretBtn() {
     const btn = document.getElementById('ty-secret-btn');
     const reveal = document.getElementById('ty-secret-reveal');
     if (!btn || !reveal) return;
-    let open = false;
+    const iconEl = btn.querySelector('.btn-icon');
+    const textEl = btn.querySelector('[data-i18n]');
+
+    function setSecretBtnLabel(isOpen) {
+        if (iconEl) iconEl.textContent = isOpen ? '🌷' : '🌸';
+        if (textEl) {
+            const key = isOpen ? 'thankyou.secretHide' : 'thankyou.secretMessage';
+            textEl.setAttribute('data-i18n', key);
+            textEl.textContent = t(key);
+        }
+    }
+
+    let open = reveal.classList.contains('open');
+    setSecretBtnLabel(open);
+
     btn.onclick = () => {
         open = !open;
         reveal.classList.toggle('open', open);
-        const iconEl = btn.querySelector('.btn-icon');
-        const textEl = btn.querySelector('[data-i18n]');
-        if (iconEl) iconEl.textContent = open ? '🌷' : '🌸';
-        if (textEl) textEl.textContent = open ? 'Cất đi nhé...' : t('thankyou.secretMessage');
+        setSecretBtnLabel(open);
     };
 }
 

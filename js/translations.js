@@ -800,7 +800,7 @@ const translations = {
         'product.1.method': '一つ一つ手描き',
         'product.1.meaning': 'ベトナム文化の象徴、日差しと雨から守る。',
 
-        'product.2.name': 'ブックマーク',
+        'product.2.name': 'しおり',
         'product.2.material': 'シルク、錦',
         'product.2.method': '丁寧に仕立てられた',
         'product.2.meaning': 'ベトナム女性の優しい美しさを称える。',
@@ -815,7 +815,7 @@ const translations = {
         'product.4.method': '木版画',
         'product.4.meaning': '民族の魂を保存する。',
 
-        'product.5.name': 'ブックマークセット',
+        'product.5.name': 'しおりセット',
         'product.5.material': '天然竹',
         'product.5.method': '手作り',
         'product.5.meaning': '子供時代の思い出。',

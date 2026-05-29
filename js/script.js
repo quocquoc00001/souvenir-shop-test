@@ -461,6 +461,42 @@ document.addEventListener('DOMContentLoaded', function () {
     renderSakura();
     initConstellation();
     initVietnamSeasons();
+
+    // Giữ trang hiện tại khi reload
+    const savedSection = sessionStorage.getItem('currentSection');
+    if (savedSection) {
+        if (savedSection === 'thank-you-page') {
+            const savedOrder = sessionStorage.getItem('currentOrderCode');
+            if (savedOrder) {
+                document.getElementById('order-search-input').value = savedOrder;
+                setTimeout(() => checkOrder(), 500);
+            } else {
+                showSection('home-page');
+            }
+        } else if (savedSection === 'admin-dashboard') {
+            if (sessionStorage.getItem('isAdminLoggedIn') === 'true') {
+                showSection('admin-dashboard');
+                const header = document.getElementById('header-bar');
+                if (header) header.style.display = 'none';
+            } else {
+                showSection('home-page');
+            }
+        } else {
+            showSection(savedSection);
+        }
+    }
+
+    // Hỗ trợ phím Enter trên các ô input
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (this.id === 'order-search-input') checkOrder();
+                else if (this.id === 'secret-password-input') verifyPassword();
+                else if (this.id === 'admin-pass') loginAdmin();
+            }
+        });
+    });
 });
 
 /* ============================================
@@ -1073,6 +1109,7 @@ function closeLogin() {
 
 function loginAdmin() {
     if (document.getElementById('admin-pass').value === 'admin123') {
+        sessionStorage.setItem('isAdminLoggedIn', 'true');
         closeLogin();
         showSection('admin-dashboard');
         const header = document.getElementById('header-bar');
@@ -1331,6 +1368,7 @@ async function testApiConnection() {
    === NAVIGATION & UTILS ===
    ============================================ */
 function showSection(sectionId) {
+    sessionStorage.setItem('currentSection', sectionId);
     document.querySelectorAll('main, section, .modal').forEach(el => el.classList.add('hidden'));
     const section = document.getElementById(sectionId);
     if (section) {
@@ -1355,6 +1393,8 @@ function showSection(sectionId) {
 
 function goHome() {
     tyEffectsInitialized = false;
+    sessionStorage.removeItem('currentSection');
+    sessionStorage.removeItem('currentOrderCode');
     window.location.href = 'index.html';
 }
 
@@ -1389,6 +1429,8 @@ function toSpotifyEmbedUrl(url) {
 async function checkOrder() {
     const code = document.getElementById('order-search-input').value;
     if (code.length !== 4) { alert(t('alert.orderCodeLength')); return; }
+
+    sessionStorage.setItem('currentOrderCode', code);
 
     try {
         const { data: order, error } = await supabaseClient

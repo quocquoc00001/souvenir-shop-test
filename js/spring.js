@@ -319,7 +319,7 @@ function showAiMessage(message) {
     const messagesDiv = document.getElementById('chatMessages');
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message ai';
-    messageDiv.innerHTML = `<strong>${t('canvas.aiName')}:</strong> ${message}`;
+    messageDiv.innerHTML = `<strong><span data-i18n="canvas.aiName">${t('canvas.aiName')}</span>:</strong> ${message}`;
     messagesDiv.appendChild(messageDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }

@@ -255,7 +255,7 @@ function removeLoadingMessage() {
 function showAiMessage(message) {
     const div = document.createElement('div');
     div.className = 'message ai';
-    div.innerHTML = `<strong>${t('canvas.aiName')}:</strong> ${message}`;
+    div.innerHTML = `<strong><span data-i18n="canvas.aiName">${t('canvas.aiName')}</span>:</strong> ${message}`;
     document.getElementById('chatMessages').appendChild(div);
     document.getElementById('chatMessages').scrollTop = 999999;
 }

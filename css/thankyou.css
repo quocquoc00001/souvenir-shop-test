@@ -116,7 +116,7 @@
 
 .ty-hero-title {
     font-family: 'Dancing Script', cursive;
-    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-size: clamp(2.5rem, 8vw, 6rem);
     font-weight: 700;
     line-height: 1.05;
     background: linear-gradient(135deg, #c2677a 0%, #e8a0b4 40%, #f4a7b9 70%, #d4607c 100%);

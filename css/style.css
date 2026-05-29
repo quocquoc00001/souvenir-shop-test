@@ -176,16 +176,32 @@ h3,
 }
 
 /* --- RESPONSIVE HEADER --- */
-@media (max-width: 520px) {
+@media (max-width: 768px) {
     .main-header {
-        top: 8px;
-        left: 8px;
-        gap: 6px;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        pointer-events: none;
     }
 
-    .lang-btn {
-        padding: 3px 7px;
-        font-size: 0.7rem;
+    .language-switcher {
+        pointer-events: auto;
+        margin-left: 0;
+    }
+
+    .search-box {
+        pointer-events: auto;
+    }
+}
+
+@media (max-width: 520px) {
+    .main-header {
+        gap: 8px;
     }
 
     .search-box {
@@ -193,7 +209,7 @@ h3,
     }
 
     .search-box input {
-        width: 130px;
+        width: 180px;
         padding: 6px 10px;
         font-size: 0.75rem;
     }
@@ -208,15 +224,7 @@ h3,
     }
 }
 
-@media (max-width: 360px) {
-    .search-box input {
-        width: 100px;
-    }
 
-    .lang-btn {
-        padding: 3px 5px;
-    }
-}
 
 #back-home-btn {
     position: fixed;
@@ -1618,62 +1626,20 @@ h3,
 }
 
 @media (max-width: 768px) {
-    .main-header {
-        position: relative;
-        top: 0;
-        left: 0;
-        padding: 10px 15px;
-        flex-direction: column;
-        align-items: center;
-    }
 
-    .language-switcher {
-        justify-content: center;
-        padding: 3px;
-        gap: 2px;
-        width: fit-content;
-        align-self: center;
-    }
-
-    .lang-btn {
-        padding: 3px 8px;
-        font-size: 0.7rem;
-        gap: 2px;
-    }
-
-    .search-box {
-        width: 100%;
-        max-width: 350px;
-        margin: 0 auto;
-        padding: 4px;
-    }
-
-    .search-box input {
-        flex: 1;
-        width: auto;
-        min-width: 0;
-        padding: 6px 10px;
-        font-size: 0.8rem;
-    }
-
-    .search-box button {
-        flex-shrink: 0;
-        padding: 6px 12px;
-        font-size: 0.75rem;
-        white-space: nowrap;
-    }
 
     .hero-section {
         height: 50vh;
     }
 
     .shop-name {
-        font-size: 1.8rem;
+        font-size: 2rem;
         padding: 15px 20px;
         white-space: normal;
         text-align: center;
-        width: 85%;
-        max-width: 320px;
+        width: 92%;
+        max-width: 380px;
+        line-height: 1.4;
     }
 
     .seasons-nav {
@@ -1773,38 +1739,7 @@ h3,
 
 /* --- HEADER MOBILE --- */
 @media (max-width: 600px) {
-    .main-header {
-        top: 10px;
-        left: 10px;
-        gap: 8px;
-        flex-wrap: wrap;
-        max-width: calc(100vw - 20px);
-    }
 
-    .language-switcher {
-        padding: 3px;
-    }
-
-    .lang-btn {
-        padding: 4px 8px;
-        font-size: 0.7rem;
-    }
-
-    .search-box {
-        padding: 5px;
-        gap: 4px;
-    }
-
-    .search-box input {
-        width: 110px;
-        padding: 6px 10px;
-        font-size: 0.85rem;
-    }
-
-    .search-box button {
-        padding: 6px 14px;
-        font-size: 0.85rem;
-    }
 
     #back-home-btn {
         top: 10px;
@@ -2076,5 +2011,37 @@ h3,
     .admin-list {
         width: 100%;
         max-width: 100%;
+    }
+}
+
+/* --- MOBILE LANDSCAPE FIXES --- */
+@media (max-width: 900px) and (orientation: landscape) {
+    .shop-name {
+        font-size: 2rem !important;
+        width: 90% !important;
+        max-width: 700px !important;
+        white-space: normal !important;
+        line-height: 1.5 !important;
+        padding: 20px 25px !important;
+        height: auto !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .seasons-nav {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+        padding: 20px 10px !important;
+        overflow-x: auto;
+    }
+
+    .season-card {
+        width: 25% !important;
+        min-width: 140px !important;
+        height: 250px !important;
+        max-width: none !important;
     }
 }

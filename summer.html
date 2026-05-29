@@ -9,7 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/summer.css">
+    <link rel="stylesheet" href="css/summer.css?v=2">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
@@ -22,15 +22,16 @@
 
     <div class="sun"></div>
 
+    <div class="language-switcher season-lang-switcher">
+        <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')"><img
+                src="https://flagcdn.com/16x12/vn.png" width="16" height="12" alt="VN"> VI</button>
+        <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')"><img
+                src="https://flagcdn.com/16x12/gb.png" width="16" height="12" alt="GB"> EN</button>
+        <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')"><img
+                src="https://flagcdn.com/16x12/jp.png" width="16" height="12" alt="JP"> JA</button>
+    </div>
+
     <div class="header">
-        <div class="language-switcher season-lang-switcher">
-            <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')"><img
-                    src="https://flagcdn.com/16x12/vn.png" width="16" height="12" alt="VN"> VI</button>
-            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')"><img
-                    src="https://flagcdn.com/16x12/gb.png" width="16" height="12" alt="GB"> EN</button>
-            <button class="lang-btn" data-lang="ja" onclick="changeLanguage('ja')"><img
-                    src="https://flagcdn.com/16x12/jp.png" width="16" height="12" alt="JP"> JA</button>
-        </div>
         <h1>☀️ <span data-i18n="summer.title">MÙA HẠ VIỆT NAM</span> ☀️</h1>
         <p data-i18n="summer.subtitle">Mùa của nắng gắt, biển xanh và tiếng ve sầu</p>
         <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="summer.backHome">Quay
@@ -84,9 +85,9 @@
                         thấm hút tốt và thoáng mát. Áo thun, quần short, váy… chất liệu cotton, lanh sẽ phù hợp với thời
                         tiết nóng bức. Mang theo mũ hoặc dù để che nắng.</p>
                     <div class="festival-tags">
-                        <span class="festival-tag">Tết Đoan Ngọ</span>
-                        <span class="festival-tag">Lễ hội pháo hoa Đà Nẵng</span>
-                        <span class="festival-tag">Festival Biển Nha Trang</span>
+                        <span class="festival-tag" data-i18n="summer.tag1">Tết Đoan Ngọ</span>
+                        <span class="festival-tag" data-i18n="summer.tag2">Lễ hội pháo hoa Đà Nẵng</span>
+                        <span class="festival-tag" data-i18n="summer.tag3">Festival Biển Nha Trang</span>
                     </div>
                     <p data-i18n="summer.festival.desc">Đi tắm biển (Đà Nẵng, Nha Trang…), vui chơi tại công viên nước
                         để dịu đi cái nóng. Cắm trại, picnic với bạn bè, gia đình giữa thiên nhiên xanh mát. Tham quan
@@ -171,7 +172,7 @@
     </div>
 
     <script src="js/config.js"></script>
-    <script src="js/translations.js"></script>
+    <script src="js/translations.js?v=2"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/summer.js"></script>
 </body>

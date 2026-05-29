@@ -6,6 +6,8 @@ const translations = {
     // Vietnamese (Default)
     vi: {
         // Header
+        'header.title': 'Souvenir Shop',
+        'header.subtitle': 'Góc Quà Nhỏ',
         'header.search.placeholder': 'Nhập mã đơn (4 số)',
         'header.search.button': 'Tra cứu',
         'header.backHome': 'Trang chủ',
@@ -19,6 +21,16 @@ const translations = {
         'season.autumn': 'Thu Phai',
         'season.winter': 'Đông Lạnh',
         'season.secret': 'Bí mật',
+
+        // Versions
+        'version.xuan': 'Xuân 🌸',
+        'version.ha': 'Hạ ☀️',
+        'version.thu': 'Thu 🍂',
+        'version.dong': 'Đông ❄️',
+        'version.xuan_ha': 'Xuân - Hạ 🌸☀️',
+        'version.thu_dong': 'Thu - Đông 🍂❄️',
+        'version.combo_all': 'Bốn Mùa 🎁',
+        'version.tat_ca': 'Tất Cả ✨',
 
         // Products Section
         'products.title': 'Bộ Sưu Tập Ký Ức',
@@ -252,6 +264,9 @@ const translations = {
         'spring.weather.desc': 'Mùa xuân thường mát mẻ, dễ chịu, có nắng dịu và gió thổi dịu dàng. Không khí trong lành hơn, đôi khi có mưa xuân lất phất tạo cảm giác dịu dàng, dễ chịu cho mọi người.',
         'spring.weather.desc2': '<strong>Cảnh quan:</strong> Cây cối đâm chồi nảy lộc, hoa nở rực rỡ khắp nơi. Màu xanh tươi mới xuất hiện nhiều hơn, làm cảnh vật trở nên sinh động và đầy sức sống.',
         'spring.culture.title': 'Trang phục & Lễ hội',
+        'spring.tag1': 'Tết Nguyên Đán',
+        'spring.tag2': 'Du xuân',
+        'spring.tag3': 'Chúc Tết',
         'spring.culture.outfit': '<strong>Trang phục:</strong> Mùa xuân, miền Bắc chuộng áo dài, áo khoác mỏng, khăn choàng nhẹ vì trời còn se lạnh. Miền Trung thường mặc áo dài truyền thống, màu sắc nhã nhặn, phù hợp không khí lễ hội đầu năm. Miền Nam thời tiết ấm áp nên trang phục thoáng mát, áo dài mỏng, váy nhẹ, màu sắc tươi sáng.',
         'spring.culture.desc': 'Mùa xuân gắn liền với nhiều lễ hội truyền thống, đặc biệt là Tết. Mọi người đi du xuân, chúc Tết, tham gia các hoạt động văn hóa và gặp gỡ người thân, bạn bè.',
         'spring.food.title': 'Ẩm thực Xuân',
@@ -271,10 +286,13 @@ const translations = {
         'summer.landscape.title': 'Cảnh quan',
         'summer.landscape.desc': 'Biển xanh cát vàng và bầu trời trong xanh. Hoa phượng nở đỏ rực trên phố. Ruộng lúa xanh mướt và núi rừng hùng vĩ dưới ánh nắng rực rỡ.',
         'summer.festival.title': 'Trang phục & Lễ hội',
+        'summer.tag1': 'Tết Đoan Ngọ',
+        'summer.tag2': 'Lễ hội pháo hoa Đà Nẵng',
+        'summer.tag3': 'Festival Biển Nha Trang',
         'summer.festival.outfit': '<strong>Trang phục:</strong> Ưu tiên trang phục thoải mái, thấm hút tốt và thoáng mát. Áo thun, quần short, váy… chất liệu cotton, lanh sẽ phù hợp với thời tiết nóng bức. Mang theo mũ hoặc dù để che nắng.',
         'summer.festival.desc': 'Đi tắm biển (Đà Nẵng, Nha Trang…), vui chơi tại công viên nước để dịu đi cái nóng. Cắm trại, picnic với bạn bè, gia đình giữa thiên nhiên xanh mát. Tham quan khu du lịch sinh thái và hòa mình vào những lễ hội sôi động.',
 
-        // Autumn Page
+        // Thu
         'autumn.title': 'MÙA THU VIỆT NAM',
         'autumn.subtitle': 'Mùa của nỗi nhớ, lá vàng và tình yêu',
         'autumn.backHome': 'Quay lại trang chủ',
@@ -288,11 +306,13 @@ const translations = {
         'autumn.specialty.title': 'Cảnh quan',
         'autumn.specialty.desc': 'Hình ảnh những hàng cây cơm nguội vàng, cây lộc vừng hay cây lá đỏ trải thảm trên vỉa hè (đặc biệt là ở Phan Đình Phùng - Hà Nội) bên cạnh hồ nước phẳng lặng như gương. Đặc trưng mùa thu là hương hoa sữa len lỏi khắp ngỏ và những đóa hoa thạch thảo nở rộ vào cuối thu.',
         'autumn.festival.title': 'Trang phục & Lễ hội',
+        'autumn.tag1': 'Tết Trung Thu',
+        'autumn.tag2': 'Dạo hồ Gươm',
         'autumn.festival.outfit': '<strong>Trang phục:</strong> Với phong cách nhẹ nhàng, thanh lịch cùng với các tông màu be, pastel đầy thơ mộng phối với áo khoác nhẹ và khăn voan mỏng.',
         'autumn.festival.food': '<strong>Ẩm thực:</strong> Thiên về những món ăn mang tính nhâm nhi và hương vị thanh tao như ốm làng Vòng dẻo thơm, hồng chín ngọt lịm, sấu chín ngọt thanh và giòn rụm.',
         'autumn.festival.desc': 'Tết Trung Thu là lễ hội lớn nhất trong mùa, với lồng đèn, múa lân, bánh trung thu. Đi dạo hồ Gươm, ngắm hoàng hôn hồ Tây hay chụp ảnh cùng xe hoa dạo.',
 
-        // Winter Page
+        // Đông
         'winter.title': 'MÙA ĐÔNG VIỆT NAM',
         'winter.subtitle': 'Mùa của gió lạnh, bếp lửa và kỷ niệm ấm áp',
         'winter.backHome': 'Quay lại trang chủ',
@@ -308,6 +328,9 @@ const translations = {
         'winter.food.title': 'Ẩm thực',
         'winter.food.desc': 'Phở nóng, bún bò, lẩu nghi ngút khói. Ngô nướng, khoai nướng ven đường sưởi ấm những chiều đông lạnh. Món ăn mùa đông đậm đà và đầy hơi ấm.',
         'winter.festival.title': 'Trang phục & Lễ hội',
+        'winter.tag1': 'Tết Dương Lịch',
+        'winter.tag2': 'Giáng Sinh',
+        'winter.tag3': 'Tết Nguyên Đán',
         'winter.festival.outfit': '<strong>Trang phục:</strong> Áo khoác dày, áo len, khăn quàng cổ trở nên quen thuộc. Trang phục mùa đông thiên về gam màu trầm, đơn giản nhưng ấm áp và tinh tế.',
         'winter.festival.desc': 'Giáng sinh và Tết Dương lịch mang không khí rộn ràng cuối năm. Người người tụ họp, dạo phố, uống cà phê nóng, quây quần bên gia đình để khép lại một năm cũ.',
 
@@ -368,7 +391,6 @@ const translations = {
 
         // ---- AI Cậu bé bút chì ----
         'canvas.aiName': '🤖 AI Cậu bé bút chì',
-        'canvas.chatHeader': 'AI Cậu bé bút chì',
         'canvas.loading': 'Đang phân tích bức vẽ...',
         // System prompts theo mùa (tiếng Việt)
         'canvas.systemPrompt.spring': 'Bạn là AI Cậu bé bút chì - trợ lý nghệ thuật dễ thương. Hãy nhận xét bức tranh mùa xuân này bằng tiếng Việt, ấm áp và chân thành. Trả lời ngắn gọn 2-3 câu.',
@@ -394,12 +416,14 @@ const translations = {
     // English
     en: {
         // Header
+        'header.title': 'Souvenir Shop',
+        'header.subtitle': 'Little Gift Corner',
         'header.search.placeholder': 'Enter order code (4 digits)',
         'header.search.button': 'Search',
         'header.backHome': 'Home',
 
         // Hero Section
-        'hero.title': 'Little Gift Corner – Full of Joy',
+        'hero.title': 'Little Gift Corner, Joy Overflowing',
 
         // Seasons
         'season.spring': 'Spring',
@@ -407,6 +431,16 @@ const translations = {
         'season.autumn': 'Autumn',
         'season.winter': 'Winter',
         'season.secret': 'Secret',
+
+        // Versions
+        'version.xuan': 'Spring 🌸',
+        'version.ha': 'Summer ☀️',
+        'version.thu': 'Autumn 🍂',
+        'version.dong': 'Winter ❄️',
+        'version.xuan_ha': 'Spring - Summer 🌸☀️',
+        'version.thu_dong': 'Autumn - Winter 🍂❄️',
+        'version.combo_all': 'Four Seasons 🎁',
+        'version.tat_ca': 'All ✨',
 
         // Products Section
         'products.title': 'Memory Collection',
@@ -636,6 +670,9 @@ const translations = {
         'spring.weather.desc': 'Spring is usually cool and pleasant, with gentle sunshine and soft breezes. The air feels fresher, and sometimes light spring drizzle falls, creating a tender and soothing atmosphere for everyone.',
         'spring.weather.desc2': '<strong>Scenery:</strong> Trees begin to sprout new buds, and flowers bloom vibrantly everywhere. Fresh green colors appear more abundantly, making the landscape lively and full of vitality.',
         'spring.culture.title': 'Attire & Festivals',
+        'spring.tag1': 'Lunar New Year',
+        'spring.tag2': 'Spring Outing',
+        'spring.tag3': 'New Year Greetings',
         'spring.culture.outfit': '<strong>Attire:</strong> In spring, people in Northern Vietnam often wear áo dài, light jackets, and soft scarves because the weather is still slightly chilly. In Central Vietnam, traditional áo dài in elegant, subtle colors are commonly worn, reflecting the festive spirit of the early year. In Southern Vietnam, where the weather is warmer, people prefer breathable outfits such as light ao dai, airy dresses, and bright-colored clothing.',
         'spring.culture.desc': 'Spring is closely associated with many traditional festivals, especially Tet. People go on spring outings, extend New Year\'s greetings, take part in cultural activities and gather with family and friends.',
         'spring.food.title': 'Spring Cuisine',
@@ -655,6 +692,9 @@ const translations = {
         'summer.landscape.title': 'Landscape',
         'summer.landscape.desc': 'Blue seas, golden sand, and clear skies create a vibrant summer picture. Flamboyant flowers bloom in bright red along the streets. Lush green rice fields and majestic mountains stand proudly under the radiant sunlight.',
         'summer.festival.title': 'Attire & Festivals',
+        'summer.tag1': 'Mid-Year Festival',
+        'summer.tag2': 'Da Nang Fireworks Festival',
+        'summer.tag3': 'Nha Trang Sea Festival',
         'summer.festival.outfit': '<strong>Attire:</strong> Lightweight, breathable, and moisture-absorbing clothing is recommended. T-shirts, shorts, and dresses made of cotton or linen are ideal for the hot weather. Bringing a hat or an umbrella is also advisable to protect yourself from the sun.',
         'summer.festival.desc': 'Tet Doan Ngo (Mid-Year Festival), the Da Nang International Fireworks Festival, and the Nha Trang Sea Festival are notable summer events. People often go to the beach (such as Da Nang or Nha Trang) or visit water parks to cool off. Camping and picnicking with friends and family in the refreshing outdoors are also popular. Many enjoy visiting eco-tourism sites and immersing themselves in lively festivals.',
 
@@ -672,6 +712,8 @@ const translations = {
         'autumn.specialty.title': 'Landscape',
         'autumn.specialty.desc': 'Images of yellowing Com Nguoi trees, loc vung, or red-leaf trees carpeting the sidewalks (especially on Phan Đinh Phung Street in Hanoi), beside mirror-calm lakes. The scent of milk flowers drifting through the alleys and clusters of asters blooming in late autumn are also typical signs of the season.',
         'autumn.festival.title': 'Attire & Festivals',
+        'autumn.tag1': 'Mid-Autumn Festival',
+        'autumn.tag2': 'Stroll by Sword Lake',
         'autumn.festival.outfit': '<strong>Attire:</strong> A gentle, elegant style featuring dreamy beige and pastel tones, paired with light coats and thin chiffon scarves.',
         'autumn.festival.food': '<strong>Cuisine:</strong> The season favors light, snack-like delicacies with refined flavors such as fragrant young green rice from Vòng Village, sweet ripe persimmons, and ripe sấu fruit with a mildly sweet, crisp taste.',
         'autumn.festival.desc': 'The Mid-Autumn Festival is the biggest celebration of the season, with lanterns, lion dances, and mooncakes. Popular activities include strolling around Hoàn Kiếm Lake, watching the sunset at West Lake, or taking photos with flower bicycles passing by.',
@@ -692,6 +734,9 @@ const translations = {
         'winter.food.title': 'Cuisine',
         'winter.food.desc': 'Steaming bowls of Phở, spicy Bún Bò, and bubbling hotpots take center stage. On the sidewalks, the scent of roasted corn and sweet potatoes warms the chilly afternoons. Winter cuisine is rich, bold, and full of heart.',
         'winter.festival.title': 'Attire & Festivals',
+        'winter.tag1': 'New Year',
+        'winter.tag2': 'Christmas',
+        'winter.tag3': 'Lunar New Year',
         'winter.festival.outfit': '<strong>Attire:</strong> Heavy coats, knit sweaters, and scarves become the season\'s staples. Winter attire leans toward muted tones and minimalist designs—simple, yet warm and refined.',
         'winter.festival.desc': 'Christmas and New Year\'s Eve bring a bustling energy to the year\'s end. People gather to stroll through the streets, sip hot coffee, and huddle with family to bid the old year farewell.',
 
@@ -752,7 +797,6 @@ const translations = {
 
         // ---- Shin-chan AI ----
         'canvas.aiName': '🤖 Shin-chan AI',
-        'canvas.chatHeader': 'Shin-chan AI',
         'canvas.loading': 'Analyzing your drawing...',
         'canvas.systemPrompt.spring': 'You are Shin-chan AI - a friendly and cute art assistant. Please comment on this spring drawing in English, warmly and sincerely. Reply in 2-3 short sentences.',
         'canvas.systemPrompt.summer': 'You are Shin-chan AI - a friendly and cute art assistant. Please comment on this summer drawing in English, with energy and joy. Reply in 2-3 short sentences.',
@@ -776,6 +820,8 @@ const translations = {
     // Japanese
     ja: {
         // Header
+        'header.title': 'お土産屋',
+        'header.subtitle': '小さな贈り物のコーナー',
         'header.search.placeholder': '注文コードを入力（4桁）',
         'header.search.button': '検索',
         'header.backHome': 'ホーム',
@@ -789,6 +835,16 @@ const translations = {
         'season.autumn': '秋',
         'season.winter': '冬',
         'season.secret': '秘密',
+
+        // Versions
+        'version.xuan': '春 🌸',
+        'version.ha': '夏 ☀️',
+        'version.thu': '秋 🍂',
+        'version.dong': '冬 ❄️',
+        'version.xuan_ha': '春 - 夏 🌸☀️',
+        'version.thu_dong': '秋 - 冬 🍂❄️',
+        'version.combo_all': '四季 🎁',
+        'version.tat_ca': 'すべて ✨',
 
         // Products Section
         'products.title': '思い出コレクション',
@@ -1018,6 +1074,9 @@ const translations = {
         'spring.weather.desc': '春は比較的涼しく、過ごしやすい季節である。やわらかな日差しと穏やかな風が感じられ、空気はいっそう澄みわたる。ときおり細やかな霧雨が静かに降り、人々にやさしく心安らぐ雰囲気をもたらす。',
         'spring.weather.desc2': '<strong>風景：</strong> 木々は新芽を吹き始め、花々はあちらこちらで色鮮やかに咲き誇る。みずみずしい緑がいっそう増し、景色は生き生きとした活気と生命力に満ちあふれている。',
         'spring.culture.title': '服装と祭り',
+        'spring.tag1': '旧正月 (テト)',
+        'spring.tag2': '春の外出',
+        'spring.tag3': '新年の挨拶',
         'spring.culture.outfit': '<strong>服装：</strong> 北部ベトナムでは、春はまだやや肌寒さが残るため、人々はアオザイや薄手の上着、やわらかなスカーフなどを身に着けるのが一般的である。中部ベトナムでは、上品で落ち着いた色合いの伝統的なアオザイがよく着用され、新年の祝祭的な雰囲気を優雅に醸し出している。南部ベトナムでは気候がより温暖であるため、軽やかなアオザイや風通しのよいワンピース、明るい色彩の衣服など、通気性に優れた装いが好まれる。',
         'spring.culture.desc': '春は多くの伝統的な祭りと深く結びついており、特にテト（旧正月）はその代表的な行事である。人々は春の行楽を楽しみ、新年の挨拶を交わし、さまざまな伝統文化活動に参加する。また、家族や友人と集い、温かなひとときを共に過ごす。',
         'spring.food.title': '春の料理',
@@ -1037,6 +1096,9 @@ const translations = {
         'summer.landscape.title': '風景',
         'summer.landscape.desc': '青い海と白い砂浜、澄み渡る青空が広がり、街路には赤く咲き誇る鳳凰木（ホウオウボク）の花が見られます。青々とした田んぼや、まぶしい日差しの下にそびえる雄大な山々も、夏ならではの風景です。',
         'summer.festival.title': '服装と祭り',
+        'summer.tag1': '端午節',
+        'summer.tag2': 'ダナン国際花火大会',
+        'summer.tag3': 'ニャチャン海洋フェスティバル',
         'summer.festival.outfit': '<strong>服装：</strong> 夏には、通気性が良く汗を吸いやすい服装が好まれます。Tシャツやショートパンツ、ワンピースなど、コットンやリネン素材の衣類は暑い季節に適しています。また、強い日差しを避けるために帽子や日傘を持ち歩くとよいでしょう。',
         'summer.festival.desc': '夏には、ベトナムの伝統行事である端午節をはじめ、ダナン国際花火大会やニャチャン海洋フェスティバルなど、さまざまなイベントが開催されます。ダナンやニャチャンで海水浴を楽しんだり、ウォーターパークで暑さを和らげたりするのも人気です。また、友人や家族と自然の中でキャンプやピクニックを楽しんだり、エコツーリズムのスポットを訪れたりする人も多く見られます。',
 
@@ -1054,6 +1116,8 @@ const translations = {
         'autumn.specialty.title': '風景',
         'autumn.specialty.desc': '黄色く色づく街路樹や、赤く染まる葉が歩道を彩り（特にハノイのファンディンフン通りが有名）、鏡のように静かな湖の景色が広がります。秋を代表する香りとして、ホアスアの花の甘い香りが路地に漂い、晩秋にはアスターの花が咲き誇ります。',
         'autumn.festival.title': '服装と祭り',
+        'autumn.tag1': '中秋節',
+        'autumn.tag2': 'ホアンキエム湖散策',
         'autumn.festival.outfit': '<strong>服装：</strong> やさしく上品なスタイルで、ベージュやパステルなどのロマンチックな色合いに、薄手のコートや軽いスカーフを合わせるのが秋らしい装いです。',
         'autumn.festival.food': '<strong>食べ物：</strong> 軽く楽しめる上品な味わいのものが多く、香り高いヴォン村の若いもち米、甘く熟した柿、甘酸っぱい熟したサウの実などが秋の味覚です。',
         'autumn.festival.desc': '中秋節は秋最大の行事で、提灯、獅子舞、月餅などで賑わいます。ホアンキエム湖を散歩したり、西湖の夕日を眺めたり、花を積んだ自転車と写真を撮るのも人気です。',
@@ -1074,6 +1138,9 @@ const translations = {
         'winter.food.title': '食べ物',
         'winter.food.desc': '湯気の立つフォーやブンボー、熱々の鍋料理は冬の定番です。道端で売られる焼きとうもろこしや焼き芋も、冷えた体をやさしく温めてくれます。冬の料理は味わい深く、心まで温めてくれるものばかりです。',
         'winter.festival.title': '服装と祭り',
+        'winter.tag1': '新暦の正月',
+        'winter.tag2': 'クリスマス',
+        'winter.tag3': '旧正月 (テト)',
         'winter.festival.outfit': '<strong>服装：</strong> 厚手のコートやセーター、マフラーが欠かせない季節になります。冬の装いは落ち着いた色合いが中心で、シンプルながらも温もりと上品さを感じさせます。',
         'winter.festival.desc': 'クリスマスや年末年始は、一年の締めくくりとしてにぎやかな雰囲気に包まれます。人々は集まり、街を散策したり、温かいコーヒーを飲んだりしながら、家族とともに一年を静かに振り返ります。',
 

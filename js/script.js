@@ -621,7 +621,7 @@ function openProductModal(id) {
     if (container) {
         // Với các combo 4,5,6: chỉ hiển thị 1 nút "Bốn Mùa"
         if ([4, 5, 6].includes(currentProduct.id)) {
-            container.innerHTML = `<button class="season-btn combo-all-btn active" onclick="changeProductVersion('combo_all')">Bốn Mùa</button>`;
+            container.innerHTML = `<button class="season-btn combo-all-btn active" onclick="changeProductVersion('combo_all')"><span data-i18n="version.combo_all">${t('version.combo_all')}</span></button>`;
         } else {
             const versionKeys = Object.keys(currentProduct.versions);
             const labelMap = {
@@ -634,8 +634,9 @@ function openProductModal(id) {
                 tat_ca: 'modal.season.all'
             };
             container.innerHTML = versionKeys.map(key => {
-                const label = t(labelMap[key] || key);
-                return `<button class="season-btn" onclick="changeProductVersion('${key}')">${label}</button>`;
+                const i18nKey = labelMap[key] || key;
+                const label = t(i18nKey);
+                return `<button class="season-btn" onclick="changeProductVersion('${key}')"><span data-i18n="${i18nKey}">${label}</span></button>`;
             }).join('');
         }
     }
@@ -1481,9 +1482,9 @@ function renderThankYouPage(order) {
     if (prodDiv) {
         if (order.product_ids && order.product_ids.length > 0) {
             const versionNames = {
-                xuan: 'Xuân 🌸', ha: 'Hạ ☀️', thu: 'Thu 🍂', dong: 'Đông ❄️',
-                xuan_ha: 'Xuân - Hạ 🌸☀️', thu_dong: 'Thu - Đông 🍂❄️',
-                combo_all: 'Bốn Mùa 🎁', tat_ca: 'Tất Cả ✨'
+                xuan: t('version.xuan'), ha: t('version.ha'), thu: t('version.thu'), dong: t('version.dong'),
+                xuan_ha: t('version.xuan_ha'), thu_dong: t('version.thu_dong'),
+                combo_all: t('version.combo_all'), tat_ca: t('version.tat_ca')
             };
             prodDiv.innerHTML = order.product_ids.map(item => {
                 // Tương thích ngược: hỗ trợ cả số nguyên lẫn object

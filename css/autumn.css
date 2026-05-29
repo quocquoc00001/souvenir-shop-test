@@ -89,6 +89,7 @@ body {
     bottom: 0;
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,50 Q40,30 50,50 T80,50" stroke="rgba(255,255,255,0.1)" fill="none"/></svg>');
     opacity: 0.3;
+    pointer-events: none;
 }
 
 .header h1 {
